@@ -54,6 +54,20 @@
   </script>
 
   <link rel="stylesheet" href="assets/styles.css" />
+
+  <!-- Google Analytics 4 (GA4) — TODO: replace G-XXXXXXXXXX with the real
+       Measurement ID, or remove this block if analytics is disabled.
+       The site will work without analytics; this is only needed before
+       you start spending money on paid traffic. -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+  </script>
+  -->
 </head>
 
 <body class="bg-bone text-ink font-sans antialiased selection:bg-claret selection:text-bone">
@@ -142,8 +156,7 @@
                 <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-claret opacity-60"></span>
                 <span class="relative inline-flex h-2 w-2 rounded-full bg-claret"></span>
               </span>
-              <!-- TODO: update spot count each week -->
-              Only 4 international spots per week · July 2026: 2 remaining
+              Limited intake — only 4 international spots per week
             </p>
 
             <dl class="mt-12 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4 border-t border-ink/15 pt-7">
@@ -860,7 +873,8 @@
                 <div class="sm:col-span-2 flex items-start gap-3">
                   <input id="f-consent" name="consent" type="checkbox" required class="mt-1 h-4 w-4 rounded border-ink/30 text-claret focus:ring-claret" />
                   <label for="f-consent" class="text-sm text-ink/75">
-                    I agree that MedBridge may use the information above to contact me about my application. *
+                    I agree that MedBridge may use the information above to contact me about my application. See our
+                    <a class="link underline" href="/privacy.html" target="_blank" rel="noopener noreferrer">privacy policy</a>. *
                   </label>
                 </div>
               </div>
@@ -1013,6 +1027,11 @@
           <p class="mt-3 text-sm">
             <a class="footer-link" href="mailto:hello@medbridge.am">hello@medbridge.am</a>
           </p>
+          <p class="mt-5 text-xs uppercase tracking-[0.22em] text-bone/45">Legal</p>
+          <ul class="mt-3 space-y-1.5 text-sm">
+            <li><a class="footer-link" href="/privacy.html">Privacy policy</a></li>
+            <li><a class="footer-link" href="/terms.html">Terms of service</a></li>
+          </ul>
         </div>
       </div>
 

@@ -39,6 +39,11 @@ export function Footer() {
             <p className="mt-3 text-sm">
               <a className="footer-link" href="mailto:hello@medbridge.am">hello@medbridge.am</a>
             </p>
+            <p className="mt-5 text-xs uppercase tracking-[0.22em] text-bone/45">Legal</p>
+            <ul className="mt-3 space-y-1.5 text-sm">
+              <li><a className="footer-link" href="/privacy.html">Privacy policy</a></li>
+              <li><a className="footer-link" href="/terms.html">Terms of service</a></li>
+            </ul>
           </div>
         </div>
 
