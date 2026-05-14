@@ -1,8 +1,19 @@
-// TODO: replace the placeholder number below with the real WhatsApp business line.
-const WHATSAPP_NUMBER = "37400000000"
+// TODO: replace the placeholder below with the real WhatsApp business line.
+// Format: country code + digits, no spaces or symbols. Example: "37491123456".
+// Keep at least one literal "X" while the number is unset — the component
+// refuses to render with any "X" in the value, so a placeholder cannot ship.
+const WHATSAPP_NUMBER = "374XXXXXXXX"
 const WHATSAPP_MESSAGE = "Hi MedBridge — I'd like to learn more about the program."
 
+const isPlaceholder = /[xX]/.test(WHATSAPP_NUMBER)
+
 export function WhatsAppButton() {
+  if (isPlaceholder) {
+    // Refuse to render with a placeholder number so the live site never
+    // ships a broken or zero-routed WhatsApp link.
+    return null
+  }
+
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
   return (
     <a

@@ -33,6 +33,14 @@ const FAQS = [
     q: "How do I apply?",
     a: "Submit the application form on this page. A member of the MedBridge team reviews each application personally and replies within two business days with availability, a personalised quote, and the next steps. No payment is required at the application stage.",
   },
+  {
+    q: "What is your refund and cancellation policy?",
+    a: "Cancellations 30 or more days before your programme start date receive a full refund. Cancellations 14 to 30 days before the start date receive a 50% refund. Cancellations less than 14 days before the start date are non-refundable, except where required by Armenian law. You can also reschedule your start date once at no charge, subject to availability, if requested at least 14 days ahead. If your Armenian visa application is denied, send us the official decision and we will refund the full programme fee.",
+  },
+  {
+    q: "Do you provide travel and medical insurance?",
+    a: "Comprehensive travel and medical insurance is required for participation, but MedBridge does not provide it directly. We're happy to recommend trusted international brokers that past participants have used. You're free to use any provider as long as the policy covers the full programme duration and your country of origin.",
+  },
 ]
 
 export function Faq() {

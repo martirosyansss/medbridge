@@ -8,7 +8,7 @@ import { Schedule } from "@/components/sections/Schedule"
 import { Specialties } from "@/components/sections/Specialties"
 import { Services } from "@/components/sections/Services"
 import { Pricing } from "@/components/sections/Pricing"
-import { Testimonials } from "@/components/sections/Testimonials"
+import { RiskReversal } from "@/components/sections/RiskReversal"
 import { Mission } from "@/components/sections/Mission"
 import { Apply } from "@/components/sections/Apply"
 import { Faq } from "@/components/sections/Faq"
@@ -32,7 +32,7 @@ export default function App() {
         <Specialties />
         <Services />
         <Pricing />
-        <Testimonials />
+        <RiskReversal />
         <Mission />
         <Apply />
         <Faq />
