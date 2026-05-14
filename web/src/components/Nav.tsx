@@ -1,0 +1,92 @@
+import { useState } from "react"
+import { Menu, X, Plus } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { useStickyHeader } from "@/hooks/useStickyHeader"
+import { useActiveSection } from "@/hooks/useActiveSection"
+
+const LINKS = [
+  { href: "about", label: "About" },
+  { href: "why", label: "Why MedBridge" },
+  { href: "yerevan", label: "Yerevan" },
+  { href: "program", label: "Program" },
+  { href: "specialties", label: "Specialties" },
+  { href: "faq", label: "FAQ" },
+] as const
+
+const MOBILE_LINKS = [
+  ...LINKS.slice(0, 5),
+  { href: "schedule", label: "Sample Week" },
+  LINKS[5],
+] as const
+
+export function Nav() {
+  const scrolled = useStickyHeader()
+  const active = useActiveSection(LINKS.map((l) => l.href))
+  const [open, setOpen] = useState(false)
+
+  return (
+    <header
+      id="site-header"
+      className={cn(
+        "site-header fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+        scrolled && "is-scrolled"
+      )}
+    >
+      <div className="mx-auto max-w-content px-6 lg:px-10">
+        <nav className="flex items-center justify-between py-5" aria-label="Primary">
+          <a href="#top" className="group flex items-center gap-2 font-display text-xl tracking-tightest text-ink">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-claret text-bone transition-transform group-hover:-rotate-6">
+              <Plus className="h-4 w-4" strokeWidth={2.2} />
+            </span>
+            <span className="font-medium">MedBridge</span>
+          </a>
+
+          <ul className="hidden lg:flex items-center gap-8 text-sm text-ink/80">
+            {LINKS.map((l) => (
+              <li key={l.href}>
+                <a
+                  className={cn("nav-link", active === l.href && "is-active")}
+                  href={`#${l.href}`}
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="hidden lg:block">
+            <a href="#apply" className="btn-primary">
+              Apply Now
+            </a>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            className="lg:hidden -mr-2 inline-flex h-11 w-11 items-center justify-center rounded-md text-ink hover:bg-ink/5"
+            aria-controls="mobile-menu"
+            aria-expanded={open}
+          >
+            <span className="sr-only">Toggle menu</span>
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </nav>
+
+        <div id="mobile-menu" className={cn("lg:hidden pb-6 -mt-2", !open && "hidden")}>
+          <ul className="flex flex-col divide-y divide-ink/10 border-y border-ink/10 text-ink">
+            {MOBILE_LINKS.map((l) => (
+              <li key={l.href}>
+                <a className="mobile-link" href={`#${l.href}`} onClick={() => setOpen(false)}>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a href="#apply" onClick={() => setOpen(false)} className="btn-primary mt-6 w-full justify-center">
+            Apply Now
+          </a>
+        </div>
+      </div>
+    </header>
+  )
+}
