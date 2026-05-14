@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>MedBridge — International Medical Shadowing at Astghik Medical Center, Yerevan</title>
+  <meta name="description" content="MedBridge is the international observership program at Astghik Medical Center in Yerevan, Armenia. Twenty-four specialties, fifteen operating rooms, ISO-certified, in English. For medical students, pre-med students, residents, and young physicians." />
+  <meta name="theme-color" content="#0E1726" />
+
+  <link rel="canonical" href="https://medbridge.example/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%237A1F2B'/%3E%3Cpath d='M9 16h14M16 9v14' stroke='%23F5F1EA' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MedBridge — International Medical Shadowing in Armenia" />
+  <meta property="og:description" content="Observe surgery at Astghik Medical Center, Yerevan. Twenty-four specialties, fifteen operating rooms, ISO-certified, in English." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&auto=format&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0E1726',
+            bone: '#F5F1EA',
+            'bone-deep': '#EAE3D6',
+            claret: '#7A1F2B',
+            'claret-deep': '#5E1620',
+            sage: '#3F5B4A',
+            'sage-soft': '#7A9285',
+            gold: '#B8924A',
+            'gold-soft': '#D9BE89',
+            paper: '#FBF8F2',
+          },
+          fontFamily: {
+            display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          letterSpacing: {
+            tightest: '-0.04em',
+          },
+          maxWidth: {
+            content: '76rem',
+            prose2: '38rem',
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body class="bg-bone text-ink font-sans antialiased selection:bg-claret selection:text-bone">
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ==================== NAV ==================== -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-colors duration-300">
+    <div class="mx-auto max-w-content px-6 lg:px-10">
+      <nav class="flex items-center justify-between py-5" aria-label="Primary">
+        <a href="#top" class="group flex items-center gap-2 font-display text-xl tracking-tightest text-ink">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-claret text-bone transition-transform group-hover:-rotate-6">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 12h10M12 7v10"/></svg>
+          </span>
+          <span class="font-medium">MedBridge</span>
+        </a>
+
+        <ul class="hidden lg:flex items-center gap-8 text-sm text-ink/80">
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#why">Why MedBridge</a></li>
+          <li><a class="nav-link" href="#yerevan">Yerevan</a></li>
+          <li><a class="nav-link" href="#program">Program</a></li>
+          <li><a class="nav-link" href="#specialties">Specialties</a></li>
+          <li><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+
+        <div class="hidden lg:block">
+          <a href="#apply" class="btn-primary">Apply Now</a>
+        </div>
+
+        <button id="nav-toggle" type="button" class="lg:hidden -mr-2 inline-flex h-11 w-11 items-center justify-center rounded-md text-ink hover:bg-ink/5" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Toggle menu</span>
+          <svg id="icon-burger" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg id="icon-close" class="hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </nav>
+
+      <div id="mobile-menu" class="hidden lg:hidden pb-6 -mt-2">
+        <ul class="flex flex-col divide-y divide-ink/10 border-y border-ink/10 text-ink">
+          <li><a class="mobile-link" href="#about">About</a></li>
+          <li><a class="mobile-link" href="#why">Why MedBridge</a></li>
+          <li><a class="mobile-link" href="#yerevan">Yerevan</a></li>
+          <li><a class="mobile-link" href="#program">Program</a></li>
+          <li><a class="mobile-link" href="#specialties">Specialties</a></li>
+          <li><a class="mobile-link" href="#schedule">Sample Week</a></li>
+          <li><a class="mobile-link" href="#faq">FAQ</a></li>
+        </ul>
+        <a href="#apply" class="btn-primary mt-6 w-full justify-center">Apply Now</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ==================== HERO ==================== -->
+    <section id="top" class="relative overflow-hidden bg-bone pt-32 lg:pt-36">
+      <div class="hero-grain" aria-hidden="true"></div>
+
+      <div class="mx-auto max-w-content px-6 lg:px-10">
+        <div class="grid items-end gap-12 lg:grid-cols-12">
+          <div class="lg:col-span-7 reveal">
+            <p class="kicker text-sage">
+              <span class="kicker-mark"></span>
+              International Medical Shadowing · Yerevan, Armenia
+            </p>
+
+            <h1 class="mt-6 font-display text-[clamp(2.4rem,6.2vw,5.5rem)] leading-[0.98] tracking-tightest text-ink">
+              Inside Armenia's<br />
+              leading <em class="italic font-light text-claret">surgical floor</em>.
+            </h1>
+
+            <p class="mt-7 max-w-prose2 text-lg leading-relaxed text-ink/75">
+              MedBridge is the international observership program at <span class="font-medium text-ink">Astghik Medical Center, Yerevan</span> — twenty-four specialties, fifteen operating rooms, ISO-certified, in English. Designed for medical students, pre-med students, residents, and young physicians from around the world.
+            </p>
+
+            <div class="mt-9 flex flex-wrap items-center gap-4">
+              <a href="#apply" class="btn-primary btn-lg">
+                Apply for a Program
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a href="#specialties" class="btn-secondary btn-lg">Explore 24 Specialties</a>
+            </div>
+
+            <dl class="mt-12 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4 border-t border-ink/15 pt-7">
+              <div>
+                <dt class="text-xs uppercase tracking-[0.18em] text-ink/55">Departments</dt>
+                <dd class="mt-1 font-display text-2xl font-medium">30<span class="text-claret">+</span></dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-[0.18em] text-ink/55">Operating Rooms</dt>
+                <dd class="mt-1 font-display text-2xl font-medium">15</dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-[0.18em] text-ink/55">Specialties</dt>
+                <dd class="mt-1 font-display text-2xl font-medium">24</dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-[0.18em] text-ink/55">ISO Certified</dt>
+                <dd class="mt-1 font-display text-2xl font-medium">9001<span class="text-claret">:2015</span></dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="lg:col-span-5 reveal">
+            <figure class="relative aspect-[4/5] overflow-hidden rounded-sm bg-bone-deep shadow-2xl ring-1 ring-ink/10">
+              <img
+                src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1200&auto=format&fit=crop&q=72"
+                alt="Surgeons during a procedure in a modern operating theatre"
+                class="h-full w-full object-cover img-fallback"
+                loading="eager"
+                fetchpriority="high"
+                onerror="this.style.display='none'; this.parentElement.classList.add('photo-fallback')"
+              />
+              <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink/85 via-ink/40 to-transparent p-6 text-bone">
+                <p class="font-display text-xl leading-snug">"Step into the operating theatre. Stay for the medicine."</p>
+                <p class="mt-2 text-xs uppercase tracking-[0.2em] text-bone/75">Astghik Medical Center · Yerevan</p>
+              </figcaption>
+            </figure>
+            <div class="mt-5 flex items-center gap-4 text-xs uppercase tracking-[0.2em] text-ink/55">
+              <span class="h-px flex-1 bg-ink/15"></span>
+              Certified by TÜV Rheinland
+              <span class="h-px flex-1 bg-ink/15"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-24 lg:mt-28 border-t border-ink/10"></div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section id="about" class="bg-bone py-24 lg:py-32">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
+        <header class="reveal grid gap-6 lg:grid-cols-12">
+          <p class="kicker text-claret lg:col-span-3"><span class="kicker-mark"></span>01 — About</p>
+          <div class="lg:col-span-9">
+            <h2 class="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
+              Astghik Medical Center is one of the largest, most modern, and most technologically advanced multidisciplinary hospitals in Armenia.
+            </h2>
+          </div>
+        </header>
+
+        <div class="mt-16 grid gap-12 lg:grid-cols-12">
+          <div class="reveal lg:col-span-7 space-y-6 text-lg leading-relaxed text-ink/80">
+            <p>
+              Built according to European healthcare standards, Astghik is recognised for its modern infrastructure, advanced medical technologies, and internationally trained specialists. The center includes more than thirty specialised departments and fifteen state-of-the-art operating rooms equipped to international standards.
+            </p>
+            <p>
+              Astghik actively collaborates with leading clinics and specialists from Europe, Russia, and the United States — allowing physicians to continuously exchange experience, participate in international trainings, and stay updated with the latest medical innovations and surgical techniques.
+            </p>
+            <p>
+              The center is internationally certified under <strong class="font-medium text-ink">ISO 9001:2015</strong> quality management standards by <strong class="font-medium text-ink">TÜV Rheinland</strong>, reflecting its commitment to patient safety, healthcare quality, and clinical excellence.
+            </p>
+          </div>
+
+          <aside class="reveal lg:col-span-5">
+            <div class="rounded-sm border border-ink/10 bg-paper p-8">
+              <p class="text-xs uppercase tracking-[0.22em] text-ink/55">Key Facts</p>
+              <ul class="mt-6 space-y-4 text-[0.97rem] text-ink/85">
+                <li class="fact"><span class="dot"></span>One of the leading multidisciplinary hospitals in Armenia</li>
+                <li class="fact"><span class="dot"></span>More than 30 medical departments</li>
+                <li class="fact"><span class="dot"></span>15 modern operating rooms</li>
+                <li class="fact"><span class="dot"></span>ISO 9001:2015 certification (TÜV Rheinland)</li>
+                <li class="fact"><span class="dot"></span>Modern MRI, CT, endoscopy, angiography</li>
+                <li class="fact"><span class="dot"></span>Internationally trained physicians and surgeons</li>
+                <li class="fact"><span class="dot"></span>High-volume surgical and clinical practice</li>
+                <li class="fact"><span class="dot"></span>Advanced intensive care and emergency medicine</li>
+                <li class="fact"><span class="dot"></span>24/7 medical services</li>
+                <li class="fact"><span class="dot"></span>Multidisciplinary approach to patient care</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+
+        <blockquote class="reveal mt-20 mx-auto max-w-3xl text-center">
+          <p class="font-display text-[clamp(1.4rem,2.6vw,2.2rem)] leading-[1.18] tracking-tightest text-ink">
+            "A multidisciplinary surgical center built to European standards — and opened to the international medical community."
+          </p>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ==================== WHY MEDBRIDGE (comparison) ==================== -->
+    <section id="why" class="bg-ink py-24 text-bone lg:py-32">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
+        <header class="reveal grid gap-6 lg:grid-cols-12">
+          <p class="kicker text-gold lg:col-span-3"><span class="kicker-mark"></span>02 — Why MedBridge</p>
+          <div class="lg:col-span-9">
+            <h2 class="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
+              A summer abroad you'll talk about in <em class="italic font-light text-gold">every</em> interview.
+            </h2>
+            <p class="mt-6 max-w-2xl text-lg leading-relaxed text-bone/75">
+              Most international shadowing programs hop students across small ward rounds at a network of partner clinics. MedBridge is different: every rotation happens inside one hospital — a private, high-volume surgical center with the case mix of a regional referral hospital.
+            </p>
+          </div>
+        </header>
+
+        <div class="reveal mt-14 overflow-hidden rounded-sm ring-1 ring-bone/15">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-bone/5 text-xs uppercase tracking-[0.18em] text-bone/60">
+              <tr>
+                <th class="px-6 py-4">&nbsp;</th>
+                <th class="px-6 py-4">Typical shadowing abroad</th>
+                <th class="px-6 py-4 bg-claret/30 text-bone">MedBridge at Astghik</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-bone/10 text-bone/85">
+              <tr>
+                <th class="px-6 py-5 text-left font-display text-base font-medium text-bone">Setting</th>
+                <td class="px-6 py-5">Rotating small clinics</td>
+                <td class="px-6 py-5 bg-claret/10 text-bone">One ISO-certified multidisciplinary hospital, 15 ORs</td>
+              </tr>
+              <tr>
+                <th class="px-6 py-5 text-left font-display text-base font-medium text-bone">Daily exposure</th>
+                <td class="px-6 py-5">Ward rounds and a surgery or two per week</td>
+                <td class="px-6 py-5 bg-claret/10 text-bone">Observation of up to <strong class="text-bone">5 surgeries daily</strong>, Mon–Fri</td>
+              </tr>
+              <tr>
+                <th class="px-6 py-5 text-left font-display text-base font-medium text-bone">Specialty breadth</th>
+                <td class="px-6 py-5">3–6 specialties</td>
+                <td class="px-6 py-5 bg-claret/10 text-bone"><strong class="text-bone">24 clinical specialties</strong> under one roof</td>
+              </tr>
+              <tr>
+                <th class="px-6 py-5 text-left font-display text-base font-medium text-bone">Language</th>
+                <td class="px-6 py-5">Often local language with translator</td>
+                <td class="px-6 py-5 bg-claret/10 text-bone">English-language program</td>
+              </tr>
+              <tr>
+                <th class="px-6 py-5 text-left font-display text-base font-medium text-bone">Hands-on access</th>
+                <td class="px-6 py-5">Observation only</td>
+                <td class="px-6 py-5 bg-claret/10 text-bone">Supervised hands-on exposure for advanced students*</td>
+              </tr>
+              <tr>
+                <th class="px-6 py-5 text-left font-display text-base font-medium text-bone">Cost of living</th>
+                <td class="px-6 py-5">Western Europe / US benchmarks</td>
+                <td class="px-6 py-5 bg-claret/10 text-bone">Yerevan: ~25–35% of Western Europe</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="reveal mt-4 text-xs text-bone/55">*Hands-on opportunities depend on academic level, specialty, hospital approval, and local regulations.</p>
+      </div>
+    </section>
+
+    <!-- ==================== YEREVAN ==================== -->
+    <section id="yerevan" class="bg-paper py-24 lg:py-32">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
+        <header class="reveal grid gap-6 lg:grid-cols-12">
+          <p class="kicker text-claret lg:col-span-3"><span class="kicker-mark"></span>03 — Yerevan</p>
+          <div class="lg:col-span-9">
+            <h2 class="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
+              The oldest continuously inhabited capital in the world. Now one of the most exciting places to begin a medical career.
+            </h2>
+          </div>
+        </header>
+
+        <div class="mt-14 grid gap-10 lg:grid-cols-12">
+          <figure class="reveal lg:col-span-5 row-span-2">
+            <div class="aspect-[4/5] overflow-hidden rounded-sm bg-bone-deep ring-1 ring-ink/10">
+              <img
+                src="https://images.unsplash.com/photo-1641914094934-ce7ec0acedb7?w=1000&auto=format&fit=crop&q=70"
+                alt="The skyline of Yerevan, Armenia, with Mount Ararat in the distance"
+                class="h-full w-full object-cover"
+                loading="lazy"
+                onerror="this.style.display='none'; this.parentElement.classList.add('photo-fallback-yerevan')"
+              />
+            </div>
+            <figcaption class="mt-4 text-xs uppercase tracking-[0.2em] text-ink/55">Yerevan · view toward Mount Ararat</figcaption>
+          </figure>
+
+          <div class="reveal lg:col-span-7 grid gap-6 sm:grid-cols-2 self-start">
+            <div class="yerevan-card">
+              <p class="kicker-sm text-sage">Geography</p>
+              <h3 class="mt-2 font-display text-xl">The Caucasus crossroads</h3>
+              <p class="mt-3 text-ink/75 text-[0.97rem] leading-relaxed">Between Europe and Asia, in sight of Mount Ararat. Daily direct flights from Vienna, Paris, Rome, Frankfurt, Athens, and Doha.</p>
+            </div>
+            <div class="yerevan-card">
+              <p class="kicker-sm text-sage">Visa</p>
+              <h3 class="mt-2 font-display text-xl">Easy entry</h3>
+              <p class="mt-3 text-ink/75 text-[0.97rem] leading-relaxed">Visa-free entry for citizens of most EU, UK, US, and Schengen-area countries for stays up to 180 days.</p>
+            </div>
+            <div class="yerevan-card">
+              <p class="kicker-sm text-sage">Cost of Living</p>
+              <h3 class="mt-2 font-display text-xl">Roughly a quarter of Paris</h3>
+              <p class="mt-3 text-ink/75 text-[0.97rem] leading-relaxed">A meal at a good restaurant: $10–15. A coffee: $2. Monthly transit: under $25. Your stipend stretches.</p>
+            </div>
+            <div class="yerevan-card">
+              <p class="kicker-sm text-sage">Language</p>
+              <h3 class="mt-2 font-display text-xl">English everywhere</h3>
+              <p class="mt-3 text-ink/75 text-[0.97rem] leading-relaxed">The program is conducted in English. Most physicians, residents, and younger Yerevantsi speak English fluently.</p>
+            </div>
+          </div>
+
+          <div class="reveal lg:col-span-7">
+            <p class="text-lg leading-relaxed text-ink/80">
+              Yerevan is a city of cafés, mountain views, late-night promenades, and a thousand-year history compressed into a walkable downtown. Between rotations, our participants visit Garni Temple, Geghard Monastery, the Areni wine region, and Lake Sevan — all within a two-hour drive.
+            </p>
+            <a href="#program" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-claret hover:text-claret-deep">
+              See the weekly programme
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROGRAM AT A GLANCE ==================== -->
+    <section id="program" class="bg-bone py-24 lg:py-32">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
+        <header class="reveal grid gap-6 lg:grid-cols-12">
+          <p class="kicker text-claret lg:col-span-3"><span class="kicker-mark"></span>04 — Programme</p>
+          <div class="lg:col-span-9">
+            <h2 class="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
+              One, two, or three weeks at the bedside.
+            </h2>
+            <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75">
+              Programmes begin every Saturday. Choose your length, choose your focus specialty, and arrive ready. Longer durations available on request.
+            </p>
+          </div>
+        </header>
+
+        <div class="reveal mt-14 grid gap-6 md:grid-cols-3">
+          <article class="program-card">
+            <span class="program-num">01</span>
+            <h3 class="font-display text-2xl">Duration</h3>
+            <ul class="mt-5 space-y-2.5 text-ink/85">
+              <li class="dur-row"><span class="font-display text-3xl text-claret leading-none">1</span><span>week</span></li>
+              <li class="dur-row"><span class="font-display text-3xl text-claret leading-none">2</span><span>weeks</span></li>
+              <li class="dur-row"><span class="font-display text-3xl text-claret leading-none">3</span><span>weeks</span></li>
+            </ul>
+            <p class="mt-5 text-sm text-ink/55">Longer durations on request.</p>
+          </article>
+
+          <article class="program-card">
+            <span class="program-num">02</span>
+            <h3 class="font-display text-2xl">Arrival</h3>
+            <p class="mt-5 text-ink/80 text-[0.97rem]">All participants arrive on <strong class="font-medium text-ink">Saturday</strong>, with the programme beginning the following Monday.</p>
+            <ul class="mt-5 space-y-2 text-sm text-ink/70">
+              <li class="check-row">Airport transfer included</li>
+              <li class="check-row">Sunday orientation walk</li>
+              <li class="check-row">Hospital induction Monday AM</li>
+            </ul>
+          </article>
+
+          <article class="program-card">
+            <span class="program-num">03</span>
+            <h3 class="font-display text-2xl">Eligibility</h3>
+            <ul class="mt-5 space-y-2 text-sm text-ink/70">
+              <li class="check-row">Medical students, years 1–6</li>
+              <li class="check-row">Pre-med students (observational programmes)</li>
+              <li class="check-row">International healthcare trainees</li>
+              <li class="check-row">Young physicians and residents</li>
+            </ul>
+            <p class="mt-5 text-xs text-ink/55">Advanced students may be eligible for supervised hands-on exposure depending on specialty, experience, and hospital approval.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCHEDULE ==================== -->
+    <section id="schedule" class="bg-paper py-24 lg:py-32">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
+        <header class="reveal grid gap-6 lg:grid-cols-12">
+          <p class="kicker text-claret lg:col-span-3"><span class="kicker-mark"></span>05 — Sample Week</p>
+          <div class="lg:col-span-9">
+            <h2 class="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
+              A week at Astghik, hour by hour.
+            </h2>
+            <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75">
+              A representative Monday-to-Friday rotation. Actual case mix varies with department and weekly surgical schedule.
+            </p>
+          </div>
+        </header>
+
+        <ol class="reveal mt-14 grid gap-px overflow-hidden rounded-sm bg-ink/10 ring-1 ring-ink/10 md:grid-cols-5">
+          <li class="day-card">
+            <p class="day-label">Mon</p>
+            <h3 class="day-title">Induction & first ORs</h3>
+            <ul class="day-list">
+              <li>Hospital orientation</li>
+              <li>OR protocols & sterile field</li>
+              <li>2–3 surgical observations</li>
+              <li>Post-op debrief</li>
+            </ul>
+          </li>
+          <li class="day-card">
+            <p class="day-label">Tue</p>
+            <h3 class="day-title">Operating theatre</h3>
+            <ul class="day-list">
+              <li>Up to 5 surgical observations</li>
+              <li>Detailed surgeon commentary</li>
+              <li>Anaesthesiology overview</li>
+              <li>Patient case-file review</li>
+            </ul>
+          </li>
+          <li class="day-card">
+            <p class="day-label">Wed</p>
+            <h3 class="day-title">Ward rounds & clinic</h3>
+            <ul class="day-list">
+              <li>Morning attending rounds</li>
+              <li>Post-operative patient care</li>
+              <li>Outpatient clinic shadowing</li>
+              <li>Imaging & diagnostics</li>
+            </ul>
+          </li>
+          <li class="day-card">
+            <p class="day-label">Thu</p>
+            <h3 class="day-title">Specialty focus</h3>
+            <ul class="day-list">
+              <li>Deep-dive in chosen specialty</li>
+              <li>Up to 5 surgical observations</li>
+              <li>One-on-one with surgeon</li>
+              <li>Procedural workshop</li>
+            </ul>
+          </li>
+          <li class="day-card">
+            <p class="day-label">Fri</p>
+            <h3 class="day-title">Multidisciplinary day</h3>
+            <ul class="day-list">
+              <li>Cross-specialty observations</li>
+              <li>Tumour board / case conference</li>
+              <li>Programme reflection</li>
+              <li>Certificate of completion</li>
+            </ul>
+          </li>
+        </ol>
+
+        <div class="reveal mt-12 rounded-sm border border-sage/30 bg-sage/5 p-8 lg:p-10">
+          <p class="kicker-sm text-sage"><span class="kicker-mark"></span>For Advanced Students</p>
+          <h3 class="mt-3 font-display text-2xl lg:text-3xl tracking-tightest">Selected surgical hands-on exposure</h3>
+          <p class="mt-4 max-w-3xl text-ink/80 leading-relaxed">
+            Advanced medical students may be eligible for supervised hands-on clinical exposure in selected surgeries and clinical activities — including assisting during selected procedures where permitted, and direct interaction with surgeons and medical teams. Eligibility depends on academic level, specialty, hospital approval, and local regulations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SPECIALTIES ==================== -->
+    <section id="specialties" class="bg-bone py-24 lg:py-32">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
+        <header class="reveal grid gap-6 lg:grid-cols-12">
+          <p class="kicker text-claret lg:col-span-3"><span class="kicker-mark"></span>06 — Specialties</p>
+          <div class="lg:col-span-9">
+            <h2 class="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
+              Twenty-four clinical specialties. One hospital.
+            </h2>
+            <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75">
+              Browse the full case mix. Filter by domain, or search by name.
+            </p>
+          </div>
+        </header>
+
+        <div class="reveal mt-12 flex flex-wrap items-center gap-3">
+          <div role="tablist" aria-label="Filter specialties" class="flex flex-wrap gap-2">
+            <button class="chip chip-active" data-filter="all">All <span class="chip-count">24</span></button>
+            <button class="chip" data-filter="surgical">Surgical</button>
+            <button class="chip" data-filter="cardio">Cardiac & Vascular</button>
+            <button class="chip" data-filter="neuro">Neuro</button>
+            <button class="chip" data-filter="womens">Women's Health</button>
+            <button class="chip" data-filter="diagnostic">Diagnostic</button>
+            <button class="chip" data-filter="other">Other</button>
+          </div>
+          <div class="ml-auto relative w-full sm:w-72">
+            <input id="specialty-search" type="search" placeholder="Search specialties…" class="w-full rounded-sm border border-ink/15 bg-paper px-4 py-2.5 pr-10 text-sm placeholder:text-ink/40 focus:border-claret focus:outline-none focus:ring-2 focus:ring-claret/20" />
+            <svg viewBox="0 0 24 24" class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ink/40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+          </div>
+        </div>
+
+        <div id="specialty-grid" class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Cards rendered by app.js -->
+        </div>
+
+        <p id="specialty-empty" class="hidden mt-8 text-center text-ink/55">No specialties match your search.</p>
+      </div>
+    </section>
+
+    <!-- ==================== ADDITIONAL SERVICES ==================== -->
+    <section id="services" class="bg-paper py-24 lg:py-28">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
+        <header class="reveal grid gap-6 lg:grid-cols-12">
+          <p class="kicker text-claret lg:col-span-3"><span class="kicker-mark"></span>07 — Beyond the Hospital</p>
+          <div class="lg:col-span-9">
+            <h2 class="font-display text-[clamp(1.7rem,3.2vw,2.8rem)] leading-[1.05] tracking-tightest">
+              Everything around the rotation, handled.
+            </h2>
+          </div>
+        </header>
+
+        <div class="reveal mt-12 grid gap-px overflow-hidden rounded-sm bg-ink/10 ring-1 ring-ink/10 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="service-card">
+            <svg viewBox="0 0 24 24" class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12 12 4l9 8M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+            <h3 class="service-title">Accommodation</h3>
+            <p class="service-text">Boutique hotels and serviced apartments within 10–20 minutes of the hospital, arranged for you.</p>
+          </div>
+          <div class="service-card">
+            <svg viewBox="0 0 24 24" class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 17h20M5 17V9a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v8"/><circle cx="8" cy="20" r="2"/><circle cx="16" cy="20" r="2"/></svg>
+            <h3 class="service-title">Airport transfer</h3>
+            <p class="service-text">Pickup on arrival at Zvartnots International, drop-off on departure — both included.</p>
+          </div>
+          <div class="service-card">
+            <svg viewBox="0 0 24 24" class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12c4-6 14-6 18 0M3 12c4 6 14 6 18 0"/><circle cx="12" cy="12" r="2"/></svg>
+            <h3 class="service-title">Tours across Armenia</h3>
+            <p class="service-text">Optional weekend excursions: Garni, Geghard, Lake Sevan, Areni wine region, Dilijan.</p>
+          </div>
+          <div class="service-card">
+            <svg viewBox="0 0 24 24" class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 19h16M6 19V9l6-4 6 4v10"/><path d="M10 19v-6h4v6"/></svg>
+            <h3 class="service-title">Cultural activities</h3>
+            <p class="service-text">Curated dinners, music evenings, and meet-ups with local medical students and residents.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MISSION ==================== -->
+    <section id="mission" class="relative bg-claret py-28 text-bone lg:py-36 overflow-hidden">
+      <div class="absolute inset-0 mission-grain" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-content px-6 lg:px-10">
+        <p class="kicker text-gold-soft reveal"><span class="kicker-mark"></span>Our mission</p>
+        <p class="reveal mt-8 font-display text-[clamp(1.8rem,4vw,3.6rem)] leading-[1.08] tracking-tightest max-w-5xl">
+          To create a bridge between international medical education and clinical excellence in Armenia — by offering meaningful educational experiences that inspire future healthcare professionals.
+        </p>
+        <div class="reveal mt-12 flex flex-wrap items-center gap-6">
+          <a href="#apply" class="btn-on-dark btn-lg">Begin your application</a>
+          <a href="#faq" class="text-sm uppercase tracking-[0.2em] text-bone/75 hover:text-bone">Read the FAQ →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== APPLY ==================== -->
+    <section id="apply" class="bg-bone py-24 lg:py-32">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
+        <div class="grid gap-12 lg:grid-cols-12">
+          <div class="reveal lg:col-span-5">
+            <p class="kicker text-claret"><span class="kicker-mark"></span>08 — Apply</p>
+            <h2 class="mt-6 font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
+              Tell us about you.<br />We'll design the rotation.
+            </h2>
+            <p class="mt-6 text-lg leading-relaxed text-ink/75 max-w-prose2">
+              Your application is reviewed personally by the MedBridge team. You'll hear back within <strong class="font-medium text-ink">two business days</strong> with availability, an all-inclusive quote, and the next steps.
+            </p>
+
+            <ul class="mt-8 space-y-3 text-[0.97rem] text-ink/80">
+              <li class="fact"><span class="dot"></span>Review by a real human, within 48 hours</li>
+              <li class="fact"><span class="dot"></span>Personalised quote: programme + accommodation + transfers</li>
+              <li class="fact"><span class="dot"></span>No commitment — no card required to apply</li>
+              <li class="fact"><span class="dot"></span>Programme begins every Saturday, year-round</li>
+            </ul>
+
+            <div class="mt-10 rounded-sm border border-ink/10 bg-paper p-6">
+              <p class="text-xs uppercase tracking-[0.2em] text-ink/55">Prefer to talk first?</p>
+              <p class="mt-3 text-ink/80">
+                Email <a class="link" href="mailto:hello@medbridge.am">hello@medbridge.am</a><br />
+                or write us on WhatsApp.
+              </p>
+            </div>
+          </div>
+
+          <div class="reveal lg:col-span-7">
+            <form id="apply-form" class="rounded-sm border border-ink/15 bg-paper p-6 sm:p-10 shadow-sm" action="https://formspree.io/f/REPLACE_ME" method="POST" novalidate>
+              <div class="grid gap-5 sm:grid-cols-2">
+                <div class="field">
+                  <label for="f-first">First name *</label>
+                  <input id="f-first" name="firstName" type="text" required autocomplete="given-name" />
+                </div>
+                <div class="field">
+                  <label for="f-last">Last name *</label>
+                  <input id="f-last" name="lastName" type="text" required autocomplete="family-name" />
+                </div>
+                <div class="field">
+                  <label for="f-email">Email *</label>
+                  <input id="f-email" name="email" type="email" required autocomplete="email" />
+                </div>
+                <div class="field">
+                  <label for="f-country">Country</label>
+                  <input id="f-country" name="country" type="text" autocomplete="country-name" />
+                </div>
+                <div class="field">
+                  <label for="f-phone">Phone / WhatsApp</label>
+                  <input id="f-phone" name="phone" type="tel" autocomplete="tel" />
+                </div>
+                <div class="field">
+                  <label for="f-education">Education level *</label>
+                  <select id="f-education" name="educationLevel" required>
+                    <option value="">Select one…</option>
+                    <option>Pre-med student</option>
+                    <option>Medical student — Years 1–3</option>
+                    <option>Medical student — Years 4–6</option>
+                    <option>Resident</option>
+                    <option>Young physician</option>
+                    <option>Healthcare trainee (other)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="f-specialty">Preferred specialty *</label>
+                  <select id="f-specialty" name="preferredSpecialty" required>
+                    <option value="">Select one…</option>
+                    <!-- Options injected by app.js -->
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="f-duration">Programme length *</label>
+                  <select id="f-duration" name="duration" required>
+                    <option value="">Select one…</option>
+                    <option>1 week</option>
+                    <option>2 weeks</option>
+                    <option>3 weeks</option>
+                    <option>Longer (please specify)</option>
+                  </select>
+                </div>
+                <div class="field sm:col-span-2">
+                  <label for="f-start">Preferred start date</label>
+                  <input id="f-start" name="preferredStart" type="date" />
+                  <p class="hint">Programmes begin on Saturdays.</p>
+                </div>
+                <div class="field sm:col-span-2">
+                  <label for="f-message">Anything we should know?</label>
+                  <textarea id="f-message" name="message" rows="4" placeholder="Specific surgeries you'd like to observe, prior shadowing experience, dietary needs, accommodation preferences…"></textarea>
+                </div>
+                <div class="sm:col-span-2 flex items-start gap-3">
+                  <input id="f-consent" name="consent" type="checkbox" required class="mt-1 h-4 w-4 rounded border-ink/30 text-claret focus:ring-claret" />
+                  <label for="f-consent" class="text-sm text-ink/75">
+                    I agree that MedBridge may use the information above to contact me about my application. *
+                  </label>
+                </div>
+              </div>
+
+              <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+
+              <div class="mt-8 flex flex-wrap items-center gap-4">
+                <button type="submit" class="btn-primary btn-lg">
+                  Submit application
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
+                <p class="text-xs text-ink/55">We'll reply within 2 business days.</p>
+              </div>
+
+              <div id="form-error" class="hidden mt-6 rounded-sm border border-claret/40 bg-claret/5 px-4 py-3 text-sm text-claret-deep" role="alert"></div>
+              <div id="form-success" class="hidden mt-8 rounded-sm border border-sage/40 bg-sage/5 p-6">
+                <p class="font-display text-xl text-sage">Application received. Thank you.</p>
+                <p class="mt-2 text-ink/75">A member of the MedBridge team will be in touch within two business days with availability and a personalised quote. Check your inbox (and spam folder, just in case).</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section id="faq" class="bg-paper py-24 lg:py-32">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
+        <header class="reveal grid gap-6 lg:grid-cols-12">
+          <p class="kicker text-claret lg:col-span-3"><span class="kicker-mark"></span>09 — FAQ</p>
+          <div class="lg:col-span-9">
+            <h2 class="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
+              Questions, answered.
+            </h2>
+          </div>
+        </header>
+
+        <div class="reveal mt-12 mx-auto max-w-3xl divide-y divide-ink/15 border-y border-ink/15">
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Who is eligible to apply?</span><span class="faq-icon"></span>
+            </button>
+            <div class="faq-panel"><div class="faq-body">
+              <p>Our programmes are open to medical students in years 1–6, pre-med students, international healthcare trainees, young physicians, and residents. Pre-med students are eligible for selected observational shadowing programmes. Advanced medical students may be eligible for supervised hands-on exposure in selected surgeries, depending on specialty, experience, and hospital approval.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Is the programme purely observational, or hands-on?</span><span class="faq-icon"></span>
+            </button>
+            <div class="faq-panel"><div class="faq-body">
+              <p>For most participants the programme is observational — observation of up to five surgeries daily, detailed surgeon explanations, post-operative discussions, clinical rounds, and exposure to OR protocols. For advanced and qualified participants, selected programmes may include supervised hands-on clinical experience during selected procedures, strictly depending on academic level, qualifications, hospital approval, and local regulations.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>What language is the programme in?</span><span class="faq-icon"></span>
+            </button>
+            <div class="faq-panel"><div class="faq-body">
+              <p>The MedBridge programme is conducted in English. Astghik's physicians are internationally trained and collaborate with clinics across Europe, Russia, and the United States — English is the working language for international participants.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>How long is each programme, and when can I arrive?</span><span class="faq-icon"></span>
+            </button>
+            <div class="faq-panel"><div class="faq-body">
+              <p>Programmes run for one, two, or three weeks. Longer durations are available on request. All participants arrive on Saturday; the rotation begins the following Monday.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Do I need a visa for Armenia?</span><span class="faq-icon"></span>
+            </button>
+            <div class="faq-panel"><div class="faq-body">
+              <p>Citizens of EU member states, the UK, the US, Canada, Australia, and most Schengen-area countries can enter Armenia visa-free for stays of up to 180 days. We'll send detailed entry guidance with your acceptance letter.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>What's included in the programme fee?</span><span class="faq-icon"></span>
+            </button>
+            <div class="faq-panel"><div class="faq-body">
+              <p>Our all-inclusive packages typically cover the clinical programme, accommodation, airport transfers, hospital induction, certificate of completion, and 24/7 support during your stay. Optional tours and cultural activities are available as add-ons. You'll receive a personalised quote after you apply.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Will I receive a certificate?</span><span class="faq-icon"></span>
+            </button>
+            <div class="faq-panel"><div class="faq-body">
+              <p>Yes. Every participant who completes a programme at Astghik Medical Center receives an official certificate of completion, signed by the hospital, listing the rotation length, specialties observed, and supervising physicians.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>How do I apply?</span><span class="faq-icon"></span>
+            </button>
+            <div class="faq-panel"><div class="faq-body">
+              <p>Submit the application form on this page. A member of the MedBridge team reviews each application personally and replies within two business days with availability, a personalised quote, and the next steps. No payment is required at the application stage.</p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-ink text-bone/80 pt-20 pb-10">
+    <div class="mx-auto max-w-content px-6 lg:px-10">
+      <div class="grid gap-12 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <a href="#top" class="inline-flex items-center gap-2 font-display text-2xl tracking-tightest text-bone">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-claret text-bone">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 12h10M12 7v10"/></svg>
+            </span>
+            MedBridge
+          </a>
+          <p class="mt-5 max-w-md text-bone/65 leading-relaxed">
+            The international observership programme at Astghik Medical Center — bridging international medical education and clinical excellence in Armenia.
+          </p>
+        </div>
+
+        <div class="lg:col-span-3">
+          <p class="text-xs uppercase tracking-[0.22em] text-bone/45">Programme</p>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li><a class="footer-link" href="#about">About Astghik</a></li>
+            <li><a class="footer-link" href="#program">Programme</a></li>
+            <li><a class="footer-link" href="#specialties">Specialties</a></li>
+            <li><a class="footer-link" href="#schedule">Sample Week</a></li>
+            <li><a class="footer-link" href="#apply">Apply</a></li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-4">
+          <p class="text-xs uppercase tracking-[0.22em] text-bone/45">Location</p>
+          <address class="mt-4 not-italic text-sm leading-relaxed text-bone/85">
+            Astghik Medical Center<br />
+            Yerevan, Armenia
+          </address>
+          <p class="mt-5 text-xs uppercase tracking-[0.22em] text-bone/45">Contact</p>
+          <p class="mt-3 text-sm">
+            <a class="footer-link" href="mailto:hello@medbridge.am">hello@medbridge.am</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-16 flex flex-col items-start justify-between gap-4 border-t border-bone/15 pt-8 text-xs text-bone/55 sm:flex-row sm:items-center">
+        <p>© <span id="year"></span> MedBridge. All rights reserved.</p>
+        <p>Astghik Medical Center is ISO 9001:2015 certified by TÜV Rheinland.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
