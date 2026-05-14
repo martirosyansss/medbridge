@@ -88,6 +88,7 @@
   function initMobileMenu() {
     const toggle = document.getElementById('nav-toggle');
     const menu = document.getElementById('mobile-menu');
+    const header = document.getElementById('site-header');
     const iconBurger = document.getElementById('icon-burger');
     const iconClose = document.getElementById('icon-close');
     if (!toggle || !menu) return;
@@ -95,6 +96,7 @@
     const setOpen = (open) => {
       menu.classList.toggle('hidden', !open);
       toggle.setAttribute('aria-expanded', String(open));
+      header && header.classList.toggle('is-open', open);
       iconBurger && iconBurger.classList.toggle('hidden', open);
       iconClose && iconClose.classList.toggle('hidden', !open);
     };
@@ -307,11 +309,44 @@
       const action = form.getAttribute('action') || '';
       const usingPlaceholder = !action || action.includes('REPLACE_ME');
 
+      let mailtoUrl = null;
       try {
         if (usingPlaceholder) {
-          // No real endpoint yet — simulate success so the UI is testable.
-          // Replace the form's `action` with your Formspree endpoint to go live.
-          await new Promise((r) => setTimeout(r, 600));
+          // No real endpoint configured — render a visible "Open email
+          // client" button in the success banner instead of silently
+          // navigating away. This avoids the "did anything happen?"
+          // ambiguity when no mail client is registered. Replace the
+          // form's `action` with your Formspree (or other) endpoint to go
+          // live.
+          const get = (id) => {
+            const el = form.querySelector('#' + id);
+            return el && 'value' in el ? String(el.value || '').trim() : '';
+          };
+          const fields = {
+            firstName: get('f-first'),
+            lastName: get('f-last'),
+            email: get('f-email'),
+            country: get('f-country'),
+            phone: get('f-phone'),
+            educationLevel: get('f-education'),
+            preferredSpecialty: get('f-specialty'),
+            duration: get('f-duration'),
+            preferredStart: get('f-start'),
+            message: get('f-message').slice(0, 1500),
+          };
+          const subject = ('MedBridge application — ' + fields.firstName + ' ' + fields.lastName).trim();
+          const body = [
+            'Name: ' + fields.firstName + ' ' + fields.lastName,
+            'Email: ' + fields.email,
+            fields.country && 'Country: ' + fields.country,
+            fields.phone && 'Phone / WhatsApp: ' + fields.phone,
+            'Education level: ' + fields.educationLevel,
+            'Preferred specialty: ' + fields.preferredSpecialty,
+            'Programme length: ' + fields.duration,
+            fields.preferredStart && 'Preferred start date: ' + fields.preferredStart,
+            fields.message && '\nMessage:\n' + fields.message,
+          ].filter(Boolean).join('\n');
+          mailtoUrl = 'mailto:hello@medbridge.am?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         } else {
           const data = new FormData(form);
           const res = await fetch(action, {
@@ -330,6 +365,13 @@
           el.disabled = true;
         });
         if (okBox) {
+          if (mailtoUrl) {
+            okBox.innerHTML =
+              '<p class="font-display text-xl text-sage">One more step — send the email.</p>' +
+              '<p class="mt-2 text-ink/75">Open your email client with a pre-filled application and <strong class="font-medium text-ink">send the email</strong> to finish your application.</p>' +
+              '<a href="' + mailtoUrl + '" class="btn-primary btn-lg mt-5 inline-flex">Open email client</a>' +
+              '<p class="mt-4 text-sm text-ink/65">No mail client set up? Email us directly at <a class="link underline" href="mailto:hello@medbridge.am">hello@medbridge.am</a> with the details above.</p>';
+          }
           okBox.classList.remove('hidden');
           okBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }

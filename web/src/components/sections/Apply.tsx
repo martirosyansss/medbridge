@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react"
 import { SPECIALTIES } from "@/data/specialties"
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_ME"
+const FALLBACK_EMAIL = "hello@medbridge.am"
+const MESSAGE_MAX = 2000
 
 type FormState = {
   firstName: string
@@ -17,6 +19,25 @@ type FormState = {
   message: string
   consent: boolean
   _gotcha: string
+}
+
+function buildMailto(form: FormState): string {
+  const subject = `MedBridge application — ${form.firstName} ${form.lastName}`.trim()
+  // Clamp message to keep total URI under common 2 KB mail-client limits
+  // after percent-encoding, which roughly triples non-ASCII byte size.
+  const safeMessage = form.message ? form.message.slice(0, 1500) : ""
+  const lines = [
+    `Name: ${form.firstName} ${form.lastName}`,
+    `Email: ${form.email}`,
+    form.country && `Country: ${form.country}`,
+    form.phone && `Phone / WhatsApp: ${form.phone}`,
+    `Education level: ${form.educationLevel}`,
+    `Preferred specialty: ${form.preferredSpecialty}`,
+    `Programme length: ${form.duration}`,
+    form.preferredStart && `Preferred start date: ${form.preferredStart}`,
+    safeMessage && `\nMessage:\n${safeMessage}`,
+  ].filter(Boolean)
+  return `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`
 }
 
 const INITIAL: FormState = {
@@ -63,6 +84,7 @@ export function Apply() {
   const [error, setError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [mailtoUrl, setMailtoUrl] = useState<string | null>(null)
 
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }))
@@ -98,7 +120,11 @@ export function Apply() {
     try {
       const usingPlaceholder = FORMSPREE_ENDPOINT.includes("REPLACE_ME")
       if (usingPlaceholder) {
-        await new Promise((r) => setTimeout(r, 600))
+        // No real submission endpoint configured yet — show the user an
+        // explicit "Open email client" button instead of silently
+        // navigating away. This avoids the "did anything happen?" ambiguity
+        // when no mail client is registered.
+        setMailtoUrl(buildMailto(form))
       } else {
         const data = new FormData()
         Object.entries(form).forEach(([k, v]) => {
@@ -117,7 +143,7 @@ export function Apply() {
       }, 50)
     } catch (err) {
       console.error(err)
-      setError("Sorry — we couldn't submit your application. Please try again, or email hello@medbridge.am.")
+      setError(`Sorry — we couldn't submit your application. Please try again, or email ${FALLBACK_EMAIL}.`)
     } finally {
       setSubmitting(false)
     }
@@ -288,6 +314,7 @@ export function Apply() {
                   <textarea
                     id="f-message"
                     rows={4}
+                    maxLength={MESSAGE_MAX}
                     placeholder="Specific surgeries you'd like to observe, prior shadowing experience, dietary needs, accommodation preferences…"
                     value={form.message}
                     onChange={(e) => set("message", e.target.value)}
@@ -305,7 +332,8 @@ export function Apply() {
                     disabled={success}
                   />
                   <label htmlFor="f-consent" className="text-sm text-ink/75">
-                    I agree that MedBridge may use the information above to contact me about my application. *
+                    I agree that MedBridge may use the information above to contact me about my application. See our{" "}
+                    <a className="link underline" href="/privacy.html" target="_blank" rel="noopener noreferrer">privacy policy</a>. *
                   </label>
                 </div>
               </div>
@@ -333,11 +361,29 @@ export function Apply() {
                   {error}
                 </div>
               )}
-              {success && (
+              {success && !mailtoUrl && (
                 <div id="form-success" className="mt-8 rounded-sm border border-sage/40 bg-sage/5 p-6">
                   <p className="font-display text-xl text-sage">Application received. Thank you.</p>
                   <p className="mt-2 text-ink/75">
                     A member of the MedBridge team will be in touch within two business days with availability and a personalised quote. Check your inbox (and spam folder, just in case).
+                  </p>
+                </div>
+              )}
+              {success && mailtoUrl && (
+                <div id="form-success" className="mt-8 rounded-sm border border-sage/40 bg-sage/5 p-6">
+                  <p className="font-display text-xl text-sage">One more step — send the email.</p>
+                  <p className="mt-2 text-ink/75">
+                    Open your email client with a pre-filled application and{" "}
+                    <strong className="font-medium text-ink">send the email</strong> to finish your application.
+                  </p>
+                  <a href={mailtoUrl} className="btn-primary btn-lg mt-5 inline-flex">
+                    Open email client
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <p className="mt-4 text-sm text-ink/65">
+                    No mail client set up? Email us directly at{" "}
+                    <a className="link underline" href={`mailto:${FALLBACK_EMAIL}`}>{FALLBACK_EMAIL}</a>{" "}
+                    with the details above.
                   </p>
                 </div>
               )}
