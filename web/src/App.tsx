@@ -6,6 +6,7 @@ import { Yerevan } from "@/components/sections/Yerevan"
 import { Program } from "@/components/sections/Program"
 import { Schedule } from "@/components/sections/Schedule"
 import { Specialties } from "@/components/sections/Specialties"
+import { Gallery } from "@/components/sections/Gallery"
 import { Services } from "@/components/sections/Services"
 import { Pricing } from "@/components/sections/Pricing"
 import { RiskReversal } from "@/components/sections/RiskReversal"
@@ -14,6 +15,7 @@ import { Apply } from "@/components/sections/Apply"
 import { Faq } from "@/components/sections/Faq"
 import { Footer } from "@/components/Footer"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
+import { StickyMobileCTA } from "@/components/StickyMobileCTA"
 import { useReveal } from "@/hooks/useReveal"
 
 export default function App() {
@@ -30,6 +32,7 @@ export default function App() {
         <Program />
         <Schedule />
         <Specialties />
+        <Gallery />
         <Services />
         <Pricing />
         <RiskReversal />
@@ -39,6 +42,7 @@ export default function App() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <StickyMobileCTA />
     </>
   )
 }

@@ -1,3 +1,5 @@
+import { Photo } from "@/components/Photo"
+
 const FACTS = [
   "One of the leading multidisciplinary hospitals in Armenia",
   "More than 30 medical departments",
@@ -27,7 +29,45 @@ export function About() {
           </div>
         </header>
 
-        <div className="mt-16 grid gap-12 lg:grid-cols-12">
+        <div className="reveal mt-14 grid gap-6 sm:grid-cols-12">
+          <figure className="sm:col-span-7 aspect-[16/10] overflow-hidden rounded-sm ring-1 ring-ink/10 bg-bone-deep">
+            <Photo
+              src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=1600&auto=format&fit=crop&q=78"
+              srcSet="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=900&auto=format&fit=crop&q=72 900w, https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=1600&auto=format&fit=crop&q=78 1600w"
+              sizes="(min-width: 1024px) 60vw, 100vw"
+              alt="Modern multidisciplinary hospital exterior at dusk"
+              className="h-full w-full object-cover"
+              fallbackClass="photo-fallback-hospital"
+              fallbackLabel="Hospital exterior"
+            />
+          </figure>
+          <figure className="sm:col-span-5 grid grid-rows-2 gap-6">
+            <div className="aspect-[4/3] overflow-hidden rounded-sm ring-1 ring-ink/10 bg-bone-deep">
+              <Photo
+                src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1000&auto=format&fit=crop&q=75"
+                srcSet="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=600&auto=format&fit=crop&q=72 600w, https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1000&auto=format&fit=crop&q=75 1000w"
+                sizes="(min-width: 1024px) 30vw, 50vw"
+                alt="Operating room equipped with modern surgical lights and monitors"
+                className="h-full w-full object-cover"
+                fallbackClass="photo-fallback-or"
+                fallbackLabel="Operating room"
+              />
+            </div>
+            <div className="aspect-[4/3] overflow-hidden rounded-sm ring-1 ring-ink/10 bg-bone-deep">
+              <Photo
+                src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1000&auto=format&fit=crop&q=75"
+                srcSet="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=600&auto=format&fit=crop&q=72 600w, https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1000&auto=format&fit=crop&q=75 1000w"
+                sizes="(min-width: 1024px) 30vw, 50vw"
+                alt="Modern MRI scanner inside a diagnostic imaging suite"
+                className="h-full w-full object-cover"
+                fallbackClass="photo-fallback-tech"
+                fallbackLabel="Diagnostic imaging"
+              />
+            </div>
+          </figure>
+        </div>
+
+        <div className="mt-14 grid gap-12 lg:grid-cols-12">
           <div className="reveal lg:col-span-7 space-y-6 text-lg leading-relaxed text-ink/80">
             <p>
               Built according to European healthcare standards, Astghik is recognised for its modern infrastructure, advanced medical technologies, and internationally trained specialists. The center includes more than thirty specialised departments and fifteen state-of-the-art operating rooms equipped to international standards.

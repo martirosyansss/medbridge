@@ -1,5 +1,5 @@
-import { useState } from "react"
 import { ArrowRight } from "lucide-react"
+import { Photo } from "@/components/Photo"
 
 const CARDS = [
   { kicker: "Geography", title: "The Caucasus crossroads", body: "Between Europe and Asia, in sight of Mount Ararat. Daily direct flights from Vienna, Paris, Rome, Frankfurt, Athens, and Doha." },
@@ -8,8 +8,34 @@ const CARDS = [
   { kicker: "Language", title: "English everywhere", body: "The program is conducted in English. Most physicians, residents, and younger Yerevantsi speak English fluently." },
 ]
 
+const MINI_PHOTOS = [
+  {
+    src: "https://images.unsplash.com/photo-1602253020023-90f2a4ee0f1d?w=900&auto=format&fit=crop&q=72",
+    alt: "Garni Pagan Temple, first-century Hellenistic temple east of Yerevan",
+    caption: "Garni Temple",
+    fallback: "photo-fallback-garni",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1601034740089-fef21b317e9a?w=900&auto=format&fit=crop&q=72",
+    alt: "Republic Square in central Yerevan with tufa-stone civic architecture",
+    caption: "Republic Square",
+    fallback: "photo-fallback-yerevan",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1602257015014-c0bc7a3ab0f3?w=900&auto=format&fit=crop&q=72",
+    alt: "Lake Sevan, a high-altitude alpine lake north-east of Yerevan",
+    caption: "Lake Sevan",
+    fallback: "photo-fallback-sevan",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1602615576540-a0e1afad8019?w=900&auto=format&fit=crop&q=72",
+    alt: "The Cascade monument, a stepped sculpture park in central Yerevan",
+    caption: "The Cascade",
+    fallback: "photo-fallback-yerevan",
+  },
+]
+
 export function Yerevan() {
-  const [imgFailed, setImgFailed] = useState(false)
   return (
     <section id="yerevan" className="bg-paper py-24 lg:py-32">
       <div className="mx-auto max-w-content px-6 lg:px-10">
@@ -27,16 +53,15 @@ export function Yerevan() {
 
         <div className="mt-14 grid gap-10 lg:grid-cols-12">
           <figure className="reveal lg:col-span-5 row-span-2">
-            <div className={`aspect-[4/5] overflow-hidden rounded-sm bg-bone-deep ring-1 ring-ink/10 ${imgFailed ? "photo-fallback-yerevan" : ""}`}>
-              {!imgFailed && (
-                <img
-                  src="https://images.unsplash.com/photo-1589537368054-6a9c11ba1eac?w=1000&auto=format&fit=crop&q=70"
-                  alt="The skyline of Yerevan, Armenia, with Mount Ararat in the distance"
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                  onError={() => setImgFailed(true)}
-                />
-              )}
+            <div className="aspect-[4/5] overflow-hidden rounded-sm bg-bone-deep ring-1 ring-ink/10">
+              <Photo
+                src="https://images.unsplash.com/photo-1589537368054-6a9c11ba1eac?w=1200&auto=format&fit=crop&q=72"
+                srcSet="https://images.unsplash.com/photo-1589537368054-6a9c11ba1eac?w=700&auto=format&fit=crop&q=70 700w, https://images.unsplash.com/photo-1589537368054-6a9c11ba1eac?w=1200&auto=format&fit=crop&q=72 1200w"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                alt="The skyline of Yerevan, Armenia, with Mount Ararat in the distance"
+                className="h-full w-full object-cover"
+                fallbackClass="photo-fallback-yerevan"
+              />
             </div>
             <figcaption className="mt-4 text-xs uppercase tracking-[0.2em] text-ink/55">Yerevan · view toward Mount Ararat</figcaption>
           </figure>
@@ -60,6 +85,22 @@ export function Yerevan() {
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
+        </div>
+
+        <div className="reveal mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          {MINI_PHOTOS.map((p) => (
+            <figure key={p.caption} className="mini-photo">
+              <div className="mini-photo-frame">
+                <Photo
+                  src={p.src}
+                  alt={p.alt}
+                  className="h-full w-full object-cover"
+                  fallbackClass={p.fallback}
+                />
+              </div>
+              <figcaption className="mini-photo-caption">{p.caption}</figcaption>
+            </figure>
+          ))}
         </div>
       </div>
     </section>
