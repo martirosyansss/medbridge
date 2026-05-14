@@ -30,7 +30,7 @@ export function Yerevan() {
             <div className={`aspect-[4/5] overflow-hidden rounded-sm bg-bone-deep ring-1 ring-ink/10 ${imgFailed ? "photo-fallback-yerevan" : ""}`}>
               {!imgFailed && (
                 <img
-                  src="https://images.unsplash.com/photo-1641914094934-ce7ec0acedb7?w=1000&auto=format&fit=crop&q=70"
+                  src="https://images.unsplash.com/photo-1589537368054-6a9c11ba1eac?w=1000&auto=format&fit=crop&q=70"
                   alt="The skyline of Yerevan, Armenia, with Mount Ararat in the distance"
                   className="h-full w-full object-cover"
                   loading="lazy"

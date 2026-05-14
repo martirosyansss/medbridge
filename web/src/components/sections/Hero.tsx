@@ -62,7 +62,7 @@ export function Hero() {
             <figure className={`relative aspect-[4/5] overflow-hidden rounded-sm bg-bone-deep shadow-2xl ring-1 ring-ink/10 ${imgFailed ? "photo-fallback" : ""}`}>
               {!imgFailed && (
                 <img
-                  src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1200&auto=format&fit=crop&q=72"
+                  src="https://images.unsplash.com/photo-1758206523711-f20bb01033a5?w=1200&auto=format&fit=crop&q=72"
                   alt="Surgeons during a procedure in a modern operating theatre"
                   className="h-full w-full object-cover"
                   loading="eager"
