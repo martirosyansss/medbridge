@@ -30,7 +30,8 @@ export function Nav() {
       id="site-header"
       className={cn(
         "site-header fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled && "is-scrolled"
+        scrolled && "is-scrolled",
+        open && "is-open"
       )}
     >
       <div className="mx-auto max-w-content px-6 lg:px-10">
