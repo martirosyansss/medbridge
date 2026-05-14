@@ -10,13 +10,14 @@ const LINKS = [
   { href: "yerevan", label: "Yerevan" },
   { href: "program", label: "Program" },
   { href: "specialties", label: "Specialties" },
+  { href: "pricing", label: "Pricing" },
   { href: "faq", label: "FAQ" },
 ] as const
 
 const MOBILE_LINKS = [
   ...LINKS.slice(0, 5),
   { href: "schedule", label: "Sample Week" },
-  LINKS[5],
+  ...LINKS.slice(5),
 ] as const
 
 export function Nav() {

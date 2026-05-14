@@ -34,6 +34,15 @@ export function Hero() {
               </a>
             </div>
 
+            <p className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-claret">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-claret opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-claret" />
+              </span>
+              {/* TODO: update spot count each week */}
+              Only 4 international spots per week · July 2026: 2 remaining
+            </p>
+
             <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4 border-t border-ink/15 pt-7">
               <div>
                 <dt className="text-xs uppercase tracking-[0.18em] text-ink/55">Departments</dt>

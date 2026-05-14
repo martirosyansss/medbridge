@@ -24,6 +24,7 @@ export function Footer() {
               <li><a className="footer-link" href="#program">Programme</a></li>
               <li><a className="footer-link" href="#specialties">Specialties</a></li>
               <li><a className="footer-link" href="#schedule">Sample Week</a></li>
+              <li><a className="footer-link" href="#pricing">Pricing</a></li>
               <li><a className="footer-link" href="#apply">Apply</a></li>
             </ul>
           </div>

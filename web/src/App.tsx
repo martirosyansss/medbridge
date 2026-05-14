@@ -7,10 +7,13 @@ import { Program } from "@/components/sections/Program"
 import { Schedule } from "@/components/sections/Schedule"
 import { Specialties } from "@/components/sections/Specialties"
 import { Services } from "@/components/sections/Services"
+import { Pricing } from "@/components/sections/Pricing"
+import { Testimonials } from "@/components/sections/Testimonials"
 import { Mission } from "@/components/sections/Mission"
 import { Apply } from "@/components/sections/Apply"
 import { Faq } from "@/components/sections/Faq"
 import { Footer } from "@/components/Footer"
+import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { useReveal } from "@/hooks/useReveal"
 
 export default function App() {
@@ -28,11 +31,14 @@ export default function App() {
         <Schedule />
         <Specialties />
         <Services />
+        <Pricing />
+        <Testimonials />
         <Mission />
         <Apply />
         <Faq />
       </main>
       <Footer />
+      <WhatsAppButton />
     </>
   )
 }
