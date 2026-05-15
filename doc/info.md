@@ -14,7 +14,7 @@ The medical center includes more than 30 specialized departments and 15 state-of
 
 Astghik Medical Center actively collaborates with leading clinics and specialists from Europe, Russia, and the United States, allowing physicians to continuously exchange experience, participate in international trainings, and stay updated with the latest medical innovations and surgical techniques.
 
-The center is internationally certified under ISO 9001:2015 quality management standards by TÜV Rheinland, reflecting its commitment to patient safety, healthcare quality, and clinical excellence.
+The center is accredited by Joint Commission International (JCI) — effective 31 May 2025 through 30 May 2028 — and is internationally certified under ISO 9001:2015 quality management standards by TÜV Rheinland (valid 2024-08-26 to 2027-08-26, first certified 2018), reflecting its commitment to patient safety, healthcare quality, and clinical excellence.
 
 Astghik Medical Center provides high-volume surgical and clinical practice in numerous specialties and serves thousands of patients every year.
 
@@ -22,7 +22,8 @@ Key Facts:
 • One of the leading multidisciplinary hospitals in Armenia
 • More than 30 medical departments
 • 15 modern operating rooms
-• International ISO 9001:2015 certification
+• JCI accreditation (Joint Commission International), effective 31 May 2025 – 30 May 2028
+• International ISO 9001:2015 certification (TÜV Rheinland)
 • Modern MRI, CT, endoscopy, angiography, and diagnostic technologies
 • Internationally trained physicians and surgeons
 • High-volume surgical and clinical practice

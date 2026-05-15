@@ -5,7 +5,7 @@ const SERVICES: { icon: LucideIcon; title: string; body: string }[] = [
   { icon: Home,    title: "Accommodation",        body: "Boutique hotels and serviced apartments within 10–20 minutes of the hospital, arranged for you." },
   { icon: Plane,   title: "Airport transfer",     body: "Pickup on arrival at Zvartnots International, drop-off on departure — both included." },
   { icon: Compass, title: "Tours across Armenia", body: "Optional weekend excursions: Garni, Geghard, Lake Sevan, Areni wine region, Dilijan." },
-  { icon: Music,   title: "Cultural activities",  body: "Curated dinners, music evenings, and meet-ups with local medical students and residents." },
+  { icon: Music,   title: "Cultural activities",  body: "Curated dinners, music evenings and meet-ups with local medical students and residents." },
 ]
 
 export function Services() {

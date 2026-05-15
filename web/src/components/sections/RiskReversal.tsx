@@ -43,7 +43,7 @@ export function RiskReversal() {
               Booking abroad feels risky.<br />We make sure it isn't.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75">
-              A clear, written set of guarantees on refunds, rescheduling, and visa contingencies — so the only thing left to decide is the rotation.
+              A clear, written set of guarantees on refunds, rescheduling and visa contingencies — so the only thing left to decide is the rotation.
             </p>
           </div>
         </header>
@@ -58,7 +58,7 @@ export function RiskReversal() {
           ))}
         </div>
 
-        <p className="reveal mt-6 text-xs text-ink/55">
+        <p className="reveal mt-6 text-xs text-ink/65">
           Full details are spelled out in your acceptance email and the programme agreement. See our{" "}
           <a className="link underline" href="/terms.html" target="_blank" rel="noopener noreferrer">terms of service</a> for the complete refund and cancellation policy.
         </p>

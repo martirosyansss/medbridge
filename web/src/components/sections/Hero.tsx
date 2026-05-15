@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react"
 import { ArrowRight, ChevronDown, ShieldCheck } from "lucide-react"
+import hospitalExterior from "@/assets/astghik/hospital-exterior.jpg"
 
 function computeNextSaturdayScarcity(): { n: number; dateLabel: string } {
   const d = new Date()
@@ -24,10 +25,8 @@ export function Hero() {
       <div className={`hero-bg ${imgFailed ? "hero-bg--fallback" : ""}`}>
         {!imgFailed && (
           <img
-            src="https://images.unsplash.com/photo-1551076805-e1869033e561?w=2400&auto=format&fit=crop&q=80"
-            srcSet="https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&auto=format&fit=crop&q=72 1200w, https://images.unsplash.com/photo-1551076805-e1869033e561?w=2000&auto=format&fit=crop&q=78 2000w, https://images.unsplash.com/photo-1551076805-e1869033e561?w=2800&auto=format&fit=crop&q=82 2800w"
-            sizes="100vw"
-            alt="Surgical team performing a procedure inside a modern operating theatre"
+            src={hospitalExterior}
+            alt="Astghik Medical Center building in Yerevan with Armenian flag"
             className="hero-image"
             loading="eager"
             fetchPriority="high"
@@ -56,10 +55,9 @@ export function Hero() {
           </h1>
 
           <p className="hero-subline">
-            The international observership program at{" "}
-            <span className="hero-subline-strong">Astghik Medical Center, Yerevan</span> —
-            twenty-four specialties, fifteen operating rooms, ISO-certified, in English.
-            Designed for medical students, residents, and young physicians from around the world.
+            MedBridge is an international medical shadowing program at{" "}
+            <span className="hero-subline-strong">Astghik Medical Center in Yerevan, Armenia</span> —
+            a JCI-accredited and ISO 9001:2015 certified hospital. The program offers exposure to 24 medical specialties, 15 operating rooms and real clinical practice in an English-speaking environment for pre-med students, medical students, residents and young physicians from around the world.
           </p>
 
           <div className="hero-ctas">
@@ -102,16 +100,16 @@ export function Hero() {
             <span className="hero-stat-sep" aria-hidden="true" />
             <div className="hero-stat">
               <span className="hero-stat-num">
-                9001<span className="hero-stat-mark">:2015</span>
+                5<span className="hero-stat-mark">/wk</span>
               </span>
-              <span className="hero-stat-label">ISO Certified</span>
+              <span className="hero-stat-label">Surgeries Observed</span>
             </div>
           </div>
 
           <div className="hero-trust reveal">
             <ShieldCheck className="h-4 w-4" strokeWidth={1.6} />
             <span>
-              Certified by <strong>TÜV Rheinland</strong>
+              <strong>JCI-accredited</strong> · ISO 9001:2015 by <strong>TÜV Rheinland</strong>
             </span>
           </div>
         </div>

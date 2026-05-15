@@ -8,12 +8,17 @@
   --color-bone: #F5F1EA;
   --color-bone-deep: #EAE3D6;
   --color-paper: #FBF8F2;
-  --color-claret: #7A1F2B;
-  --color-claret-deep: #5E1620;
-  --color-sage: #3F5B4A;
-  --color-sage-soft: #7A9285;
-  --color-gold: #B8924A;
-  --color-gold-soft: #D9BE89;
+  /* Brand palette: MedBridge navy + teal (logo-aligned).
+     Names kept (claret/gold) so call-sites don't have to change. */
+  --color-claret: #1B3A6A;
+  --color-claret-deep: #112A52;
+  /* `sage` slot repurposed as warm-gold success accent (medical classic:
+     navy = trust, teal = fresh, gold = achievement). Names kept so call-
+     sites don't have to change. */
+  --color-sage: #B8924A;
+  --color-sage-soft: #D9BE89;
+  --color-gold: #1FA8A4;
+  --color-gold-soft: #5DD0CC;
 
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -30,7 +35,7 @@
   --color-card-foreground: #0E1726;
   --color-popover: #FBF8F2;
   --color-popover-foreground: #0E1726;
-  --color-primary: #7A1F2B;
+  --color-primary: #1B3A6A;
   --color-primary-foreground: #F5F1EA;
   --color-secondary: #EAE3D6;
   --color-secondary-foreground: #0E1726;
@@ -38,11 +43,11 @@
   --color-muted-foreground: rgba(14, 23, 38, 0.65);
   --color-accent: #EAE3D6;
   --color-accent-foreground: #0E1726;
-  --color-destructive: #7A1F2B;
+  --color-destructive: #1B3A6A;
   --color-destructive-foreground: #F5F1EA;
   --color-border: rgba(14, 23, 38, 0.12);
   --color-input: rgba(14, 23, 38, 0.15);
-  --color-ring: rgba(122, 31, 43, 0.5);
+  --color-ring: rgba(27, 58, 106, 0.5);
 }
 
 @utility max-w-content {
@@ -77,6 +82,34 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   font-size: 0.875rem; transition: top 0.18s;
 }
 .skip-link:focus { top: 1rem; }
+
+/* ---------------- brand logo ----------------
+   The MedBridge lockup has a white background. We render it as a soft
+   white chip in every state — the warm bone surface and the dark hero
+   both treat the chip cleanly. Earlier we used mix-blend-mode toggling
+   between states, but `mix-blend-mode` is not a smoothly-animated CSS
+   property: it flipped instantly while `background-color` faded, which
+   read on screen as a flicker on every scroll boundary. */
+.brand-logo {
+  display: block;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 4px 8px;
+  box-shadow: 0 1px 0 rgba(14, 23, 38, 0.04), 0 6px 14px -10px rgba(14, 23, 38, 0.22);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+/* On the scrolled / open header (light bone background), drop the
+   shadow so the white chip blends almost invisibly into the bone. */
+.site-header.is-scrolled .brand-logo,
+.site-header.is-open .brand-logo {
+  box-shadow: 0 1px 0 rgba(14, 23, 38, 0.05);
+}
+.brand-logo--on-dark {
+  background-color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 18px 36px -20px rgba(0, 0, 0, 0.55);
+}
 
 /* ---------------- header ---------------- */
 .site-header { background-color: rgba(245, 241, 234, 0); transition: background-color 0.3s ease, border-color 0.3s ease; }
@@ -213,8 +246,8 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 }
 .hero-bg--fallback {
   background:
-    radial-gradient(60% 80% at 30% 30%, rgba(122,31,43,0.55) 0%, transparent 60%),
-    radial-gradient(50% 70% at 80% 70%, rgba(184,146,74,0.25) 0%, transparent 65%),
+    radial-gradient(60% 80% at 30% 30%, rgba(27,58,106,0.55) 0%, transparent 60%),
+    radial-gradient(50% 70% at 80% 70%, rgba(31,168,164,0.25) 0%, transparent 65%),
     linear-gradient(160deg, #0E1726 0%, #0a0f1a 55%, #050810 100%);
 }
 .hero-bg--fallback::after {
@@ -252,8 +285,8 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   position: absolute; inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(40% 50% at 18% 80%, rgba(122,31,43,0.35) 0%, transparent 70%),
-    radial-gradient(35% 45% at 88% 18%, rgba(184,146,74,0.18) 0%, transparent 75%);
+    radial-gradient(40% 50% at 18% 80%, rgba(27,58,106,0.35) 0%, transparent 70%),
+    radial-gradient(35% 45% at 88% 18%, rgba(31,168,164,0.18) 0%, transparent 75%);
   mix-blend-mode: screen;
 }
 
@@ -309,8 +342,8 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 .hero-headline em {
   font-style: italic;
   font-weight: 300;
-  color: #E7C58A;
-  background: linear-gradient(180deg, #E7C58A 0%, #B8924A 100%);
+  color: #5DD0CC;
+  background: linear-gradient(180deg, #5DD0CC 0%, #1FA8A4 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -327,7 +360,7 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 .hero-subline-strong {
   color: var(--color-bone);
   font-weight: 500;
-  border-bottom: 1px solid rgba(184,146,74,0.55);
+  border-bottom: 1px solid rgba(31,168,164,0.55);
   padding-bottom: 1px;
 }
 
@@ -342,8 +375,6 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 .btn-hero-primary,
 .btn-hero-ghost {
   display: inline-flex; align-items: center; gap: 0.55rem;
-  padding: 1.05rem 1.85rem;
-  font-size: 0.96rem;
   font-weight: 500;
   border-radius: 2px;
   letter-spacing: 0.01em;
@@ -352,12 +383,14 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   white-space: nowrap;
 }
 .btn-hero-primary {
+  padding: 1.05rem 1.85rem;
+  font-size: 0.96rem;
   background-color: var(--color-claret);
   color: var(--color-bone);
   border: 1px solid rgba(255,255,255,0.06);
   box-shadow:
     0 1px 0 rgba(255,255,255,0.08) inset,
-    0 14px 34px -16px rgba(122,31,43,0.65),
+    0 14px 34px -16px rgba(27,58,106,0.65),
     0 2px 6px rgba(0,0,0,0.3);
 }
 .btn-hero-primary:hover {
@@ -365,22 +398,26 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   transform: translateY(-1px);
   box-shadow:
     0 1px 0 rgba(255,255,255,0.08) inset,
-    0 18px 42px -16px rgba(122,31,43,0.75),
+    0 18px 42px -16px rgba(27,58,106,0.75),
     0 4px 10px rgba(0,0,0,0.35);
 }
+/* Ghost is visually subordinate: smaller padding, slightly smaller font,
+   no border on dark hero — reads as a tertiary text link with hit area. */
 .btn-hero-ghost {
+  padding: 0.95rem 1.1rem;
+  font-size: 0.9rem;
   background-color: transparent;
-  color: var(--color-bone);
-  border: 1px solid rgba(245,241,234,0.32);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  color: rgba(245,241,234,0.82);
+  border: 1px solid transparent;
 }
 .btn-hero-ghost:hover {
-  background-color: rgba(245,241,234,0.08);
-  border-color: rgba(245,241,234,0.6);
-  transform: translateY(-1px);
+  color: var(--color-bone);
+  background-color: rgba(245,241,234,0.06);
+  border-color: rgba(245,241,234,0.18);
 }
 
+/* Scarcity cue stays warm (amber) regardless of brand palette — cold
+   colors read as "info indicator," warm reads as "act now." */
 .hero-scarcity {
   margin-top: 1.4rem;
   display: inline-flex; align-items: center;
@@ -388,7 +425,7 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #F2D2A3;
+  color: #F2A65A;
 }
 .hero-pulse {
   position: relative;
@@ -398,7 +435,7 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 .hero-pulse-ring {
   position: absolute; inset: 0;
   border-radius: 999px;
-  background-color: #E7C58A;
+  background-color: #FFB870;
   opacity: 0.55;
   animation: heroPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
@@ -406,8 +443,8 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   position: relative;
   width: 8px; height: 8px;
   border-radius: 999px;
-  background-color: var(--color-gold);
-  box-shadow: 0 0 12px rgba(184,146,74,0.7);
+  background-color: #E08A3F;
+  box-shadow: 0 0 12px rgba(224,138,63,0.7);
 }
 
 .hero-bottom-bar {
@@ -523,7 +560,9 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   .hero-scroll { display: none; }
 }
 
-@media (max-width: 480px) {
+/* Switch to 2×2 grid up to 640px so landscape phones (e.g. 568×320)
+   don't try to cram four stats into a single horizontal row. */
+@media (max-width: 640px) {
   .hero-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -603,7 +642,7 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   text-align: center;
 }
 .photo-fallback-soft   { background: linear-gradient(135deg, #1c2336 0%, #0E1726 100%); }
-.photo-fallback-or     { background: linear-gradient(135deg, #2a1a22 0%, #5E1620 55%, #0E1726 100%); }
+.photo-fallback-or     { background: linear-gradient(135deg, #14202b 0%, #112A52 55%, #0E1726 100%); }
 .photo-fallback-hospital { background: linear-gradient(160deg, #3a4859 0%, #1c2336 60%, #0E1726 100%); }
 .photo-fallback-tech   { background: linear-gradient(150deg, #1f3a4d 0%, #14202b 60%, #0E1726 100%); }
 .photo-fallback-students { background: linear-gradient(150deg, #3F5B4A 0%, #2c3f33 60%, #14201a 100%); }
@@ -655,98 +694,16 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 .mission-overlay {
   position: absolute; inset: 0;
   background:
-    linear-gradient(160deg, rgba(122,31,43,0.85) 0%, rgba(94,22,32,0.78) 55%, rgba(40,8,14,0.92) 100%);
+    linear-gradient(160deg, rgba(27,58,106,0.85) 0%, rgba(17,42,82,0.82) 55%, rgba(8,18,38,0.94) 100%);
   mix-blend-mode: multiply;
 }
 .mission-grain {
   position: absolute; inset: 0;
   background-image:
-    radial-gradient(circle at 80% 20%, rgba(184,146,74,0.22), transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(93,208,204,0.22), transparent 50%),
     radial-gradient(circle at 10% 90%, rgba(14,23,38,0.25), transparent 55%);
   mix-blend-mode: screen;
   pointer-events: none;
-}
-
-/* ---- Gallery ---- */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 180px;
-  gap: 0.85rem;
-}
-.gallery-tile {
-  position: relative;
-  margin: 0;
-  overflow: hidden;
-  border-radius: 2px;
-  background-color: var(--color-bone-deep);
-  grid-column: span 3;
-  grid-row: span 1;
-  box-shadow: 0 14px 30px -22px rgba(14,23,38,0.45);
-  transition: box-shadow 0.3s ease;
-}
-.gallery-tile--tall   { grid-column: span 4; grid-row: span 2; }
-.gallery-tile--wide   { grid-column: span 6; grid-row: span 1; }
-.gallery-tile--square { grid-column: span 3; grid-row: span 1; }
-.gallery-tile:hover { box-shadow: 0 24px 42px -22px rgba(14,23,38,0.55); }
-
-.gallery-img,
-.gallery-tile > div {
-  position: absolute; inset: 0;
-  height: 100%; width: 100%;
-  object-fit: cover;
-  transition: transform 0.7s ease, filter 0.4s ease;
-}
-.gallery-tile:hover .gallery-img { transform: scale(1.06); }
-
-.gallery-caption {
-  position: absolute; inset: auto 0 0 0;
-  padding: 1rem 1.1rem 0.9rem;
-  background: linear-gradient(180deg, transparent 0%, rgba(14,23,38,0.7) 60%, rgba(14,23,38,0.92) 100%);
-  color: var(--color-bone);
-  display: flex; flex-direction: column; gap: 0.18rem;
-  transform: translateY(8px);
-  opacity: 0.92;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-.gallery-tile:hover .gallery-caption { transform: translateY(0); opacity: 1; }
-.gallery-label {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-.gallery-sub {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(245,241,234,0.78);
-}
-
-@media (max-width: 960px) {
-  .gallery-grid {
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: 160px;
-  }
-  .gallery-tile--tall   { grid-column: span 4; grid-row: span 2; }
-  .gallery-tile--wide   { grid-column: span 6; }
-  .gallery-tile--square { grid-column: span 3; }
-  .gallery-tile         { grid-column: span 3; }
-}
-@media (max-width: 560px) {
-  .gallery-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 150px;
-  }
-  .gallery-tile,
-  .gallery-tile--tall,
-  .gallery-tile--wide,
-  .gallery-tile--square {
-    grid-column: span 1;
-    grid-row: span 1;
-  }
-  .gallery-tile--tall   { grid-column: span 2; grid-row: span 2; }
-  .gallery-tile--wide   { grid-column: span 2; }
 }
 
 /* ---------------- cards ---------------- */
@@ -840,7 +797,7 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   font-size: 0.65rem;
   padding: 1px 6px;
   border-radius: 999px;
-  background-color: rgba(184,146,74,0.25);
+  background-color: rgba(31,168,164,0.25);
   color: var(--color-gold);
 }
 .chip-active .chip-count { background-color: rgba(245,241,234,0.18); color: var(--color-bone); }
@@ -889,7 +846,7 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   text-transform: uppercase;
   color: var(--color-sage);
   padding: 3px 8px;
-  background-color: rgba(63,91,74,0.07);
+  background-color: rgba(184,146,74,0.08);
   border-radius: 2px;
 }
 
@@ -919,7 +876,7 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 /* ---------------- mission ---------------- */
 .mission-grain {
   background-image:
-    radial-gradient(circle at 80% 20%, rgba(184,146,74,0.18), transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(31,168,164,0.18), transparent 50%),
     radial-gradient(circle at 10% 90%, rgba(14,23,38,0.2), transparent 55%);
   mix-blend-mode: screen;
 }
@@ -951,13 +908,20 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
   outline: none;
   border-color: var(--color-claret);
   background-color: #fff;
-  box-shadow: 0 0 0 3px rgba(122,31,43,0.12);
+  box-shadow: 0 0 0 3px rgba(27,58,106,0.12);
 }
 .field input[aria-invalid="true"],
 .field select[aria-invalid="true"],
 .field textarea[aria-invalid="true"] {
   border-color: var(--color-claret);
-  background-color: rgba(122,31,43,0.04);
+  background-color: rgba(27,58,106,0.04);
+}
+.field input:disabled,
+.field select:disabled,
+.field textarea:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background-color: rgba(14,23,38,0.04);
 }
 .field .hint { font-size: 0.78rem; color: rgba(14,23,38,0.55); margin: 0; }
 
@@ -1043,24 +1007,27 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 button:focus-visible,
 a:focus-visible { outline-offset: 4px; }
 
-/* ---------------- sticky mobile CTA ---------------- */
-.sticky-mcta {
-  position: fixed; left: 0; right: 0; bottom: 0;
-  z-index: 40;
-  display: flex; gap: 0.6rem;
-  padding: 0.75rem 1rem max(0.75rem, env(safe-area-inset-bottom));
-  background: rgba(245,241,234,0.96);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(14,23,38,0.08);
-  transform: translateY(0);
-  transition: transform 0.25s ease;
-}
-.sticky-mcta.is-hidden { transform: translateY(110%); pointer-events: none; }
-.sticky-mcta .apply { flex: 1; justify-content: center; }
-.sticky-mcta .wa {
-  flex: none; width: 44px; height: 44px;
-  display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 2px; border: 1px solid rgba(14,23,38,0.18);
-  color: var(--color-ink);
+/* ---------------- mobile touch targets ----------------
+   WCAG 2.5.5 / Apple HIG: interactive elements ≥ 44px tall on touch
+   devices. We bump chips, form fields, and the sticky-apply button on
+   small viewports without bulking up the desktop layout. */
+@media (max-width: 640px) {
+  .chip {
+    min-height: 44px;
+    padding: 0.6rem 1.05rem;
+    font-size: 0.86rem;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    min-height: 44px;
+    padding: 0.85rem 0.95rem;
+    font-size: 1rem; /* prevents iOS auto-zoom on focus */
+  }
+  .field textarea { min-height: 96px; }
+  .btn-primary,
+  .btn-secondary,
+  .btn-on-dark {
+    min-height: 44px;
+  }
 }

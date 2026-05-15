@@ -1,0 +1,9 @@
+# Local working files (private docs, scans, photos — not for public repo)
+Files/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

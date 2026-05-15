@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { Menu, X, Plus } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useStickyHeader } from "@/hooks/useStickyHeader"
 import { useActiveSection } from "@/hooks/useActiveSection"
+import logoUrl from "@/assets/logo.png"
 
 const LINKS = [
   { href: "about", label: "About" },
@@ -36,11 +37,19 @@ export function Nav() {
     >
       <div className="mx-auto max-w-content px-6 lg:px-10">
         <nav className="flex items-center justify-between py-5" aria-label="Primary">
-          <a href="#top" className="group flex items-center gap-2 font-display text-xl tracking-tightest text-ink">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-claret text-bone transition-transform group-hover:-rotate-6">
-              <Plus className="h-4 w-4" strokeWidth={2.2} />
-            </span>
-            <span className="font-medium">MedBridge</span>
+          <a
+            href="#top"
+            aria-label="MedBridge — home"
+            className="brand-mark group inline-flex items-center"
+          >
+            <img
+              src={logoUrl}
+              alt="MedBridge"
+              width={160}
+              height={160}
+              className="brand-logo h-11 w-auto select-none transition-transform group-hover:-rotate-1"
+              draggable={false}
+            />
           </a>
 
           <ul className="hidden lg:flex items-center gap-8 text-sm text-ink/80">

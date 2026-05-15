@@ -2,22 +2,22 @@ const DAYS = [
   {
     label: "Mon",
     title: "Induction & first ORs",
-    items: ["Hospital orientation", "OR protocols & sterile field", "2–3 surgical observations", "Post-op debrief"],
+    items: ["Hospital orientation", "OR protocols & sterile field", "1 surgical observation", "Post-op debrief"],
   },
   {
     label: "Tue",
     title: "Operating theatre",
-    items: ["Up to 5 surgical observations", "Detailed surgeon commentary", "Anaesthesiology overview", "Patient case-file review"],
+    items: ["1 surgical observation", "Detailed surgeon commentary", "Anaesthesiology overview", "Patient case-file review"],
   },
   {
     label: "Wed",
     title: "Ward rounds & clinic",
-    items: ["Morning attending rounds", "Post-operative patient care", "Outpatient clinic shadowing", "Imaging & diagnostics"],
+    items: ["Morning attending rounds", "Post-operative patient care", "Outpatient clinic shadowing", "Imaging & diagnostics", "1 surgical observation"],
   },
   {
     label: "Thu",
     title: "Specialty focus",
-    items: ["Deep-dive in chosen specialty", "Up to 5 surgical observations", "One-on-one with surgeon", "Procedural workshop"],
+    items: ["Deep-dive in chosen specialty", "1 surgical observation", "One-on-one with surgeon", "Procedural workshop"],
   },
   {
     label: "Fri",
@@ -45,7 +45,7 @@ export function Schedule() {
           </div>
         </header>
 
-        <ol className="reveal mt-14 grid gap-px overflow-hidden rounded-sm bg-ink/10 ring-1 ring-ink/10 md:grid-cols-5">
+        <ol className="reveal mt-14 grid gap-px overflow-hidden rounded-sm bg-ink/10 ring-1 ring-ink/10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {DAYS.map((d) => (
             <li key={d.label} className="day-card">
               <p className="day-label">{d.label}</p>
@@ -66,7 +66,7 @@ export function Schedule() {
           </p>
           <h3 className="mt-3 font-display text-2xl lg:text-3xl tracking-tightest">Selected surgical hands-on exposure</h3>
           <p className="mt-4 max-w-3xl text-ink/80 leading-relaxed">
-            Advanced medical students may be eligible for supervised hands-on clinical exposure in selected surgeries and clinical activities — including assisting during selected procedures where permitted, and direct interaction with surgeons and medical teams. Eligibility depends on academic level, specialty, hospital approval, and local regulations.
+            Advanced medical students may be eligible for supervised hands-on clinical exposure in selected surgeries and clinical activities — including assisting during selected procedures where permitted and direct interaction with surgeons and medical teams. Eligibility depends on academic level, specialty, hospital approval and local regulations.
           </p>
         </div>
       </div>

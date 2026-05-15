@@ -12,7 +12,7 @@ export function Program() {
               One, two, or three weeks at the bedside.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75">
-              Programmes begin every Saturday. Choose your length, choose your focus specialty, and arrive ready. Longer durations available on request.
+              Programmes begin every Saturday. Choose your length, choose your focus specialty and arrive ready. Longer durations available on request.
             </p>
           </div>
         </header>
@@ -29,7 +29,7 @@ export function Program() {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 text-sm text-ink/55">Longer durations on request.</p>
+            <p className="mt-5 text-sm text-ink/65">Longer durations on request.</p>
           </article>
 
           <article className="program-card">
@@ -50,12 +50,11 @@ export function Program() {
             <h3 className="font-display text-2xl">Eligibility</h3>
             <ul className="mt-5 space-y-2 text-sm text-ink/70">
               <li className="check-row">Medical students, years 1–6</li>
-              <li className="check-row">Pre-med students (observational programmes)</li>
               <li className="check-row">International healthcare trainees</li>
               <li className="check-row">Young physicians and residents</li>
             </ul>
-            <p className="mt-5 text-xs text-ink/55">
-              Advanced students may be eligible for supervised hands-on exposure depending on specialty, experience, and hospital approval.
+            <p className="mt-5 text-xs text-ink/65">
+              Pre-med students can participate in some observational programmes. Advanced students may be eligible for supervised hands-on exposure depending on specialty, experience and hospital approval.
             </p>
           </article>
         </div>

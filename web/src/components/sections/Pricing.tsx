@@ -1,43 +1,42 @@
 import { Check } from "lucide-react"
 
-const INCLUSIONS = [
-  "Clinical programme at Astghik Medical Center",
-  "Accommodation (boutique hotel or apartment, 10–20 min from hospital)",
-  "Airport transfers (arrival + departure)",
-  "Hospital induction & sterile-field training",
-  "Certificate of completion (signed by Astghik)",
-  "24/7 in-country support",
-]
-
 const TIERS = [
   {
-    name: "Observership",
+    name: "1 week",
     duration: "1 week",
-    price: 1499,
-    tagline: "Best for pre-med & 1st–3rd year students",
-    perks: ["Observation of up to 25 surgeries", "Ward rounds & clinic shadowing", "OR protocols overview"],
-  },
-  {
-    name: "Intensive",
-    duration: "2 weeks",
-    price: 2499,
-    featured: true,
-    tagline: "Best for 4th-year+ students & residents",
+    price: 2000,
+    tagline: "Foundational rotation with full clinical exposure",
     perks: [
-      "Everything in Observership",
+      "Observation of up to 5 surgeries",
       "Specialty deep-dive with one-on-one surgeon time",
       "Tumour board / case conference attendance",
+      "Ward round and clinic shadowing",
+      "OR protocols overview",
+      "Supervised hands-on exposure on selected procedures*",
+      "Direct mentorship from senior surgeon",
     ],
   },
   {
-    name: "Hands-on",
-    duration: "3 weeks",
-    price: 3299,
-    tagline: "For advanced students eligible for supervised assistance",
+    name: "2 weeks",
+    duration: "2 weeks",
+    price: 3500,
+    featured: true,
+    tagline: "Extended rotation with deeper case-mix exposure",
     perks: [
-      "Everything in Intensive",
-      "Supervised hands-on exposure on selected procedures*",
-      "Direct mentorship from senior surgeon",
+      "Everything in the 1-week programme",
+      "Extended specialty exposure",
+      "Additional one-on-one mentorship hours",
+    ],
+  },
+  {
+    name: "3 weeks",
+    duration: "3 weeks",
+    price: 5000,
+    tagline: "Full rotation for advanced students and residents",
+    perks: [
+      "Everything in the 2-week programme",
+      "Broader multi-specialty case mix",
+      "Maximum supervised hands-on opportunities*",
     ],
   },
 ]
@@ -49,11 +48,11 @@ export function Pricing() {
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-claret lg:col-span-3">
             <span className="kicker-mark" />
-            Investment
+            Pricing
           </p>
           <div className="lg:col-span-9">
             <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
-              All-inclusive. Transparent. Less than a week of European tuition.
+              Programme pricing.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75">
               Choose a length. Your personalised quote — locked in for 14 days — arrives within 48 hours of application.
@@ -75,13 +74,13 @@ export function Pricing() {
                   Most popular
                 </span>
               )}
-              <p className="text-xs uppercase tracking-[0.22em] text-ink/55">{t.duration}</p>
+              <p className="text-xs uppercase tracking-[0.22em] text-ink/65">{t.duration}</p>
               <h3 className="mt-2 font-display text-2xl tracking-tightest text-ink">{t.name}</h3>
               <p className="mt-4 flex items-baseline gap-1">
-                <span className="text-xs text-ink/55">from</span>
                 <span className="font-display text-4xl font-medium text-ink">${t.price.toLocaleString()}</span>
+                <span className="text-xs text-ink/65">USD</span>
               </p>
-              <p className="mt-1 text-xs text-ink/55">all-inclusive · per participant</p>
+              <p className="mt-1 text-xs text-ink/65">per participant</p>
               <p className="mt-5 text-sm text-ink/70 leading-relaxed">{t.tagline}</p>
               <ul className="mt-6 space-y-2.5 text-sm text-ink/75">
                 {t.perks.map((p) => (
@@ -105,31 +104,33 @@ export function Pricing() {
           ))}
         </div>
 
-        <div className="reveal mt-12 grid gap-8 rounded-sm border border-ink/10 bg-paper p-8 lg:grid-cols-12 lg:p-10">
-          <div className="lg:col-span-5">
-            <p className="kicker-sm text-sage">
-              <span className="kicker-mark" />
-              What's always included
-            </p>
-            <p className="mt-3 font-display text-2xl tracking-tightest">No hidden fees.</p>
-            <p className="mt-3 text-sm text-ink/70 leading-relaxed">
-              A single transparent quote covers everything below. Optional weekend tours and cultural add-ons are listed
-              separately in your acceptance email.
+        <div className="reveal mt-10 grid gap-6 md:grid-cols-3">
+          <div className="rounded-sm border border-ink/10 bg-paper p-6">
+            <p className="font-display text-base text-claret">Visa required?</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink/75">
+              Most passports are visa-free or e-visa for Armenia. We send an official invitation letter for visa applications when needed.
             </p>
           </div>
-          <ul className="lg:col-span-7 grid gap-3 sm:grid-cols-2 text-sm text-ink/80">
-            {INCLUSIONS.map((i) => (
-              <li key={i} className="flex items-start gap-2">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-claret" strokeWidth={2} />
-                <span>{i}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="rounded-sm border border-ink/10 bg-paper p-6">
+            <p className="font-display text-base text-claret">Is it refundable?</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink/75">
+              Full refund if we cancel; 80% if you cancel ≥14 days out; 50% within 14 days. Details in your acceptance email.
+            </p>
+          </div>
+          <div className="rounded-sm border border-ink/10 bg-paper p-6">
+            <p className="font-display text-base text-claret">Group discount?</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink/75">
+              Yes — 10% off for 3+ applicants applying together. Mention it in the application message.
+            </p>
+          </div>
         </div>
+        <a href="#faq" className="reveal mt-4 inline-flex items-center gap-1 text-sm text-ink/70 hover:text-ink">
+          See full FAQ <span aria-hidden>→</span>
+        </a>
 
-        <p className="reveal mt-4 text-xs text-ink/55">
-          *Supervised hands-on exposure depends on academic level, specialty, hospital approval, and local regulations.
-          Prices in USD. Group discounts available for 3+ applicants.
+        <p className="reveal mt-8 text-xs text-ink/65">
+          *Supervised hands-on exposure depends on academic level, specialty, hospital approval and local regulations.
+          Prices in USD. Group discounts available for 3+ applicants. Accommodation and additional services are available for an additional fee.
         </p>
       </div>
     </section>

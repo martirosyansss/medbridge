@@ -1,37 +1,41 @@
 import { ArrowRight } from "lucide-react"
 import { Photo } from "@/components/Photo"
+import garniTemple from "@/assets/yerevan/garni-temple.jpg"
+import republicSquare from "@/assets/yerevan/republic-square.jpg"
+import lakeSevan from "@/assets/yerevan/lake-sevan.jpg"
+import cascade from "@/assets/yerevan/cascade.jpg"
 
 const CARDS = [
-  { kicker: "Geography", title: "The Caucasus crossroads", body: "Between Europe and Asia, in sight of Mount Ararat. Daily direct flights from Vienna, Paris, Rome, Frankfurt, Athens, and Doha." },
-  { kicker: "Visa", title: "Easy entry", body: "Visa-free entry for citizens of most EU, UK, US, and Schengen-area countries for stays up to 180 days." },
+  { kicker: "Geography", title: "The Caucasus crossroads", body: "Between Europe and Asia, in sight of Mount Ararat. Daily direct flights from Vienna, Paris, Rome, Frankfurt, Athens and Doha." },
+  { kicker: "Visa", title: "Easy entry", body: "Visa-free entry for citizens of most EU, UK, US and Schengen-area countries for stays up to 180 days." },
   { kicker: "Cost of Living", title: "Roughly a quarter of Paris", body: "A meal at a good restaurant: $10–15. A coffee: $2. Monthly transit: under $25. Your stipend stretches." },
-  { kicker: "Language", title: "English everywhere", body: "The program is conducted in English. Most physicians, residents, and younger Yerevantsi speak English fluently." },
+  { kicker: "Language", title: "English everywhere", body: "The program is conducted in English. Most Armenians speak fluent English." },
 ]
 
 const MINI_PHOTOS = [
   {
-    src: "https://images.unsplash.com/photo-1602253020023-90f2a4ee0f1d?w=900&auto=format&fit=crop&q=72",
+    src: garniTemple,
     alt: "Garni Pagan Temple, first-century Hellenistic temple east of Yerevan",
     caption: "Garni Temple",
     fallback: "photo-fallback-garni",
   },
   {
-    src: "https://images.unsplash.com/photo-1601034740089-fef21b317e9a?w=900&auto=format&fit=crop&q=72",
+    src: republicSquare,
     alt: "Republic Square in central Yerevan with tufa-stone civic architecture",
     caption: "Republic Square",
-    fallback: "photo-fallback-yerevan",
+    fallback: "photo-fallback-soft",
   },
   {
-    src: "https://images.unsplash.com/photo-1602257015014-c0bc7a3ab0f3?w=900&auto=format&fit=crop&q=72",
-    alt: "Lake Sevan, a high-altitude alpine lake north-east of Yerevan",
+    src: lakeSevan,
+    alt: "Sevanavank monastery overlooking Lake Sevan, Armenia's high-altitude alpine lake",
     caption: "Lake Sevan",
     fallback: "photo-fallback-sevan",
   },
   {
-    src: "https://images.unsplash.com/photo-1602615576540-a0e1afad8019?w=900&auto=format&fit=crop&q=72",
+    src: cascade,
     alt: "The Cascade monument, a stepped sculpture park in central Yerevan",
     caption: "The Cascade",
-    fallback: "photo-fallback-yerevan",
+    fallback: "photo-fallback-hospital",
   },
 ]
 
@@ -63,7 +67,7 @@ export function Yerevan() {
                 fallbackClass="photo-fallback-yerevan"
               />
             </div>
-            <figcaption className="mt-4 text-xs uppercase tracking-[0.2em] text-ink/55">Yerevan · view toward Mount Ararat</figcaption>
+            <figcaption className="mt-4 text-xs uppercase tracking-[0.2em] text-ink/65">Yerevan · view toward Mount Ararat</figcaption>
           </figure>
 
           <div className="reveal lg:col-span-7 grid gap-6 sm:grid-cols-2 self-start">
@@ -78,7 +82,7 @@ export function Yerevan() {
 
           <div className="reveal lg:col-span-7">
             <p className="text-lg leading-relaxed text-ink/80">
-              Yerevan is a city of cafés, mountain views, late-night promenades, and a thousand-year history compressed into a walkable downtown. Between rotations, our participants visit Garni Temple, Geghard Monastery, the Areni wine region, and Lake Sevan — all within a two-hour drive.
+              Yerevan is a city of cafés, mountain views, late-night promenades and a thousand-year history compressed into a walkable downtown. Between rotations, our participants visit Garni Temple, Geghard Monastery, the Areni wine region and Lake Sevan — all within a two-hour drive.
             </p>
             <a href="#program" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-claret hover:text-claret-deep">
               See the weekly programme

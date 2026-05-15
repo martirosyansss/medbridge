@@ -1,10 +1,44 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { ArrowRight } from "lucide-react"
-import { SPECIALTIES } from "@/data/specialties"
+import { SPECIALTIES, CATEGORY_LABEL, type SpecialtyCategory } from "@/data/specialties"
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_PHONE_E164,
+  FORM_ENDPOINT,
+  isFormEndpointConfigured,
+} from "@/lib/contact"
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_ME"
-const FALLBACK_EMAIL = "hello@medbridge.am"
+const FALLBACK_EMAIL = CONTACT_EMAIL
 const MESSAGE_MAX = 2000
+const SUBMIT_TIMEOUT_MS = 12000
+
+const COMMON_COUNTRIES = [
+  "United States","United Kingdom","Canada","Germany","France","Italy","Spain","Netherlands","Belgium","Switzerland","Austria","Sweden","Norway","Denmark","Finland","Ireland","Portugal","Greece","Poland","Czech Republic","Hungary","Romania","Russia","Ukraine","Turkey","Georgia","Armenia","Israel","UAE","Saudi Arabia","Egypt","India","Pakistan","China","Japan","South Korea","Singapore","Australia","New Zealand","Brazil","Mexico","Argentina","Chile","South Africa","Nigeria","Kenya","Morocco","Tunisia","Lebanon","Jordan","Qatar","Kuwait",
+]
+
+const CATEGORY_ORDER: SpecialtyCategory[] = ["surgical", "cardio", "neuro", "womens", "diagnostic", "other"]
+
+function localISO(d: Date): string {
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, "0")
+  const day = String(d.getDate()).padStart(2, "0")
+  return `${y}-${m}-${day}`
+}
+
+function nextSaturdays(n: number): { iso: string; label: string }[] {
+  const out: { iso: string; label: string }[] = []
+  const d = new Date()
+  d.setHours(0, 0, 0, 0)
+  const days = (6 - d.getDay() + 7) % 7 || 7
+  d.setDate(d.getDate() + days)
+  const fmt = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" })
+  for (let i = 0; i < n; i++) {
+    out.push({ iso: localISO(d), label: fmt.format(d) })
+    d.setDate(d.getDate() + 7)
+  }
+  return out
+}
 
 type FormState = {
   firstName: string
@@ -23,8 +57,6 @@ type FormState = {
 
 function buildMailto(form: FormState): string {
   const subject = `MedBridge application — ${form.firstName} ${form.lastName}`.trim()
-  // Clamp message to keep total URI under common 2 KB mail-client limits
-  // after percent-encoding, which roughly triples non-ASCII byte size.
   const safeMessage = form.message ? form.message.slice(0, 1500) : ""
   const lines = [
     `Name: ${form.firstName} ${form.lastName}`,
@@ -76,15 +108,48 @@ const EDUCATION_OPTIONS = [
 
 const DURATION_OPTIONS = ["1 week", "2 weeks", "3 weeks", "Longer (please specify)"]
 
-const SPECIALTY_OPTIONS = [...SPECIALTIES.map((s) => s.name), "Open to suggestions"]
+const FIELD_TO_DOM_ID: Partial<Record<keyof FormState, string>> = {
+  firstName: "f-first",
+  lastName: "f-last",
+  email: "f-email",
+  educationLevel: "f-education",
+  preferredSpecialty: "f-specialty",
+  duration: "f-duration",
+  consent: "f-consent",
+}
+
+const FIELD_ERROR: Partial<Record<keyof FormState, string>> = {
+  firstName: "Please enter your first name.",
+  lastName: "Please enter your last name.",
+  email: "Please enter a valid email address.",
+  educationLevel: "Please select your education level.",
+  preferredSpecialty: "Please choose a preferred specialty.",
+  duration: "Please choose a programme length.",
+  consent: "Please confirm consent to be contacted.",
+}
 
 export function Apply() {
   const [form, setForm] = useState<FormState>(INITIAL)
   const [invalid, setInvalid] = useState<Set<keyof FormState>>(new Set())
   const [error, setError] = useState<string | null>(null)
-  const [submitting, setSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const [mailtoUrl, setMailtoUrl] = useState<string | null>(null)
+
+  const saturdays = useMemo(() => nextSaturdays(8), [])
+
+  const groupedSpecialties = useMemo(() => {
+    const buckets: Record<SpecialtyCategory, string[]> = {
+      surgical: [], cardio: [], neuro: [], womens: [], diagnostic: [], other: [],
+    }
+    for (const s of SPECIALTIES) {
+      const primary = s.cats[0]
+      buckets[primary].push(s.name)
+    }
+    return CATEGORY_ORDER
+      .map((cat) => ({ cat, label: CATEGORY_LABEL[cat], names: buckets[cat] }))
+      .filter((g) => g.names.length > 0)
+  }, [])
 
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }))
@@ -95,6 +160,17 @@ export function Apply() {
         return n
       })
     }
+  }
+
+  const focusFirstInvalid = (bad: Set<keyof FormState>) => {
+    const firstKey = REQUIRED.find((k) => bad.has(k))
+    if (!firstKey) return
+    const id = FIELD_TO_DOM_ID[firstKey]
+    if (!id) return
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id) as HTMLElement | null
+      el?.focus({ preventScroll: false })
+    })
   }
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -112,44 +188,80 @@ export function Apply() {
 
     if (bad.size) {
       setInvalid(bad)
-      setError("Please fill in the highlighted fields before submitting.")
+      setError("Please fix the highlighted fields before submitting.")
+      focusFirstInvalid(bad)
+      return
+    }
+
+    const mailto = buildMailto(form)
+    const scrollToSuccess = () => {
+      setTimeout(() => {
+        document.getElementById("form-success")?.scrollIntoView({ behavior: "smooth", block: "center" })
+      }, 50)
+    }
+
+    if (!isFormEndpointConfigured) {
+      setMailtoUrl(mailto)
+      setSuccess(true)
+      scrollToSuccess()
+      window.location.href = mailto
       return
     }
 
     setSubmitting(true)
+    const controller = new AbortController()
+    const timeoutId = window.setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS)
     try {
-      const usingPlaceholder = FORMSPREE_ENDPOINT.includes("REPLACE_ME")
-      if (usingPlaceholder) {
-        // No real submission endpoint configured yet — show the user an
-        // explicit "Open email client" button instead of silently
-        // navigating away. This avoids the "did anything happen?" ambiguity
-        // when no mail client is registered.
-        setMailtoUrl(buildMailto(form))
-      } else {
-        const data = new FormData()
-        Object.entries(form).forEach(([k, v]) => {
-          if (k !== "_gotcha") data.append(k, String(v))
-        })
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: "POST",
-          body: data,
-          headers: { Accept: "application/json" },
-        })
-        if (!res.ok) throw new Error("Form service returned an error.")
-      }
+      // text/plain skips the CORS preflight that Apps Script Web Apps don't
+      // answer correctly. The body is still JSON; the script parses it as such.
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          country: form.country,
+          phone: form.phone,
+          educationLevel: form.educationLevel,
+          preferredSpecialty: form.preferredSpecialty,
+          duration: form.duration,
+          preferredStart: form.preferredStart,
+          message: form.message ? form.message.slice(0, 1500) : "",
+          consent: form.consent,
+          _gotcha: form._gotcha,
+          source: typeof window !== "undefined" ? window.location.host : "medbridge.am",
+          userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
+        }),
+        signal: controller.signal,
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const data = (await res.json().catch(() => null)) as { ok?: boolean } | null
+      if (!data || data.ok !== true) throw new Error("submission_rejected")
       setSuccess(true)
-      setTimeout(() => {
-        document.getElementById("form-success")?.scrollIntoView({ behavior: "smooth", block: "center" })
-      }, 50)
-    } catch (err) {
-      console.error(err)
-      setError(`Sorry — we couldn't submit your application. Please try again, or email ${FALLBACK_EMAIL}.`)
+      setMailtoUrl(null)
+      scrollToSuccess()
+    } catch {
+      setMailtoUrl(mailto)
+      setError(
+        "We couldn't submit your application automatically. Please continue via email — your message is pre-filled.",
+      )
     } finally {
+      window.clearTimeout(timeoutId)
       setSubmitting(false)
     }
   }
 
   const ariaInvalid = (k: keyof FormState) => (invalid.has(k) ? "true" : "false")
+  const errorIdFor = (k: keyof FormState) => `${FIELD_TO_DOM_ID[k] ?? `f-${k}`}-err`
+  const describedBy = (k: keyof FormState) => (invalid.has(k) ? errorIdFor(k) : undefined)
+  const renderError = (k: keyof FormState) =>
+    invalid.has(k) && FIELD_ERROR[k] ? (
+      <p id={errorIdFor(k)} role="alert" className="mt-1 text-xs text-red-700">
+        {FIELD_ERROR[k]}
+      </p>
+    ) : null
+  const isLocked = success || submitting
 
   return (
     <section id="apply" className="bg-bone py-24 lg:py-32">
@@ -165,8 +277,16 @@ export function Apply() {
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-ink/75 max-w-prose2">
               Your application is reviewed personally by the MedBridge team. You'll hear back within{" "}
-              <strong className="font-medium text-ink">two business days</strong> with availability, an all-inclusive quote, and the next steps.
+              <strong className="font-medium text-ink">two business days</strong> with availability, an all-inclusive quote and the next steps.
             </p>
+
+            {!isFormEndpointConfigured && (
+              <div className="mt-6 rounded-sm border border-ink/10 bg-paper p-4">
+                <p className="text-sm leading-relaxed text-ink/75">
+                  Submitting opens your email client with a pre-filled message. Click <strong className="font-medium text-ink">send</strong> in your email app to complete.
+                </p>
+              </div>
+            )}
 
             <ul className="mt-8 space-y-3 text-[0.97rem] text-ink/80">
               {[
@@ -183,9 +303,11 @@ export function Apply() {
             </ul>
 
             <div className="mt-10 rounded-sm border border-ink/10 bg-paper p-6">
-              <p className="text-xs uppercase tracking-[0.2em] text-ink/55">Prefer to talk first?</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-ink/65">Prefer to talk first?</p>
               <p className="mt-3 text-ink/80">
-                Email <a className="link" href="mailto:hello@medbridge.am">hello@medbridge.am</a>
+                Email <a className="link" href={`mailto:${FALLBACK_EMAIL}`}>{FALLBACK_EMAIL}</a>
+                <br />
+                Call <a className="link" href={`tel:${CONTACT_PHONE_E164}`}>{CONTACT_PHONE_DISPLAY}</a>
                 <br />
                 or write us on WhatsApp.
               </p>
@@ -194,6 +316,7 @@ export function Apply() {
 
           <div className="reveal lg:col-span-7">
             <form onSubmit={onSubmit} noValidate className="rounded-sm border border-ink/15 bg-paper p-6 sm:p-10 shadow-sm">
+              <p className="mb-4 text-xs text-ink/65">Fields marked with * are required.</p>
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="field">
                   <label htmlFor="f-first">First name *</label>
@@ -204,8 +327,10 @@ export function Apply() {
                     value={form.firstName}
                     onChange={(e) => set("firstName", e.target.value)}
                     aria-invalid={ariaInvalid("firstName")}
-                    disabled={success}
+                    aria-describedby={describedBy("firstName")}
+                    disabled={isLocked}
                   />
+                  {renderError("firstName")}
                 </div>
                 <div className="field">
                   <label htmlFor="f-last">Last name *</label>
@@ -216,8 +341,10 @@ export function Apply() {
                     value={form.lastName}
                     onChange={(e) => set("lastName", e.target.value)}
                     aria-invalid={ariaInvalid("lastName")}
-                    disabled={success}
+                    aria-describedby={describedBy("lastName")}
+                    disabled={isLocked}
                   />
+                  {renderError("lastName")}
                 </div>
                 <div className="field">
                   <label htmlFor="f-email">Email *</label>
@@ -228,19 +355,27 @@ export function Apply() {
                     value={form.email}
                     onChange={(e) => set("email", e.target.value)}
                     aria-invalid={ariaInvalid("email")}
-                    disabled={success}
+                    aria-describedby={describedBy("email")}
+                    disabled={isLocked}
                   />
+                  {renderError("email")}
                 </div>
                 <div className="field">
                   <label htmlFor="f-country">Country</label>
                   <input
                     id="f-country"
                     type="text"
+                    list="country-list"
                     autoComplete="country-name"
                     value={form.country}
                     onChange={(e) => set("country", e.target.value)}
-                    disabled={success}
+                    disabled={isLocked}
                   />
+                  <datalist id="country-list">
+                    {COMMON_COUNTRIES.map((c) => (
+                      <option key={c} value={c} />
+                    ))}
+                  </datalist>
                 </div>
                 <div className="field">
                   <label htmlFor="f-phone">Phone / WhatsApp</label>
@@ -250,7 +385,7 @@ export function Apply() {
                     autoComplete="tel"
                     value={form.phone}
                     onChange={(e) => set("phone", e.target.value)}
-                    disabled={success}
+                    disabled={isLocked}
                   />
                 </div>
                 <div className="field">
@@ -260,13 +395,15 @@ export function Apply() {
                     value={form.educationLevel}
                     onChange={(e) => set("educationLevel", e.target.value)}
                     aria-invalid={ariaInvalid("educationLevel")}
-                    disabled={success}
+                    aria-describedby={describedBy("educationLevel")}
+                    disabled={isLocked}
                   >
                     <option value="">Select one…</option>
                     {EDUCATION_OPTIONS.map((o) => (
                       <option key={o}>{o}</option>
                     ))}
                   </select>
+                  {renderError("educationLevel")}
                 </div>
                 <div className="field">
                   <label htmlFor="f-specialty">Preferred specialty *</label>
@@ -275,13 +412,20 @@ export function Apply() {
                     value={form.preferredSpecialty}
                     onChange={(e) => set("preferredSpecialty", e.target.value)}
                     aria-invalid={ariaInvalid("preferredSpecialty")}
-                    disabled={success}
+                    aria-describedby={describedBy("preferredSpecialty")}
+                    disabled={isLocked}
                   >
                     <option value="">Select one…</option>
-                    {SPECIALTY_OPTIONS.map((o) => (
-                      <option key={o}>{o}</option>
+                    {groupedSpecialties.map((g) => (
+                      <optgroup key={g.cat} label={g.label}>
+                        {g.names.map((n) => (
+                          <option key={n}>{n}</option>
+                        ))}
+                      </optgroup>
                     ))}
+                    <option>Open to suggestions</option>
                   </select>
+                  {renderError("preferredSpecialty")}
                 </div>
                 <div className="field">
                   <label htmlFor="f-duration">Programme length *</label>
@@ -290,24 +434,30 @@ export function Apply() {
                     value={form.duration}
                     onChange={(e) => set("duration", e.target.value)}
                     aria-invalid={ariaInvalid("duration")}
-                    disabled={success}
+                    aria-describedby={describedBy("duration")}
+                    disabled={isLocked}
                   >
                     <option value="">Select one…</option>
                     {DURATION_OPTIONS.map((o) => (
                       <option key={o}>{o}</option>
                     ))}
                   </select>
+                  {renderError("duration")}
                 </div>
                 <div className="field sm:col-span-2">
                   <label htmlFor="f-start">Preferred start date</label>
-                  <input
+                  <select
                     id="f-start"
-                    type="date"
                     value={form.preferredStart}
                     onChange={(e) => set("preferredStart", e.target.value)}
-                    disabled={success}
-                  />
-                  <p className="hint">Programmes begin on Saturdays.</p>
+                    disabled={isLocked}
+                  >
+                    <option value="">Select one…</option>
+                    {saturdays.map((s) => (
+                      <option key={s.iso} value={s.iso}>{s.label}</option>
+                    ))}
+                    <option value="later">Later — I'll specify in the message</option>
+                  </select>
                 </div>
                 <div className="field sm:col-span-2">
                   <label htmlFor="f-message">Anything we should know?</label>
@@ -318,23 +468,27 @@ export function Apply() {
                     placeholder="Specific surgeries you'd like to observe, prior shadowing experience, dietary needs, accommodation preferences…"
                     value={form.message}
                     onChange={(e) => set("message", e.target.value)}
-                    disabled={success}
+                    disabled={isLocked}
                   />
                 </div>
-                <div className="sm:col-span-2 flex items-start gap-3">
-                  <input
-                    id="f-consent"
-                    type="checkbox"
-                    className="mt-1 h-4 w-4 rounded border-ink/30 text-claret focus:ring-claret"
-                    checked={form.consent}
-                    onChange={(e) => set("consent", e.target.checked)}
-                    aria-invalid={ariaInvalid("consent")}
-                    disabled={success}
-                  />
-                  <label htmlFor="f-consent" className="text-sm text-ink/75">
-                    I agree that MedBridge may use the information above to contact me about my application. See our{" "}
-                    <a className="link underline" href="/privacy.html" target="_blank" rel="noopener noreferrer">privacy policy</a>. *
-                  </label>
+                <div className="sm:col-span-2">
+                  <div className="flex items-start gap-3">
+                    <input
+                      id="f-consent"
+                      type="checkbox"
+                      className="mt-1 h-5 w-5 rounded border-ink/30 text-claret focus:ring-claret"
+                      checked={form.consent}
+                      onChange={(e) => set("consent", e.target.checked)}
+                      aria-invalid={ariaInvalid("consent")}
+                      aria-describedby={describedBy("consent")}
+                      disabled={isLocked}
+                    />
+                    <label htmlFor="f-consent" className="text-sm text-ink/75">
+                      I agree that MedBridge may use the information above to contact me about my application. See our{" "}
+                      <a className="link underline" href="/privacy.html" target="_blank" rel="noopener noreferrer">privacy policy</a>. *
+                    </label>
+                  </div>
+                  {renderError("consent")}
                 </div>
               </div>
 
@@ -349,32 +503,41 @@ export function Apply() {
               />
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <button type="submit" disabled={submitting || success} className="btn-primary btn-lg">
-                  {submitting ? "Sending…" : "Submit application"}
-                  {!submitting && <ArrowRight className="h-4 w-4" />}
+                <button type="submit" disabled={isLocked} className="btn-primary btn-lg">
+                  {submitting
+                    ? "Submitting…"
+                    : isFormEndpointConfigured
+                      ? "Submit application"
+                      : "Continue to email"}
+                  <ArrowRight className="h-4 w-4" />
                 </button>
-                <p className="text-xs text-ink/55">We'll reply within 2 business days.</p>
+                <p className="text-xs text-ink/65">We'll reply within 2 business days.</p>
               </div>
 
               {error && (
-                <div role="alert" className="mt-6 rounded-sm border border-claret/40 bg-claret/5 px-4 py-3 text-sm text-claret-deep">
+                <div role="alert" className="mt-6 rounded-sm border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800">
                   {error}
                 </div>
               )}
               {success && !mailtoUrl && (
-                <div id="form-success" className="mt-8 rounded-sm border border-sage/40 bg-sage/5 p-6">
-                  <p className="font-display text-xl text-sage">Application received. Thank you.</p>
+                <div id="form-success" role="status" className="mt-8 rounded-sm border border-sage/40 bg-sage/5 p-6">
+                  <p className="font-display text-xl text-sage">Application received.</p>
                   <p className="mt-2 text-ink/75">
-                    A member of the MedBridge team will be in touch within two business days with availability and a personalised quote. Check your inbox (and spam folder, just in case).
+                    Thank you — we've got your application. A member of the MedBridge team will be in touch within{" "}
+                    <strong className="font-medium text-ink">two business days</strong>.
+                  </p>
+                  <p className="mt-4 text-sm text-ink/65">
+                    Need to update your details? Email us at{" "}
+                    <a className="link underline" href={`mailto:${FALLBACK_EMAIL}`}>{FALLBACK_EMAIL}</a>.
                   </p>
                 </div>
               )}
               {success && mailtoUrl && (
-                <div id="form-success" className="mt-8 rounded-sm border border-sage/40 bg-sage/5 p-6">
+                <div id="form-success" role="status" className="mt-8 rounded-sm border border-sage/40 bg-sage/5 p-6">
                   <p className="font-display text-xl text-sage">One more step — send the email.</p>
                   <p className="mt-2 text-ink/75">
-                    Open your email client with a pre-filled application and{" "}
-                    <strong className="font-medium text-ink">send the email</strong> to finish your application.
+                    Open your email client to send the application. We've pre-filled the message — just hit{" "}
+                    <strong className="font-medium text-ink">send</strong> to finish.
                   </p>
                   <a href={mailtoUrl} className="btn-primary btn-lg mt-5 inline-flex">
                     Open email client
@@ -383,7 +546,15 @@ export function Apply() {
                   <p className="mt-4 text-sm text-ink/65">
                     No mail client set up? Email us directly at{" "}
                     <a className="link underline" href={`mailto:${FALLBACK_EMAIL}`}>{FALLBACK_EMAIL}</a>{" "}
-                    with the details above.
+                    with the details above, or{" "}
+                    <button
+                      type="button"
+                      className="link underline"
+                      onClick={() => { setSuccess(false); setMailtoUrl(null) }}
+                    >
+                      edit your application
+                    </button>
+                    .
                   </p>
                 </div>
               )}
