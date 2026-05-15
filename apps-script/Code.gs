@@ -19,8 +19,9 @@ var DEFAULT_CONFIG = {
   // Comma-separated list. Example: "info@medbridge.am,martirosyanss@gmail.com"
   NOTIFY_EMAILS: 'info@medbridge.am',
   EMAIL_FROM_NAME: 'MedBridge Applications',
-  // Optional: restrict the Origin allowed to call the endpoint. Use "*" to allow any.
-  ALLOWED_ORIGIN: '*',
+  // Per-IP rate limit: max submissions per ROLLING_WINDOW_SECONDS.
+  RATE_LIMIT_MAX: '5',
+  RATE_LIMIT_WINDOW_SECONDS: '600',
   // Telegram (optional — leave empty to disable)
   TELEGRAM_BOT_TOKEN: '',
   TELEGRAM_CHAT_ID: '',
@@ -29,13 +30,14 @@ var DEFAULT_CONFIG = {
 var SHEET_HEADERS = [
   'Timestamp', 'First name', 'Last name', 'Email', 'Country',
   'Phone / WhatsApp', 'Education level', 'Preferred specialty', 'Programme length',
-  'Preferred start date', 'Message', 'Consent', 'Source', 'User agent', 'Status',
+  'Preferred start date', 'Message', 'Contact consent', 'Age 18+ confirmed', 'Terms agreed',
+  'Source', 'User agent', 'Status',
 ];
 
 // ---- Entry points ---------------------------------------------------------
 
 function doGet() {
-  return jsonOut({ ok: true, service: 'medbridge-applications', version: 1 });
+  return jsonOut({ ok: true, service: 'medbridge-applications', version: 2 });
 }
 
 function doPost(e) {
@@ -43,7 +45,7 @@ function doPost(e) {
     var raw = (e && e.postData && e.postData.contents) || '';
     var payload = {};
     try { payload = JSON.parse(raw); } catch (_) {
-      return jsonOut({ ok: false, error: 'invalid_json' }, 400);
+      return jsonOut({ ok: false, error: 'invalid_json' });
     }
 
     // Honeypot — pretend success so bots don't retry, but record nothing.
@@ -51,12 +53,21 @@ function doPost(e) {
       return jsonOut({ ok: true, skipped: 'honeypot' });
     }
 
-    var validation = validate(payload);
-    if (!validation.ok) {
-      return jsonOut({ ok: false, error: 'validation', fields: validation.fields }, 400);
+    var cfg = readConfig();
+
+    // Soft per-client rate limit. Keyed by source + a coarse fingerprint of
+    // the UA so we don't reveal IP handling assumptions; collisions are fine
+    // (worst case: legit retry has to wait the rolling window).
+    var clientKey = fingerprint(payload);
+    if (clientKey && isRateLimited(clientKey, cfg)) {
+      return jsonOut({ ok: false, error: 'rate_limited' });
     }
 
-    var cfg = readConfig();
+    var validation = validate(payload);
+    if (!validation.ok) {
+      return jsonOut({ ok: false, error: 'validation', fields: validation.fields });
+    }
+
     var record = normalize(payload);
     appendToSheet(cfg, record);
     sendNotificationEmail(cfg, record);
@@ -66,7 +77,7 @@ function doPost(e) {
   } catch (err) {
     // Surface a generic error to the client; full stack stays in Apps Script logs.
     console.error('doPost failed', err && err.stack || err);
-    return jsonOut({ ok: false, error: 'server_error' }, 500);
+    return jsonOut({ ok: false, error: 'server_error' });
   }
 }
 
@@ -80,6 +91,8 @@ function validate(p) {
     if (!p[k] || String(p[k]).trim() === '') missing.push(k);
   }
   if (p.consent !== true) missing.push('consent');
+  if (p.ageConfirm !== true) missing.push('ageConfirm');
+  if (p.agreeTerms !== true) missing.push('agreeTerms');
   if (p.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(p.email))) missing.push('email');
   return { ok: missing.length === 0, fields: missing };
 }
@@ -99,9 +112,33 @@ function normalize(p) {
     preferredStart: clip(p.preferredStart, 40),
     message: clip(p.message, 2000),
     consent: p.consent === true,
+    ageConfirm: p.ageConfirm === true,
+    agreeTerms: p.agreeTerms === true,
     source: clip(p.source || 'medbridge.am', 120),
     userAgent: clip(p.userAgent, 500),
   };
+}
+
+// ---- Rate limit -----------------------------------------------------------
+
+function fingerprint(p) {
+  var src = String(p && p.source || '').slice(0, 80);
+  var ua  = String(p && p.userAgent || '').slice(0, 200);
+  if (!src && !ua) return '';
+  return Utilities.base64EncodeWebSafe(Utilities.computeDigest(
+    Utilities.DigestAlgorithm.SHA_1,
+    src + '|' + ua
+  ));
+}
+
+function isRateLimited(key, cfg) {
+  var max    = parseInt(cfg.RATE_LIMIT_MAX, 10) || 5;
+  var window = parseInt(cfg.RATE_LIMIT_WINDOW_SECONDS, 10) || 600;
+  var cache  = CacheService.getScriptCache();
+  var hits   = parseInt(cache.get(key), 10) || 0;
+  if (hits >= max) return true;
+  cache.put(key, String(hits + 1), window);
+  return false;
 }
 
 // ---- Storage --------------------------------------------------------------
@@ -117,7 +154,11 @@ function appendToSheet(cfg, r) {
   sheet.appendRow([
     r.timestamp, r.firstName, r.lastName, r.email, r.country,
     r.phone, r.educationLevel, r.preferredSpecialty, r.duration,
-    r.preferredStart, r.message, r.consent ? 'yes' : 'no', r.source, r.userAgent, 'new',
+    r.preferredStart, r.message,
+    r.consent ? 'yes' : 'no',
+    r.ageConfirm ? 'yes' : 'no',
+    r.agreeTerms ? 'yes' : 'no',
+    r.source, r.userAgent, 'new',
   ]);
 }
 

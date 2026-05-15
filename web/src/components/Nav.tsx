@@ -15,6 +15,8 @@ const LINKS = [
   { href: "faq", label: "FAQ" },
 ] as const
 
+const NAV_IDS = LINKS.map((l) => l.href)
+
 const MOBILE_LINKS = [
   ...LINKS.slice(0, 5),
   { href: "schedule", label: "Sample Week" },
@@ -23,7 +25,7 @@ const MOBILE_LINKS = [
 
 export function Nav() {
   const scrolled = useStickyHeader()
-  const active = useActiveSection(LINKS.map((l) => l.href))
+  const active = useActiveSection(NAV_IDS)
   const [open, setOpen] = useState(false)
 
   return (
@@ -35,8 +37,8 @@ export function Nav() {
         open && "is-open"
       )}
     >
-      <div className="mx-auto max-w-content px-6 lg:px-10">
-        <nav className="flex items-center justify-between py-5" aria-label="Primary">
+      <div className="mx-auto max-w-content px-container">
+        <nav className="flex items-center justify-between py-4 sm:py-5" aria-label="Primary">
           <a
             href="#top"
             aria-label="MedBridge — home"
@@ -47,7 +49,7 @@ export function Nav() {
               alt="MedBridge"
               width={160}
               height={160}
-              className="brand-logo h-11 w-auto select-none transition-transform group-hover:-rotate-1"
+              className="brand-logo h-10 sm:h-11 w-auto select-none transition-transform group-hover:-rotate-1"
               draggable={false}
             />
           </a>

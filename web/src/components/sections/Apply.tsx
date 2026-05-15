@@ -52,6 +52,8 @@ type FormState = {
   preferredStart: string
   message: string
   consent: boolean
+  ageConfirm: boolean
+  agreeTerms: boolean
   _gotcha: string
 }
 
@@ -68,6 +70,7 @@ function buildMailto(form: FormState): string {
     `Programme length: ${form.duration}`,
     form.preferredStart && `Preferred start date: ${form.preferredStart}`,
     safeMessage && `\nMessage:\n${safeMessage}`,
+    `\nConfirmations: age ${form.ageConfirm ? "yes" : "no"} · contact consent ${form.consent ? "yes" : "no"} · terms ${form.agreeTerms ? "yes" : "no"}`,
   ].filter(Boolean)
   return `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`
 }
@@ -84,6 +87,8 @@ const INITIAL: FormState = {
   preferredStart: "",
   message: "",
   consent: false,
+  ageConfirm: false,
+  agreeTerms: false,
   _gotcha: "",
 }
 
@@ -94,7 +99,9 @@ const REQUIRED: (keyof FormState)[] = [
   "educationLevel",
   "preferredSpecialty",
   "duration",
+  "ageConfirm",
   "consent",
+  "agreeTerms",
 ]
 
 const EDUCATION_OPTIONS = [
@@ -115,7 +122,9 @@ const FIELD_TO_DOM_ID: Partial<Record<keyof FormState, string>> = {
   educationLevel: "f-education",
   preferredSpecialty: "f-specialty",
   duration: "f-duration",
+  ageConfirm: "f-age",
   consent: "f-consent",
+  agreeTerms: "f-terms",
 }
 
 const FIELD_ERROR: Partial<Record<keyof FormState, string>> = {
@@ -125,7 +134,9 @@ const FIELD_ERROR: Partial<Record<keyof FormState, string>> = {
   educationLevel: "Please select your education level.",
   preferredSpecialty: "Please choose a preferred specialty.",
   duration: "Please choose a programme length.",
+  ageConfirm: "Please confirm you are 18 or older (or have parental consent).",
   consent: "Please confirm consent to be contacted.",
+  agreeTerms: "Please agree to the Terms of Service and Privacy Policy.",
 }
 
 export function Apply() {
@@ -229,6 +240,8 @@ export function Apply() {
           preferredStart: form.preferredStart,
           message: form.message ? form.message.slice(0, 1500) : "",
           consent: form.consent,
+          ageConfirm: form.ageConfirm,
+          agreeTerms: form.agreeTerms,
           _gotcha: form._gotcha,
           source: typeof window !== "undefined" ? window.location.host : "medbridge.am",
           userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
@@ -264,9 +277,9 @@ export function Apply() {
   const isLocked = success || submitting
 
   return (
-    <section id="apply" className="bg-bone py-24 lg:py-32">
-      <div className="mx-auto max-w-content px-6 lg:px-10">
-        <div className="grid gap-12 lg:grid-cols-12">
+    <section id="apply" className="bg-bone py-section">
+      <div className="mx-auto max-w-content px-container">
+        <div className="grid gap-10 lg:gap-12 lg:grid-cols-12">
           <div className="reveal lg:col-span-5">
             <p className="kicker text-claret">
               <span className="kicker-mark" />
@@ -315,9 +328,9 @@ export function Apply() {
           </div>
 
           <div className="reveal lg:col-span-7">
-            <form onSubmit={onSubmit} noValidate className="rounded-sm border border-ink/15 bg-paper p-6 sm:p-10 shadow-sm">
+            <form onSubmit={onSubmit} noValidate className="rounded-sm border border-ink/15 bg-paper p-5 sm:p-8 lg:p-10 shadow-sm">
               <p className="mb-4 text-xs text-ink/65">Fields marked with * are required.</p>
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
                 <div className="field">
                   <label htmlFor="f-first">First name *</label>
                   <input
@@ -471,24 +484,65 @@ export function Apply() {
                     disabled={isLocked}
                   />
                 </div>
-                <div className="sm:col-span-2">
-                  <div className="flex items-start gap-3">
-                    <input
-                      id="f-consent"
-                      type="checkbox"
-                      className="mt-1 h-5 w-5 rounded border-ink/30 text-claret focus:ring-claret"
-                      checked={form.consent}
-                      onChange={(e) => set("consent", e.target.checked)}
-                      aria-invalid={ariaInvalid("consent")}
-                      aria-describedby={describedBy("consent")}
-                      disabled={isLocked}
-                    />
-                    <label htmlFor="f-consent" className="text-sm text-ink/75">
-                      I agree that MedBridge may use the information above to contact me about my application. See our{" "}
-                      <a className="link underline" href="/privacy.html" target="_blank" rel="noopener noreferrer">privacy policy</a>. *
-                    </label>
+                <div className="sm:col-span-2 space-y-4">
+                  <div>
+                    <div className="flex items-start gap-3">
+                      <input
+                        id="f-age"
+                        type="checkbox"
+                        className="mt-1 h-5 w-5 rounded border-ink/30 text-claret focus:ring-claret"
+                        checked={form.ageConfirm}
+                        onChange={(e) => set("ageConfirm", e.target.checked)}
+                        aria-invalid={ariaInvalid("ageConfirm")}
+                        aria-describedby={describedBy("ageConfirm")}
+                        disabled={isLocked}
+                      />
+                      <label htmlFor="f-age" className="text-sm text-ink/75">
+                        I confirm I am at least 18 years old, or, if I am 16–17, I have written consent from a parent or legal guardian. *
+                      </label>
+                    </div>
+                    {renderError("ageConfirm")}
                   </div>
-                  {renderError("consent")}
+
+                  <div>
+                    <div className="flex items-start gap-3">
+                      <input
+                        id="f-consent"
+                        type="checkbox"
+                        className="mt-1 h-5 w-5 rounded border-ink/30 text-claret focus:ring-claret"
+                        checked={form.consent}
+                        onChange={(e) => set("consent", e.target.checked)}
+                        aria-invalid={ariaInvalid("consent")}
+                        aria-describedby={describedBy("consent")}
+                        disabled={isLocked}
+                      />
+                      <label htmlFor="f-consent" className="text-sm text-ink/75">
+                        I consent to MedBridge processing the information above to review my application and contact me about it, as described in the{" "}
+                        <a className="link underline" href="/privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. *
+                      </label>
+                    </div>
+                    {renderError("consent")}
+                  </div>
+
+                  <div>
+                    <div className="flex items-start gap-3">
+                      <input
+                        id="f-terms"
+                        type="checkbox"
+                        className="mt-1 h-5 w-5 rounded border-ink/30 text-claret focus:ring-claret"
+                        checked={form.agreeTerms}
+                        onChange={(e) => set("agreeTerms", e.target.checked)}
+                        aria-invalid={ariaInvalid("agreeTerms")}
+                        aria-describedby={describedBy("agreeTerms")}
+                        disabled={isLocked}
+                      />
+                      <label htmlFor="f-terms" className="text-sm text-ink/75">
+                        I have read and agree to the{" "}
+                        <a className="link underline" href="/terms.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>. *
+                      </label>
+                    </div>
+                    {renderError("agreeTerms")}
+                  </div>
                 </div>
               </div>
 

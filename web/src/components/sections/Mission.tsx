@@ -3,7 +3,7 @@ import missionBg from "@/assets/astghik/icu-team.jpg"
 
 export function Mission() {
   return (
-    <section id="mission" className="relative bg-claret py-28 text-bone lg:py-36 overflow-hidden">
+    <section id="mission" className="relative bg-claret py-section text-bone overflow-hidden">
       <div className="absolute inset-0" aria-hidden="true">
         <Photo
           src={missionBg}
@@ -15,7 +15,7 @@ export function Mission() {
         <div className="mission-overlay" />
         <div className="mission-grain" />
       </div>
-      <div className="relative mx-auto max-w-content px-6 lg:px-10">
+      <div className="relative mx-auto max-w-content px-container">
         <p className="kicker text-gold-soft reveal">
           <span className="kicker-mark" />
           Our mission

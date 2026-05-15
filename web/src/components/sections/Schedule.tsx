@@ -28,8 +28,8 @@ const DAYS = [
 
 export function Schedule() {
   return (
-    <section id="schedule" className="bg-paper py-24 lg:py-32">
-      <div className="mx-auto max-w-content px-6 lg:px-10">
+    <section id="schedule" className="bg-paper py-section">
+      <div className="mx-auto max-w-content px-container">
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-claret lg:col-span-3">
             <span className="kicker-mark" />
@@ -45,7 +45,7 @@ export function Schedule() {
           </div>
         </header>
 
-        <ol className="reveal mt-14 grid gap-px overflow-hidden rounded-sm bg-ink/10 ring-1 ring-ink/10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <ol className="reveal mt-14 grid gap-px overflow-hidden rounded-sm bg-ink/10 ring-1 ring-ink/10 sm:grid-cols-2 lg:grid-cols-5">
           {DAYS.map((d) => (
             <li key={d.label} className="day-card">
               <p className="day-label">{d.label}</p>
@@ -59,7 +59,7 @@ export function Schedule() {
           ))}
         </ol>
 
-        <div className="reveal mt-12 rounded-sm border border-sage/30 bg-sage/5 p-8 lg:p-10">
+        <div className="reveal mt-12 rounded-sm border border-sage/30 bg-sage/5 p-6 sm:p-8 lg:p-10">
           <p className="kicker-sm text-sage">
             <span className="kicker-mark" />
             For Advanced Students

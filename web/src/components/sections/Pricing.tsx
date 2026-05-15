@@ -43,8 +43,8 @@ const TIERS = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="bg-bone py-24 lg:py-32">
-      <div className="mx-auto max-w-content px-6 lg:px-10">
+    <section id="pricing" className="bg-bone py-section">
+      <div className="mx-auto max-w-content px-container">
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-claret lg:col-span-3">
             <span className="kicker-mark" />
@@ -65,7 +65,7 @@ export function Pricing() {
           {TIERS.map((t) => (
             <article
               key={t.name}
-              className={`relative rounded-sm border bg-paper p-8 transition ${
+              className={`relative rounded-sm border bg-paper p-6 md:p-6 lg:p-8 transition ${
                 t.featured ? "border-claret shadow-lg shadow-claret/10" : "border-ink/10"
               }`}
             >
@@ -104,7 +104,7 @@ export function Pricing() {
           ))}
         </div>
 
-        <div className="reveal mt-10 grid gap-6 md:grid-cols-3">
+        <div className="reveal mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div className="rounded-sm border border-ink/10 bg-paper p-6">
             <p className="font-display text-base text-claret">Visa required?</p>
             <p className="mt-2 text-sm leading-relaxed text-ink/75">
@@ -114,7 +114,7 @@ export function Pricing() {
           <div className="rounded-sm border border-ink/10 bg-paper p-6">
             <p className="font-display text-base text-claret">Is it refundable?</p>
             <p className="mt-2 text-sm leading-relaxed text-ink/75">
-              Full refund if we cancel; 80% if you cancel ≥14 days out; 50% within 14 days. Details in your acceptance email.
+              Full refund 30+ days out; 50% between 14–30 days; non-refundable within 14 days. Visa denial: full refund. <a className="link underline" href="#guarantees">See guarantees</a>.
             </p>
           </div>
           <div className="rounded-sm border border-ink/10 bg-paper p-6">

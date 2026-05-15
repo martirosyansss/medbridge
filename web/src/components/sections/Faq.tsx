@@ -45,8 +45,8 @@ const FAQS = [
 
 export function Faq() {
   return (
-    <section id="faq" className="bg-paper py-24 lg:py-32">
-      <div className="mx-auto max-w-content px-6 lg:px-10">
+    <section id="faq" className="bg-paper py-section">
+      <div className="mx-auto max-w-content px-container">
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-claret lg:col-span-3">
             <span className="kicker-mark" />

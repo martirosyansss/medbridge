@@ -2,23 +2,18 @@ import { useMemo, useState } from "react"
 import { ArrowRight, ChevronDown, ShieldCheck } from "lucide-react"
 import hospitalExterior from "@/assets/astghik/hospital-exterior.jpg"
 
-function computeNextSaturdayScarcity(): { n: number; dateLabel: string } {
+function nextSaturdayLabel(): string {
   const d = new Date()
   d.setHours(0, 0, 0, 0)
   const dow = d.getDay()
   const offset = dow === 6 ? 0 : (6 - dow + 7) % 7
   d.setDate(d.getDate() + offset)
-  const start = new Date(d.getFullYear(), 0, 0)
-  const diff = d.getTime() - start.getTime()
-  const dayOfYear = Math.floor(diff / 86400000)
-  const n = (dayOfYear % 3) + 1
-  const dateLabel = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric" }).format(d)
-  return { n, dateLabel }
+  return new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric" }).format(d)
 }
 
 export function Hero() {
   const [imgFailed, setImgFailed] = useState(false)
-  const scarcity = useMemo(computeNextSaturdayScarcity, [])
+  const nextStart = useMemo(() => nextSaturdayLabel(), [])
 
   return (
     <section id="top" className="hero-cinematic">
@@ -75,7 +70,7 @@ export function Hero() {
               <span className="hero-pulse-ring" />
               <span className="hero-pulse-dot" />
             </span>
-            {scarcity.n} spot{scarcity.n === 1 ? "" : "s"} left for {scarcity.dateLabel}
+            Next start: {nextStart} · rolling intake, every Saturday
           </p>
         </div>
 

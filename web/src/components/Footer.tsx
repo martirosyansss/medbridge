@@ -9,10 +9,10 @@ import {
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-bone/80 pt-20 pb-10">
-      <div className="mx-auto max-w-content px-6 lg:px-10">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+    <footer className="bg-ink text-bone/80 pt-16 pb-10 sm:pt-20">
+      <div className="mx-auto max-w-content px-container">
+        <div className="grid gap-10 sm:gap-12 md:grid-cols-2 lg:grid-cols-12">
+          <div className="md:col-span-2 lg:col-span-5">
             <a href="#top" aria-label="MedBridge — home" className="inline-flex items-center">
               <img
                 src={logoUrl}
@@ -60,6 +60,16 @@ export function Footer() {
             <ul className="mt-3 space-y-1.5 text-sm">
               <li><a className="footer-link" href="/privacy.html">Privacy policy</a></li>
               <li><a className="footer-link" href="/terms.html">Terms of service</a></li>
+              <li>
+                <a className="footer-link" href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">
+                  EU online dispute resolution
+                </a>
+              </li>
+              <li>
+                <a className="footer-link" href="https://www.foi.am/en/personal-data-protection-agency/" target="_blank" rel="noopener noreferrer">
+                  Armenia PDP Agency
+                </a>
+              </li>
             </ul>
           </div>
         </div>

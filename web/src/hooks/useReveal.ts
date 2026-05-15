@@ -20,5 +20,5 @@ export function useReveal() {
     )
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
-  })
+  }, [])
 }

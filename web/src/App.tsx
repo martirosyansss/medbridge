@@ -14,6 +14,7 @@ import { Apply } from "@/components/sections/Apply"
 import { Faq } from "@/components/sections/Faq"
 import { Footer } from "@/components/Footer"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
+import { CookieConsent } from "@/components/CookieConsent"
 import { useReveal } from "@/hooks/useReveal"
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <CookieConsent />
     </>
   )
 }

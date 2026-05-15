@@ -16,24 +16,100 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="MedBridge — International Medical Shadowing in Armenia" />
     <meta property="og:description" content="Observe surgery at Astghik Medical Center, Yerevan. Twenty-four specialties, fifteen operating rooms, JCI-accredited, in English." />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&auto=format&fit=crop" />
+    <meta property="og:url" content="https://medbridge.am/" />
+    <meta property="og:site_name" content="MedBridge" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://medbridge.am/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Astghik Medical Center, Yerevan — MedBridge international shadowing program" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MedBridge — International Medical Shadowing in Armenia" />
+    <meta name="twitter:description" content="Observe surgery at Astghik Medical Center, Yerevan. 24 specialties, 15 operating rooms, JCI-accredited, in English." />
+    <meta name="twitter:image" content="https://medbridge.am/og.jpg" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Fonts are self-hosted via @fontsource-variable in src/main.tsx — no third-party font CDN. -->
 
-    <!-- Google Analytics 4 (GA4) — TODO: replace G-XXXXXXXXXX with the real
-         Measurement ID, or remove this block if analytics is disabled. -->
-    <!--
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MedBridge",
+      "url": "https://medbridge.am/",
+      "logo": "https://medbridge.am/logo.png",
+      "description": "International medical shadowing & clinical experience program at Astghik Medical Center, Yerevan, Armenia.",
+      "email": "info@medbridge.am",
+      "telephone": "+374-77-33-83-33",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "13 Khanjyan str.",
+        "addressLocality": "Yerevan",
+        "addressCountry": "AM"
+      },
+      "sameAs": []
+    }
     </script>
-    -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Hospital",
+      "name": "Astghik Medical Center",
+      "url": "https://medbridge.am/",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "13 Khanjyan str.",
+        "addressLocality": "Yerevan",
+        "addressCountry": "AM"
+      },
+      "medicalSpecialty": [
+        "Surgery", "CardiacSurgery", "Cardiology", "Neurosurgery", "Obstetrics",
+        "Gynecology", "Ophthalmology", "Otolaryngology", "Orthopedics", "Urology",
+        "Oncology", "PlasticSurgery", "Pulmonary", "DiagnosticRadiology"
+      ],
+      "hasCredential": [
+        { "@type": "EducationalOccupationalCredential", "name": "Joint Commission International (JCI) accreditation" },
+        { "@type": "EducationalOccupationalCredential", "name": "ISO 9001:2015 (TÜV Rheinland)" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "MedBridge International Medical Shadowing Program",
+      "description": "Clinical observership at Astghik Medical Center, Yerevan — 24 specialties, 15 operating rooms, English-language program for medical students, residents and young physicians.",
+      "provider": {
+        "@type": "Organization",
+        "name": "MedBridge",
+        "url": "https://medbridge.am/"
+      },
+      "inLanguage": "en",
+      "educationalLevel": "Medical student, Resident, Young physician",
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "name": "1-week rotation",
+          "courseMode": "onsite",
+          "location": { "@type": "Place", "name": "Astghik Medical Center, Yerevan, Armenia" },
+          "offers": { "@type": "Offer", "price": "2000", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "2-week rotation",
+          "courseMode": "onsite",
+          "location": { "@type": "Place", "name": "Astghik Medical Center, Yerevan, Armenia" },
+          "offers": { "@type": "Offer", "price": "3500", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "3-week rotation",
+          "courseMode": "onsite",
+          "location": { "@type": "Place", "name": "Astghik Medical Center, Yerevan, Armenia" },
+          "offers": { "@type": "Offer", "price": "5000", "priceCurrency": "USD" }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

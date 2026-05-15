@@ -19,8 +19,8 @@ const FACTS = [
 
 export function About() {
   return (
-    <section id="about" className="bg-bone py-24 lg:py-32">
-      <div className="mx-auto max-w-content px-6 lg:px-10">
+    <section id="about" className="bg-bone py-section">
+      <div className="mx-auto max-w-content px-container">
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-claret lg:col-span-3">
             <span className="kicker-mark" />
@@ -33,8 +33,8 @@ export function About() {
           </div>
         </header>
 
-        <div className="reveal mt-14 grid gap-6 sm:grid-cols-12">
-          <figure className="sm:col-span-7 aspect-[16/10] overflow-hidden rounded-sm ring-1 ring-ink/10 bg-bone-deep">
+        <div className="reveal mt-14 grid gap-4 sm:gap-6 md:grid-cols-12">
+          <figure className="md:col-span-7 aspect-[16/10] overflow-hidden rounded-sm ring-1 ring-ink/10 bg-bone-deep">
             <Photo
               src={hospitalExterior}
               alt="Astghik Medical Center building in Yerevan"
@@ -43,7 +43,7 @@ export function About() {
               fallbackLabel="Astghik Medical Center"
             />
           </figure>
-          <figure className="sm:col-span-5 grid grid-rows-2 gap-6">
+          <figure className="md:col-span-5 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-1 md:grid-rows-2">
             <div className="aspect-[4/3] overflow-hidden rounded-sm ring-1 ring-ink/10 bg-bone-deep">
               <Photo
                 src={icuTeam}

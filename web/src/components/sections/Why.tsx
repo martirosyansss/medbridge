@@ -21,8 +21,8 @@ function withBold(s: string) {
 
 export function Why() {
   return (
-    <section id="why" className="bg-ink py-24 text-bone lg:py-32">
-      <div className="mx-auto max-w-content px-6 lg:px-10">
+    <section id="why" className="bg-ink py-section text-bone">
+      <div className="mx-auto max-w-content px-container">
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-gold lg:col-span-3">
             <span className="kicker-mark" />
@@ -38,8 +38,8 @@ export function Why() {
           </div>
         </header>
 
-        {/* Desktop / tablet: comparison table */}
-        <div className="reveal mt-14 hidden md:block overflow-hidden rounded-sm ring-1 ring-bone/15">
+        {/* Desktop (≥1024): comparison table */}
+        <div className="reveal mt-14 hidden lg:block overflow-hidden rounded-sm ring-1 ring-bone/15">
           <table className="w-full text-left text-sm">
             <thead className="bg-bone/5 text-xs uppercase tracking-[0.18em] text-bone/60">
               <tr>
@@ -60,8 +60,8 @@ export function Why() {
           </table>
         </div>
 
-        {/* Mobile: stack as comparison cards */}
-        <ul className="reveal mt-14 md:hidden space-y-4">
+        {/* Mobile / tablet: stack as comparison cards */}
+        <ul className="reveal mt-14 lg:hidden grid gap-4 sm:grid-cols-2">
           {ROWS.map((r) => (
             <li key={r.label} className="rounded-sm border border-bone/15 bg-bone/[0.03] p-5">
               <p className="font-display text-base font-medium text-bone">{r.label}</p>
