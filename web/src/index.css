@@ -656,7 +656,6 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 .photo-fallback-hospital,
 .photo-fallback-tech,
 .photo-fallback-students,
-.photo-fallback-doctor,
 .photo-fallback-garni,
 .photo-fallback-sevan {
   position: relative;
@@ -667,7 +666,6 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 .photo-fallback-hospital::after,
 .photo-fallback-tech::after,
 .photo-fallback-students::after,
-.photo-fallback-doctor::after,
 .photo-fallback-garni::after,
 .photo-fallback-sevan::after {
   content: attr(data-fallback-label);
@@ -686,7 +684,6 @@ body ::selection { background-color: var(--color-claret); color: var(--color-bon
 .photo-fallback-hospital { background: linear-gradient(160deg, #3a4859 0%, #1c2336 60%, #0E1726 100%); }
 .photo-fallback-tech   { background: linear-gradient(150deg, #1f3a4d 0%, #14202b 60%, #0E1726 100%); }
 .photo-fallback-students { background: linear-gradient(150deg, #3F5B4A 0%, #2c3f33 60%, #14201a 100%); }
-.photo-fallback-doctor { background: linear-gradient(135deg, #4d3d2a 0%, #2a2218 60%, #14110a 100%); }
 .photo-fallback-garni  { background: linear-gradient(180deg, #d9b07d 0%, #a07a4a 45%, #5d4528 100%); }
 .photo-fallback-sevan  { background: linear-gradient(180deg, #8db4c4 0%, #4d7a90 50%, #1f3a4d 100%); }
 

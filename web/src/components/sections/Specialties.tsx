@@ -2,17 +2,6 @@ import { useMemo, useState } from "react"
 import { Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SPECIALTIES, CATEGORY_LABEL, type SpecialtyCategory } from "@/data/specialties"
-import drMarkosyan from "@/assets/astghik/dr-markosyan.jpg"
-import drManvelyan from "@/assets/astghik/dr-manvelyan.jpg"
-import drSusani from "@/assets/astghik/dr-susani.jpg"
-import drVarjapetyan from "@/assets/astghik/dr-varjapetyan.jpg"
-
-const FACULTY = [
-  { src: drMarkosyan, name: "Renata Markosyan, MD", role: "Endocrinology · Department lead" },
-  { src: drManvelyan, name: "Hovhannes Manvelyan, MD", role: "General & laparoscopic surgery" },
-  { src: drSusani, name: "Mher Susani, MD", role: "Cardiac surgery" },
-  { src: drVarjapetyan, name: "Aram Varjapetyan, MD", role: "Vascular surgery" },
-]
 
 type Filter = "all" | SpecialtyCategory
 
@@ -106,40 +95,6 @@ export function Specialties() {
           {visible.length === 0 && (
             <p className="col-span-full mt-8 text-center text-ink/65">No specialties match your search.</p>
           )}
-        </div>
-
-        <div className="reveal mt-20 border-t border-ink/10 pt-14">
-          <div className="grid gap-6 lg:grid-cols-12">
-            <p className="kicker text-claret lg:col-span-3">
-              <span className="kicker-mark" />
-              Faculty
-            </p>
-            <div className="lg:col-span-9">
-              <h3 className="font-display text-[clamp(1.5rem,2.6vw,2.2rem)] leading-[1.1] tracking-tightest">
-                A few of the attendings you'll shadow.
-              </h3>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink/70">
-                Internationally trained department heads and surgeons across more than thirty specialties at Astghik Medical Center.
-              </p>
-            </div>
-          </div>
-
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {FACULTY.map((f) => (
-              <li key={f.name} className="flex flex-col items-center text-center">
-                <div className="aspect-[3/4] w-full overflow-hidden rounded-sm bg-bone-deep ring-1 ring-ink/10">
-                  <img
-                    src={f.src}
-                    alt={`Portrait of ${f.name} at Astghik Medical Center`}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <p className="mt-4 font-display text-base text-ink leading-tight">{f.name}</p>
-                <p className="mt-1 text-xs uppercase tracking-[0.16em] text-ink/65">{f.role}</p>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>
