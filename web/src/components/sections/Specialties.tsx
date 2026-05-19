@@ -45,7 +45,7 @@ export function Specialties() {
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-claret lg:col-span-3">
             <span className="kicker-mark" />
-            06 — Specialties
+            07 — Specialties
           </p>
           <div className="lg:col-span-9">
             <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">

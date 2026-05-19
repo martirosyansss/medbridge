@@ -283,7 +283,7 @@ export function Apply() {
           <div className="reveal lg:col-span-5">
             <p className="kicker text-claret">
               <span className="kicker-mark" />
-              08 — Apply
+              09 — Apply
             </p>
             <h2 className="mt-6 font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
               Tell us about you.<br />We'll design the rotation.

@@ -4,6 +4,7 @@ import { About } from "@/components/sections/About"
 import { Why } from "@/components/sections/Why"
 import { Yerevan } from "@/components/sections/Yerevan"
 import { Program } from "@/components/sections/Program"
+import { Screening } from "@/components/sections/Screening"
 import { Schedule } from "@/components/sections/Schedule"
 import { Specialties } from "@/components/sections/Specialties"
 import { Services } from "@/components/sections/Services"
@@ -29,6 +30,7 @@ export default function App() {
         <Why />
         <Yerevan />
         <Program />
+        <Screening />
         <Schedule />
         <Specialties />
         <Services />

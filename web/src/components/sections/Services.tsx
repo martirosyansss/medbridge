@@ -15,7 +15,7 @@ export function Services() {
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-claret lg:col-span-3">
             <span className="kicker-mark" />
-            07 — Beyond the Hospital
+            08 — Beyond the Hospital
           </p>
           <div className="lg:col-span-9">
             <h2 className="font-display text-[clamp(1.7rem,3.2vw,2.8rem)] leading-[1.05] tracking-tightest">
