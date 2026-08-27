@@ -4,39 +4,42 @@ const TIERS = [
   {
     name: "1 week",
     duration: "1 week",
-    price: 2000,
+    price: 1500,
     tagline: "Foundational rotation with full clinical exposure",
     perks: [
-      "Observation of up to 5 surgeries",
-      "Specialty deep-dive with one-on-one surgeon time",
-      "Tumour board / case conference attendance",
-      "Ward round and clinic shadowing",
-      "OR protocols overview",
-      "Supervised hands-on exposure on selected procedures*",
-      "Direct mentorship from senior surgeon",
+      "Up to 40 hours of clinical shadowing per week",
+      "24 medical specialties",
+      "Up to 5 surgeries observed per week",
+      "Clinical rounds & hospital experience",
+      "Accommodation near the hospital",
+      "Airport transfers",
+      "Medical screening on arrival",
+      "Cultural excursions around Armenia",
+      "Armenian cuisine & authentic culinary experiences",
+      "Certificate of Completion",
+      "Recommendation letter from supervising doctors",
+      "Visa assistance",
     ],
   },
   {
     name: "2 weeks",
     duration: "2 weeks",
-    price: 3500,
+    price: 3800,
     featured: true,
     tagline: "Extended rotation with deeper case-mix exposure",
     perks: [
       "Everything in the 1-week programme",
-      "Extended specialty exposure",
-      "Additional one-on-one mentorship hours",
+      "Full-day excursions on Saturday and Sunday",
+      "Armenian cuisine dinners on Saturday and Sunday",
     ],
   },
   {
     name: "3 weeks",
     duration: "3 weeks",
-    price: 5000,
+    price: 4500,
     tagline: "Full rotation for advanced students and residents",
     perks: [
       "Everything in the 2-week programme",
-      "Broader multi-specialty case mix",
-      "Maximum supervised hands-on opportunities*",
     ],
   },
 ]
@@ -76,7 +79,8 @@ export function Pricing() {
               )}
               <p className="text-xs uppercase tracking-[0.22em] text-ink/65">{t.duration}</p>
               <h3 className="mt-2 font-display text-2xl tracking-tightest text-ink">{t.name}</h3>
-              <p className="mt-4 flex items-baseline gap-1">
+              <p className="mt-4 flex items-baseline gap-1.5">
+                <span className="text-xs uppercase tracking-[0.18em] text-ink/65">from</span>
                 <span className="font-display text-4xl font-medium text-ink">${t.price.toLocaleString()}</span>
                 <span className="text-xs text-ink/65">USD</span>
               </p>
@@ -129,8 +133,8 @@ export function Pricing() {
         </a>
 
         <p className="reveal mt-8 text-xs text-ink/65">
-          *Supervised hands-on exposure depends on academic level, specialty, hospital approval and local regulations.
-          Prices in USD. Group discounts available for 3+ applicants. Accommodation and additional services are available for an additional fee.
+          Prices in USD, per participant. Your personalised quote is confirmed after application.
+          Group discounts available for 3+ applicants. Additional services are available for an additional fee.
         </p>
       </div>
     </section>

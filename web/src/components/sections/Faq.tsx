@@ -23,7 +23,7 @@ const FAQS = [
   },
   {
     q: "What's included in the programme fee?",
-    a: "The clinical programme and airport transfer are included. Accommodation and additional services are available for an additional fee. You'll receive a personalised quote after you apply.",
+    a: "The clinical programme, accommodation near the hospital, airport transfers, medical screening on arrival, cultural excursions, a certificate of completion, a recommendation letter and visa assistance are included. Additional services are available for an additional fee. You'll receive a personalised quote after you apply.",
   },
   {
     q: "Will I receive a certificate?",
