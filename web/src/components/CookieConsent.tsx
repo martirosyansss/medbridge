@@ -18,7 +18,7 @@ export function CookieConsent() {
       role="dialog"
       aria-live="polite"
       aria-label="Cookie notice"
-      className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-3xl rounded-sm border border-ink/15 bg-paper/95 p-4 shadow-2xl backdrop-blur-sm sm:bottom-4 sm:p-5"
+      className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-3xl rounded-2xl border border-ink/10 bg-paper/90 p-4 shadow-2xl backdrop-blur-md sm:bottom-4 sm:p-5"
       style={{
         bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
       }}
@@ -33,14 +33,14 @@ export function CookieConsent() {
           <button
             type="button"
             onClick={() => decide("rejected")}
-            className="rounded-sm border border-ink/25 px-4 py-2 text-sm font-medium text-ink hover:border-ink"
+            className="rounded-full border border-ink/20 px-4 py-2 text-sm font-medium text-ink hover:border-ink"
           >
             Reject non-essential
           </button>
           <button
             type="button"
             onClick={() => decide("accepted")}
-            className="rounded-sm bg-claret px-4 py-2 text-sm font-medium text-bone hover:bg-claret-deep"
+            className="rounded-full bg-claret px-4 py-2 text-sm font-medium text-white hover:bg-claret-deep"
           >
             Accept
           </button>

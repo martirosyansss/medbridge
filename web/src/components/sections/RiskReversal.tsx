@@ -48,11 +48,11 @@ export function RiskReversal() {
           </div>
         </header>
 
-        <div className="reveal mt-14 grid gap-px overflow-hidden rounded-sm bg-ink/10 ring-1 ring-ink/10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="reveal mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {GUARANTEES.map(({ icon: Icon, title, body }) => (
-            <article key={title} className="bg-paper p-7">
-              <Icon className="h-7 w-7 text-claret" strokeWidth={1.6} />
-              <h3 className="mt-4 font-display text-xl tracking-tightest text-ink">{title}</h3>
+            <article key={title} className="card card-hover p-7">
+              <span className="icon-tile"><Icon strokeWidth={1.7} /></span>
+              <h3 className="mt-5 text-lg font-semibold tracking-tight text-ink">{title}</h3>
               <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/75">{body}</p>
             </article>
           ))}

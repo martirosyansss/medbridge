@@ -39,7 +39,7 @@ export function Why() {
         </header>
 
         {/* Desktop (≥1024): comparison table */}
-        <div className="reveal mt-14 hidden lg:block overflow-hidden rounded-sm ring-1 ring-bone/15">
+        <div className="reveal mt-14 hidden lg:block overflow-hidden rounded-2xl ring-1 ring-bone/15 bg-bone/[0.03]">
           <table className="w-full text-left text-sm">
             <thead className="bg-bone/5 text-xs uppercase tracking-[0.18em] text-bone/60">
               <tr>
@@ -51,7 +51,7 @@ export function Why() {
             <tbody className="divide-y divide-bone/10 text-bone/85">
               {ROWS.map((r) => (
                 <tr key={r.label}>
-                  <th className="px-6 py-5 text-left font-display text-base font-medium text-bone">{r.label}</th>
+                  <th className="px-6 py-5 text-left text-base font-semibold text-bone">{r.label}</th>
                   <td className="px-6 py-5">{r.typical}</td>
                   <td className="px-6 py-5 bg-gold/10 text-bone">{withBold(r.mb)}</td>
                 </tr>
@@ -63,14 +63,14 @@ export function Why() {
         {/* Mobile / tablet: stack as comparison cards */}
         <ul className="reveal mt-14 lg:hidden grid gap-4 sm:grid-cols-2">
           {ROWS.map((r) => (
-            <li key={r.label} className="rounded-sm border border-bone/15 bg-bone/[0.03] p-5">
-              <p className="font-display text-base font-medium text-bone">{r.label}</p>
+            <li key={r.label} className="rounded-2xl border border-bone/15 bg-bone/[0.04] p-5">
+              <p className="text-base font-semibold text-bone">{r.label}</p>
               <div className="mt-4 space-y-3">
                 <div>
                   <p className="text-[0.65rem] uppercase tracking-[0.2em] text-bone/65">Typical abroad</p>
                   <p className="mt-1 text-sm text-bone/80">{r.typical}</p>
                 </div>
-                <div className="rounded-sm bg-gold/10 p-3">
+                <div className="rounded-xl bg-gold/10 p-3">
                   <p className="text-[0.65rem] uppercase tracking-[0.2em] text-gold-soft">MedBridge at Astghik</p>
                   <p className="mt-1 text-sm text-bone">{withBold(r.mb)}</p>
                 </div>

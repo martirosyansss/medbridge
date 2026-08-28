@@ -24,10 +24,10 @@ export function Services() {
           </div>
         </header>
 
-        <div className="reveal mt-12 grid gap-px overflow-hidden rounded-sm bg-ink/10 ring-1 ring-ink/10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="reveal mt-12 grid gap-4 lg:gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map(({ icon: Icon, title, body }) => (
             <div key={title} className="service-card">
-              <Icon className="service-icon" strokeWidth={1.4} />
+              <span className="icon-tile"><Icon strokeWidth={1.7} /></span>
               <h3 className="service-title">{title}</h3>
               <p className="service-text">{body}</p>
             </div>

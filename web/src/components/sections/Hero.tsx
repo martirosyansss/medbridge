@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import { ArrowRight, ChevronDown, ShieldCheck } from "lucide-react"
+import { ArrowRight, ShieldCheck } from "lucide-react"
 import hospitalExterior from "@/assets/astghik/hospital-exterior.jpg"
 
 function nextSaturdayLabel(): string {
@@ -108,11 +108,6 @@ export function Hero() {
             </span>
           </div>
         </div>
-
-        <a href="#about" className="hero-scroll" aria-label="Scroll to learn more">
-          <span>Scroll</span>
-          <ChevronDown className="h-4 w-4" />
-        </a>
       </div>
     </section>
   )

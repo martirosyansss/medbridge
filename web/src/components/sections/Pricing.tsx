@@ -68,20 +68,20 @@ export function Pricing() {
           {TIERS.map((t) => (
             <article
               key={t.name}
-              className={`relative rounded-sm border bg-paper p-6 md:p-6 lg:p-8 transition ${
-                t.featured ? "border-claret shadow-lg shadow-claret/10" : "border-ink/10"
+              className={`relative rounded-3xl border bg-paper p-6 md:p-6 lg:p-8 transition ${
+                t.featured ? "border-claret/50 shadow-2xl shadow-claret/15 ring-1 ring-claret/20" : "border-ink/8 shadow-[0_18px_44px_-32px_rgba(14,23,38,0.28)]"
               }`}
             >
               {t.featured && (
-                <span className="absolute -top-3 left-8 inline-flex items-center rounded-sm bg-claret px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-bone">
+                <span className="absolute -top-3 left-8 inline-flex items-center rounded-full bg-claret px-3.5 py-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-white shadow-md shadow-claret/30">
                   Most popular
                 </span>
               )}
               <p className="text-xs uppercase tracking-[0.22em] text-ink/65">{t.duration}</p>
-              <h3 className="mt-2 font-display text-2xl tracking-tightest text-ink">{t.name}</h3>
+              <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">{t.name}</h3>
               <p className="mt-4 flex items-baseline gap-1.5">
                 <span className="text-xs uppercase tracking-[0.18em] text-ink/65">from</span>
-                <span className="font-display text-4xl font-medium text-ink">${t.price.toLocaleString()}</span>
+                <span className="text-4xl font-semibold tracking-tight text-ink">${t.price.toLocaleString()}</span>
                 <span className="text-xs text-ink/65">USD</span>
               </p>
               <p className="mt-1 text-xs text-ink/65">per participant</p>
@@ -96,10 +96,10 @@ export function Pricing() {
               </ul>
               <a
                 href="#apply"
-                className={`mt-8 block w-full rounded-sm px-4 py-2.5 text-center text-sm font-medium transition ${
+                className={`mt-8 block w-full rounded-full px-4 py-3 text-center text-sm font-medium transition ${
                   t.featured
-                    ? "bg-claret text-bone hover:bg-claret-deep"
-                    : "border border-ink/20 text-ink hover:border-ink"
+                    ? "bg-claret text-white shadow-lg shadow-claret/25 hover:bg-claret-deep"
+                    : "border border-ink/15 bg-white text-ink hover:border-ink/40"
                 }`}
               >
                 Request a quote
@@ -109,20 +109,20 @@ export function Pricing() {
         </div>
 
         <div className="reveal mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="rounded-sm border border-ink/10 bg-paper p-6">
-            <p className="font-display text-base text-claret">Visa required?</p>
+          <div className="card p-6">
+            <p className="text-base font-semibold text-claret">Visa required?</p>
             <p className="mt-2 text-sm leading-relaxed text-ink/75">
               Most passports are visa-free or e-visa for Armenia. We send an official invitation letter for visa applications when needed.
             </p>
           </div>
-          <div className="rounded-sm border border-ink/10 bg-paper p-6">
-            <p className="font-display text-base text-claret">Is it refundable?</p>
+          <div className="card p-6">
+            <p className="text-base font-semibold text-claret">Is it refundable?</p>
             <p className="mt-2 text-sm leading-relaxed text-ink/75">
               Full refund 30+ days out; 50% between 14–30 days; non-refundable within 14 days. Visa denial: full refund. <a className="link underline" href="#guarantees">See guarantees</a>.
             </p>
           </div>
-          <div className="rounded-sm border border-ink/10 bg-paper p-6">
-            <p className="font-display text-base text-claret">Group discount?</p>
+          <div className="card p-6">
+            <p className="text-base font-semibold text-claret">Group discount?</p>
             <p className="mt-2 text-sm leading-relaxed text-ink/75">
               Yes — 10% off for 3+ applicants applying together. Mention it in the application message.
             </p>

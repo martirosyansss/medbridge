@@ -53,7 +53,7 @@ export function Yerevan() {
 
         <div className="mt-14 grid gap-8 lg:gap-10 lg:grid-cols-12">
           <figure className="reveal lg:col-span-5 row-span-2">
-            <div className="aspect-[3/4] sm:aspect-[16/9] lg:aspect-[4/5] overflow-hidden rounded-sm bg-bone-deep ring-1 ring-ink/10">
+            <div className="aspect-[3/4] sm:aspect-[16/9] lg:aspect-[4/5] overflow-hidden rounded-2xl bg-bone-deep ring-1 ring-ink/10">
               <Photo
                 src={yerevanHero}
                 alt="The Cascade complex in central Yerevan, Armenia"
@@ -68,7 +68,7 @@ export function Yerevan() {
             {CARDS.map((c) => (
               <div key={c.kicker} className="yerevan-card">
                 <p className="kicker-sm text-sage">{c.kicker}</p>
-                <h3 className="mt-2 font-display text-xl">{c.title}</h3>
+                <h3 className="mt-2 text-xl font-semibold tracking-tight">{c.title}</h3>
                 <p className="mt-3 text-ink/75 text-[0.97rem] leading-relaxed">{c.body}</p>
               </div>
             ))}

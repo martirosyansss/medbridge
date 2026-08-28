@@ -60,11 +60,11 @@ export function Screening() {
         </header>
 
         <div className="reveal mt-14 grid gap-8 lg:grid-cols-12">
-          <ul className="lg:col-span-8 grid gap-px overflow-hidden rounded-sm bg-ink/10 ring-1 ring-ink/10 sm:grid-cols-2">
+          <ul className="lg:col-span-8 grid gap-4 sm:grid-cols-2">
             {TESTS.map(({ icon: Icon, name, detail }) => (
-              <li key={name} className="bg-paper p-6 sm:p-7">
-                <Icon className="h-7 w-7 text-claret" strokeWidth={1.6} />
-                <h3 className="mt-4 font-display text-[1.05rem] leading-snug tracking-tightest text-ink">
+              <li key={name} className="card card-hover p-6 sm:p-7">
+                <span className="icon-tile"><Icon strokeWidth={1.7} /></span>
+                <h3 className="mt-5 text-[1.05rem] font-semibold leading-snug tracking-tight text-ink">
                   {name}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink/70">{detail}</p>
@@ -72,12 +72,12 @@ export function Screening() {
             ))}
           </ul>
 
-          <aside className="lg:col-span-4 rounded-sm border border-sage/30 bg-sage/5 p-6 sm:p-8">
+          <aside className="lg:col-span-4 rounded-2xl border border-sage/25 bg-sage/5 p-6 sm:p-8">
             <p className="kicker-sm text-sage">
               <span className="kicker-mark" />
               Submission
             </p>
-            <h3 className="mt-3 font-display text-2xl tracking-tightest">How to submit</h3>
+            <h3 className="mt-3 text-2xl font-semibold tracking-tight">How to submit</h3>
             <ul className="mt-5 space-y-3 text-[0.95rem] text-ink/80">
               <li className="flex gap-3">
                 <FileCheck2 className="mt-0.5 h-5 w-5 shrink-0 text-claret" strokeWidth={1.6} />

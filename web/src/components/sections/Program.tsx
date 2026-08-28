@@ -20,11 +20,11 @@ export function Program() {
         <div className="reveal mt-14 grid gap-6 md:grid-cols-3">
           <article className="program-card">
             <span className="program-num">01</span>
-            <h3 className="font-display text-2xl">Duration</h3>
+            <h3 className="text-2xl font-semibold tracking-tight">Duration</h3>
             <ul className="mt-5 space-y-2.5 text-ink/85">
               {[1, 2, 3].map((n) => (
                 <li key={n} className="dur-row">
-                  <span className="font-display text-3xl text-claret leading-none">{n}</span>
+                  <span className="text-3xl font-semibold tracking-tight text-claret leading-none">{n}</span>
                   <span>{n === 1 ? "week" : "weeks"}</span>
                 </li>
               ))}
@@ -34,7 +34,7 @@ export function Program() {
 
           <article className="program-card">
             <span className="program-num">02</span>
-            <h3 className="font-display text-2xl">Arrival</h3>
+            <h3 className="text-2xl font-semibold tracking-tight">Arrival</h3>
             <p className="mt-5 text-ink/80 text-[0.97rem]">
               All participants arrive on <strong className="font-medium text-ink">Saturday</strong>, with the programme beginning the following Monday.
             </p>
@@ -47,7 +47,7 @@ export function Program() {
 
           <article className="program-card">
             <span className="program-num">03</span>
-            <h3 className="font-display text-2xl">Eligibility</h3>
+            <h3 className="text-2xl font-semibold tracking-tight">Eligibility</h3>
             <ul className="mt-5 space-y-2 text-sm text-ink/70">
               <li className="check-row">Medical students, years 1–6</li>
               <li className="check-row">International healthcare trainees</li>

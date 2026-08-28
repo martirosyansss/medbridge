@@ -34,7 +34,7 @@ export function About() {
         </header>
 
         <div className="reveal mt-14 grid gap-4 sm:gap-6 md:grid-cols-12">
-          <figure className="md:col-span-7 aspect-[16/10] overflow-hidden rounded-sm ring-1 ring-ink/10 bg-bone-deep">
+          <figure className="md:col-span-7 aspect-[16/10] overflow-hidden rounded-2xl ring-1 ring-ink/10 bg-bone-deep">
             <Photo
               src={hospitalExterior}
               alt="Astghik Medical Center building in Yerevan"
@@ -44,7 +44,7 @@ export function About() {
             />
           </figure>
           <figure className="md:col-span-5 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-1 md:grid-rows-2">
-            <div className="aspect-[4/3] overflow-hidden rounded-sm ring-1 ring-ink/10 bg-bone-deep">
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-ink/10 bg-bone-deep">
               <Photo
                 src={icuTeam}
                 alt="Astghik clinical team inside an intensive care unit"
@@ -53,7 +53,7 @@ export function About() {
                 fallbackLabel="Clinical team"
               />
             </div>
-            <div className="aspect-[4/3] overflow-hidden rounded-sm ring-1 ring-ink/10 bg-bone-deep">
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-ink/10 bg-bone-deep">
               <Photo
                 src={lobbyReception}
                 alt="Modern reception and lobby area at Astghik Medical Center"
@@ -79,7 +79,7 @@ export function About() {
           </div>
 
           <aside className="reveal lg:col-span-5">
-            <div className="rounded-sm border border-ink/10 bg-paper p-8">
+            <div className="card p-8">
               <p className="text-xs uppercase tracking-[0.22em] text-ink/65">Key Facts</p>
               <ul className="mt-6 space-y-4 text-[0.97rem] text-ink/85">
                 {FACTS.map((f) => (

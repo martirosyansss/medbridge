@@ -45,7 +45,7 @@ export function Schedule() {
           </div>
         </header>
 
-        <ol className="reveal mt-14 grid gap-px overflow-hidden rounded-sm bg-ink/10 ring-1 ring-ink/10 sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="reveal mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {DAYS.map((d) => (
             <li key={d.label} className="day-card">
               <p className="day-label">{d.label}</p>
@@ -59,12 +59,12 @@ export function Schedule() {
           ))}
         </ol>
 
-        <div className="reveal mt-12 rounded-sm border border-sage/30 bg-sage/5 p-6 sm:p-8 lg:p-10">
+        <div className="reveal mt-12 rounded-2xl border border-sage/25 bg-sage/5 p-6 sm:p-8 lg:p-10">
           <p className="kicker-sm text-sage">
             <span className="kicker-mark" />
             For Advanced Students
           </p>
-          <h3 className="mt-3 font-display text-2xl lg:text-3xl tracking-tightest">Selected surgical hands-on exposure</h3>
+          <h3 className="mt-3 text-2xl lg:text-3xl font-semibold tracking-tight">Selected surgical hands-on exposure</h3>
           <p className="mt-4 max-w-3xl text-ink/80 leading-relaxed">
             Advanced medical students may be eligible for supervised hands-on clinical exposure in selected surgeries and clinical activities — including assisting during selected procedures where permitted and direct interaction with surgeons and medical teams. Eligibility depends on academic level, specialty, hospital approval and local regulations.
           </p>

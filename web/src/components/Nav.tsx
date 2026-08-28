@@ -37,7 +37,7 @@ export function Nav() {
         open && "is-open"
       )}
     >
-      <div className="mx-auto max-w-content px-container">
+      <div className="header-inner mx-auto max-w-content px-container">
         <nav className="flex items-center justify-between py-4 sm:py-5" aria-label="Primary">
           <a
             href="#top"

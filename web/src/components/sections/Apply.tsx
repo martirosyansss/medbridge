@@ -294,7 +294,7 @@ export function Apply() {
             </p>
 
             {!isFormEndpointConfigured && (
-              <div className="mt-6 rounded-sm border border-ink/10 bg-paper p-4">
+              <div className="card mt-6 p-4">
                 <p className="text-sm leading-relaxed text-ink/75">
                   Submitting opens your email client with a pre-filled message. Click <strong className="font-medium text-ink">send</strong> in your email app to complete.
                 </p>
@@ -315,7 +315,7 @@ export function Apply() {
               ))}
             </ul>
 
-            <div className="mt-10 rounded-sm border border-ink/10 bg-paper p-6">
+            <div className="card mt-10 p-6">
               <p className="text-xs uppercase tracking-[0.2em] text-ink/65">Prefer to talk first?</p>
               <p className="mt-3 text-ink/80">
                 Email <a className="link" href={`mailto:${FALLBACK_EMAIL}`}>{FALLBACK_EMAIL}</a>
@@ -328,7 +328,7 @@ export function Apply() {
           </div>
 
           <div className="reveal lg:col-span-7">
-            <form onSubmit={onSubmit} noValidate className="rounded-sm border border-ink/15 bg-paper p-5 sm:p-8 lg:p-10 shadow-sm">
+            <form onSubmit={onSubmit} noValidate className="rounded-3xl border border-ink/8 bg-paper p-5 sm:p-8 lg:p-10 shadow-[0_30px_70px_-45px_rgba(14,23,38,0.4)]">
               <p className="mb-4 text-xs text-ink/65">Fields marked with * are required.</p>
               <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
                 <div className="field">
@@ -569,13 +569,13 @@ export function Apply() {
               </div>
 
               {error && (
-                <div role="alert" className="mt-6 rounded-sm border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800">
+                <div role="alert" className="mt-6 rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800">
                   {error}
                 </div>
               )}
               {success && !mailtoUrl && (
-                <div id="form-success" role="status" className="mt-8 rounded-sm border border-sage/40 bg-sage/5 p-6">
-                  <p className="font-display text-xl text-sage">Application received.</p>
+                <div id="form-success" role="status" className="mt-8 rounded-2xl border border-sage/30 bg-sage/5 p-6">
+                  <p className="text-xl font-semibold tracking-tight text-sage">Application received.</p>
                   <p className="mt-2 text-ink/75">
                     Thank you — we've got your application. A member of the MedBridge team will be in touch within{" "}
                     <strong className="font-medium text-ink">two business days</strong>.
@@ -587,8 +587,8 @@ export function Apply() {
                 </div>
               )}
               {success && mailtoUrl && (
-                <div id="form-success" role="status" className="mt-8 rounded-sm border border-sage/40 bg-sage/5 p-6">
-                  <p className="font-display text-xl text-sage">One more step — send the email.</p>
+                <div id="form-success" role="status" className="mt-8 rounded-2xl border border-sage/30 bg-sage/5 p-6">
+                  <p className="text-xl font-semibold tracking-tight text-sage">One more step — send the email.</p>
                   <p className="mt-2 text-ink/75">
                     Open your email client to send the application. We've pre-filled the message — just hit{" "}
                     <strong className="font-medium text-ink">send</strong> to finish.

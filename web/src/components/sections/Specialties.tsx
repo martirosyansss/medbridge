@@ -67,7 +67,7 @@ export function Specialties() {
               placeholder="Search specialties…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full min-h-11 rounded-sm border border-ink/15 bg-paper px-4 py-2.5 pr-10 text-base sm:text-sm placeholder:text-ink/55 focus:border-claret focus:outline-none focus:ring-2 focus:ring-claret/20"
+              className="w-full min-h-11 rounded-full border border-ink/12 bg-paper px-5 py-2.5 pr-11 shadow-sm text-base sm:text-sm placeholder:text-ink/55 focus:border-claret focus:outline-none focus:ring-2 focus:ring-claret/20"
               aria-label="Search specialties"
             />
             <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ink/55" strokeWidth={1.8} />
