@@ -33,13 +33,18 @@ const AccordionTrigger = React.forwardRef<
 ))
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
 
+/**
+ * Content stays mounted when `forceMount` is passed (see Faq.tsx) so the text
+ * exists in the prerendered HTML. Closed panels are hidden with the
+ * `accordion-content` CSS rules in index.css instead of being unmounted.
+ */
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-[0.97rem] leading-relaxed text-ink/75 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    className="accordion-content overflow-hidden text-[0.97rem] leading-relaxed text-ink/75"
     {...props}
   >
     <div className={cn("max-w-[56ch] pb-6", className)}>{children}</div>

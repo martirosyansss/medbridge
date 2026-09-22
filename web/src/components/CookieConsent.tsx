@@ -1,46 +1,41 @@
-import { useState } from "react"
+import { useCookieChoice, writeCookieChoice, type CookieChoice } from "@/lib/cookieConsent"
 
-import { COOKIE_CONSENT_EVENT, readCookieChoice, writeCookieChoice, type CookieChoice } from "@/lib/cookieConsent"
-
+/**
+ * Slim, non-modal consent bar. Absent from the prerendered HTML and only shown
+ * after hydration when no choice is stored, so it never blocks first paint or
+ * hides the hero CTAs on mobile.
+ */
 export function CookieConsent() {
-  const [visible, setVisible] = useState(() => readCookieChoice() === null)
+  const choice = useCookieChoice()
+  if (choice !== null) return null
 
-  if (!visible) return null
-
-  const decide = (c: CookieChoice) => {
-    writeCookieChoice(c)
-    setVisible(false)
-    window.dispatchEvent(new CustomEvent(COOKIE_CONSENT_EVENT, { detail: c }))
-  }
+  const decide = (c: CookieChoice) => writeCookieChoice(c)
 
   return (
     <div
-      role="dialog"
+      role="region"
       aria-live="polite"
       aria-label="Cookie notice"
-      className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-3xl rounded-2xl border border-ink/10 bg-paper/90 p-4 shadow-2xl backdrop-blur-md sm:bottom-4 sm:p-5"
-      style={{
-        bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)",
-      }}
+      className="cookie-bar fixed inset-x-0 bottom-0 z-40 border-t border-ink/10 bg-paper/95 backdrop-blur-md"
+      style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-        <p className="text-sm leading-relaxed text-ink/80 sm:flex-1">
-          We use only essential cookies and storage required to make the site work. We don't run advertising or
-          profiling cookies, and we will ask before turning on any analytics. See our{" "}
-          <a className="link underline" href="/privacy.html">Privacy Policy</a>.
+      <div className="mx-auto flex max-w-content flex-wrap items-center gap-x-4 gap-y-2 px-container py-2.5 text-xs text-ink/75 sm:text-[0.8rem]">
+        <p className="min-w-0 flex-1 leading-snug">
+          Essential cookies only. No ads, no analytics without asking.{" "}
+          <a className="link underline" href="/privacy.html#cookies">Privacy Policy</a>
         </p>
         <div className="flex shrink-0 gap-2">
           <button
             type="button"
             onClick={() => decide("rejected")}
-            className="rounded-full border border-ink/20 px-4 py-2 text-sm font-medium text-ink hover:border-ink"
+            className="rounded-full border border-ink/20 px-3 py-1.5 font-medium text-ink hover:border-ink"
           >
-            Reject non-essential
+            Reject
           </button>
           <button
             type="button"
             onClick={() => decide("accepted")}
-            className="rounded-full bg-claret px-4 py-2 text-sm font-medium text-white hover:bg-claret-deep"
+            className="rounded-full bg-claret px-3.5 py-1.5 font-medium text-white hover:bg-claret-deep"
           >
             Accept
           </button>

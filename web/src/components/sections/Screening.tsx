@@ -1,5 +1,6 @@
 import { FileCheck2, ShieldPlus, Microscope, Syringe, ScanLine, FlaskConical, TestTubes } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
+import { SCREENING } from "@/data/site"
 
 type TestItem = {
   icon: LucideIcon
@@ -21,7 +22,7 @@ const TESTS: TestItem[] = [
   {
     icon: Syringe,
     name: "Hepatitis B Surface Antibody (Anti-HBs)",
-    detail: "Immunity titre — ≥10 mIU/mL required.",
+    detail: `Immunity titre, ${SCREENING.antiHbsThreshold} required.`,
   },
   {
     icon: ScanLine,
@@ -47,14 +48,14 @@ export function Screening() {
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-sage lg:col-span-3">
             <span className="kicker-mark" />
-            05 — Health Screening
+            Health Screening
           </p>
           <div className="lg:col-span-9">
             <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
               Required health documentation, before you arrive.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75">
-              In line with hospital policy and international patient-safety standards, every participant must submit the following laboratory results <strong className="font-medium text-ink">before the programme begins</strong>. Results are reviewed confidentially by the medical office and are not shared outside the admissions process.
+              In line with hospital policy and international patient-safety standards, every participant must submit the following laboratory results <strong className="font-medium text-ink">before the program begins</strong>. The tests are arranged and paid for by the participant. Results are reviewed confidentially by the medical office, stored separately from the application record, and are not shared outside the admissions process.
             </p>
           </div>
         </header>
@@ -81,7 +82,7 @@ export function Screening() {
             <ul className="mt-5 space-y-3 text-[0.95rem] text-ink/80">
               <li className="flex gap-3">
                 <FileCheck2 className="mt-0.5 h-5 w-5 shrink-0 text-claret" strokeWidth={1.6} />
-                <span>Results dated <strong className="font-medium text-ink">within the last 6 months</strong>, in English or with certified translation.</span>
+                <span>Results dated <strong className="font-medium text-ink">within the last {SCREENING.validityMonths} months</strong>, in English or with certified translation.</span>
               </li>
               <li className="flex gap-3">
                 <FileCheck2 className="mt-0.5 h-5 w-5 shrink-0 text-claret" strokeWidth={1.6} />
@@ -89,17 +90,21 @@ export function Screening() {
               </li>
               <li className="flex gap-3">
                 <FileCheck2 className="mt-0.5 h-5 w-5 shrink-0 text-claret" strokeWidth={1.6} />
-                <span>Sent as PDF to the admissions team <strong className="font-medium text-ink">no later than 14 days before arrival</strong>.</span>
+                <span>Sent as PDF to the admissions team <strong className="font-medium text-ink">no later than {SCREENING.deadlineDaysBeforeArrival} days before arrival</strong>.</span>
+              </li>
+              <li className="flex gap-3">
+                <FileCheck2 className="mt-0.5 h-5 w-5 shrink-0 text-claret" strokeWidth={1.6} />
+                <span>Under our <a className="link underline" href="/terms.html#s6">terms</a>, proof of routine immunisations (including MMR) and tuberculosis screening where indicated is also required.</span>
               </li>
             </ul>
             <p className="mt-6 text-xs leading-relaxed text-ink/65">
-              Participants whose results indicate non-immunity to hepatitis B (Anti-HBs &lt; 10 mIU/mL) will be advised on next steps before the programme starts.
+              Participants whose results indicate non-immunity to hepatitis B (Anti-HBs &lt; 10 mIU/mL) will be advised on next steps before the program starts.
             </p>
           </aside>
         </div>
 
         <p className="reveal mt-6 text-xs text-ink/65">
-          These requirements protect patients, hospital staff and you. They are non-negotiable and apply to all participants regardless of programme length or specialty.
+          These requirements protect patients, hospital staff and you. They are non-negotiable and apply to all participants regardless of program length or specialty. How we handle these records is described in our <a className="link underline" href="/privacy.html#health-data">privacy policy</a>.
         </p>
       </div>
     </section>

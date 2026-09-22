@@ -1,12 +1,16 @@
 import { useMemo, useState } from "react"
 import { ArrowRight } from "lucide-react"
 import { SPECIALTIES, CATEGORY_LABEL, type SpecialtyCategory } from "@/data/specialties"
+import { useMounted } from "@/hooks/useMounted"
+import { PROGRAM } from "@/data/site"
+import { upcomingSaturdays, type StartDate } from "@/lib/dates"
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE_DISPLAY,
   CONTACT_PHONE_E164,
   FORM_ENDPOINT,
   isFormEndpointConfigured,
+  whatsAppHref,
 } from "@/lib/contact"
 
 const FALLBACK_EMAIL = CONTACT_EMAIL
@@ -18,27 +22,6 @@ const COMMON_COUNTRIES = [
 ]
 
 const CATEGORY_ORDER: SpecialtyCategory[] = ["surgical", "cardio", "neuro", "womens", "diagnostic", "other"]
-
-function localISO(d: Date): string {
-  const y = d.getFullYear()
-  const m = String(d.getMonth() + 1).padStart(2, "0")
-  const day = String(d.getDate()).padStart(2, "0")
-  return `${y}-${m}-${day}`
-}
-
-function nextSaturdays(n: number): { iso: string; label: string }[] {
-  const out: { iso: string; label: string }[] = []
-  const d = new Date()
-  d.setHours(0, 0, 0, 0)
-  const days = (6 - d.getDay() + 7) % 7 || 7
-  d.setDate(d.getDate() + days)
-  const fmt = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" })
-  for (let i = 0; i < n; i++) {
-    out.push({ iso: localISO(d), label: fmt.format(d) })
-    d.setDate(d.getDate() + 7)
-  }
-  return out
-}
 
 type FormState = {
   firstName: string
@@ -67,7 +50,7 @@ function buildMailto(form: FormState): string {
     form.phone && `Phone / WhatsApp: ${form.phone}`,
     `Education level: ${form.educationLevel}`,
     `Preferred specialty: ${form.preferredSpecialty}`,
-    `Programme length: ${form.duration}`,
+    `Program length: ${form.duration}`,
     form.preferredStart && `Preferred start date: ${form.preferredStart}`,
     safeMessage && `\nMessage:\n${safeMessage}`,
     `\nConfirmations: age ${form.ageConfirm ? "yes" : "no"} · contact consent ${form.consent ? "yes" : "no"} · terms ${form.agreeTerms ? "yes" : "no"}`,
@@ -133,7 +116,7 @@ const FIELD_ERROR: Partial<Record<keyof FormState, string>> = {
   email: "Please enter a valid email address.",
   educationLevel: "Please select your education level.",
   preferredSpecialty: "Please choose a preferred specialty.",
-  duration: "Please choose a programme length.",
+  duration: "Please choose a program length.",
   ageConfirm: "Please confirm you are 18 or older (or have parental consent).",
   consent: "Please confirm consent to be contacted.",
   agreeTerms: "Please agree to the Terms of Service and Privacy Policy.",
@@ -147,7 +130,9 @@ export function Apply() {
   const [submitting, setSubmitting] = useState(false)
   const [mailtoUrl, setMailtoUrl] = useState<string | null>(null)
 
-  const saturdays = useMemo(() => nextSaturdays(8), [])
+  // Computed after mount so the prerendered HTML never carries stale dates.
+  const mounted = useMounted()
+  const saturdays = useMemo<StartDate[]>(() => (mounted ? upcomingSaturdays(8) : []), [mounted])
 
   const groupedSpecialties = useMemo(() => {
     const buckets: Record<SpecialtyCategory, string[]> = {
@@ -290,7 +275,7 @@ export function Apply() {
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-ink/75 max-w-prose2">
               Your application is reviewed personally by the MedBridge team. You'll hear back within{" "}
-              <strong className="font-medium text-ink">two business days</strong> with availability, an all-inclusive quote and the next steps.
+              <strong className="font-medium text-ink">two business days</strong> with availability, an itemised quote and the next steps.
             </p>
 
             {!isFormEndpointConfigured && (
@@ -303,10 +288,10 @@ export function Apply() {
 
             <ul className="mt-8 space-y-3 text-[0.97rem] text-ink/80">
               {[
-                "Review by a real human, within 48 hours",
-                "Personalised quote: programme + accommodation + transfers",
+                `Review by a real human, within ${PROGRAM.responseTime}`,
+                "Itemised quote: program + accommodation + transfers",
                 "No commitment — no card required to apply",
-                "Programme begins every Saturday, year-round",
+                "Program begins every Saturday, year-round",
               ].map((f) => (
                 <li key={f} className="fact">
                   <span className="dot" />
@@ -322,7 +307,7 @@ export function Apply() {
                 <br />
                 Call <a className="link" href={`tel:${CONTACT_PHONE_E164}`}>{CONTACT_PHONE_DISPLAY}</a>
                 <br />
-                or write us on WhatsApp.
+                or <a className="link" href={whatsAppHref} target="_blank" rel="noopener noreferrer">write us on WhatsApp</a>.
               </p>
             </div>
           </div>
@@ -441,7 +426,7 @@ export function Apply() {
                   {renderError("preferredSpecialty")}
                 </div>
                 <div className="field">
-                  <label htmlFor="f-duration">Programme length *</label>
+                  <label htmlFor="f-duration">Program length *</label>
                   <select
                     id="f-duration"
                     value={form.duration}

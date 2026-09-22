@@ -1,12 +1,16 @@
 import { Photo } from "@/components/Photo"
 import missionBg from "@/assets/astghik/icu-team.jpg"
+import missionBgWebp from "@/assets/astghik/icu-team.webp"
 
 export function Mission() {
   return (
-    <section id="mission" className="relative bg-claret py-section text-bone overflow-hidden">
+    <section id="mission" className="relative bg-claret py-section text-bone overflow-hidden" aria-labelledby="mission-heading">
       <div className="absolute inset-0" aria-hidden="true">
         <Photo
           src={missionBg}
+          webp={missionBgWebp}
+          width={500}
+          height={281}
           alt=""
           className="mission-photo"
           fallbackClass="photo-fallback-or"
@@ -16,10 +20,10 @@ export function Mission() {
         <div className="mission-grain" />
       </div>
       <div className="relative mx-auto max-w-content px-container">
-        <p className="kicker text-gold-soft reveal">
+        <h2 id="mission-heading" className="kicker text-gold-soft reveal">
           <span className="kicker-mark" />
           Our mission
-        </p>
+        </h2>
         <p className="reveal mt-8 font-display text-[clamp(1.8rem,4vw,3.6rem)] leading-[1.08] tracking-tightest max-w-5xl">
           Our mission is to create a bridge between international medical education and clinical excellence in Armenia by offering meaningful educational experiences that inspire future healthcare professionals.
         </p>

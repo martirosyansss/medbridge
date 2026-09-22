@@ -1,10 +1,13 @@
+import { STATS, SURGERY_CLAIM } from "@/data/site"
+
 const ROWS = [
-  { label: "Setting", typical: "Rotating small clinics", mb: "**JCI-accredited** and **ISO 9001:2015 certified** multidisciplinary hospital with 15 ORs" },
-  { label: "Daily exposure", typical: "Ward rounds and a surgery or two per week", mb: "**1 surgical observation daily**, Mon–Fri" },
-  { label: "Specialty breadth", typical: "3–6 specialties", mb: "**24 clinical specialties** under one roof" },
+  { label: "Setting", typical: "Rotating small clinics", mb: `**JCI-accredited** and **ISO 9001:2015 certified** multidisciplinary hospital with ${STATS.operatingRooms} ORs` },
+  { label: "Daily exposure", typical: "Ward rounds and a surgery or two per week", mb: `**${SURGERY_CLAIM}**` },
+  { label: "Specialty breadth", typical: "3–6 specialties", mb: `**${STATS.specialties} clinical specialties** under one roof` },
   { label: "Language", typical: "Often local language with translator", mb: "English-language program" },
   { label: "Hands-on access", typical: "Observation only", mb: "Supervised hands-on exposure for advanced students*" },
-  { label: "Cost of living", typical: "Western Europe / US benchmarks", mb: "Yerevan: ~25–35% of Western Europe" },
+  { label: "Timing", typical: "Summer cohorts only", mb: "**Start any Saturday**, year-round" },
+  { label: "Cost of living", typical: "Western Europe / US benchmarks", mb: "Yerevan: roughly 25–35% of Western Europe" },
 ]
 
 function withBold(s: string) {
@@ -26,14 +29,17 @@ export function Why() {
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-gold lg:col-span-3">
             <span className="kicker-mark" />
-            02 — Why MedBridge
+            Why MedBridge
           </p>
           <div className="lg:col-span-9">
             <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
-              A summer abroad you'll talk about in <em className="italic font-light text-gold">every</em> interview.
+              A rotation you can <em className="italic font-light text-gold">document</em>, not just describe.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-bone/75">
-              Most international shadowing programs hop students across small ward rounds at a network of partner clinics. MedBridge is different: every rotation happens inside one hospital — a private, high-volume surgical center with the case mix of a regional referral hospital.
+              Most international shadowing programs move students across ward rounds at a network of small partner clinics.
+              MedBridge is different: every rotation happens inside one hospital, a private, high-volume surgical center with
+              the case mix of a regional referral hospital, and ends with a certificate and a letter from the physicians who
+              supervised you.
             </p>
           </div>
         </header>

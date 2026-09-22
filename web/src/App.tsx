@@ -2,6 +2,7 @@ import { Nav } from "@/components/Nav"
 import { Hero } from "@/components/sections/Hero"
 import { About } from "@/components/sections/About"
 import { Why } from "@/components/sections/Why"
+import { Overview } from "@/components/sections/Overview"
 import { Yerevan } from "@/components/sections/Yerevan"
 import { Program } from "@/components/sections/Program"
 import { Screening } from "@/components/sections/Screening"
@@ -28,6 +29,7 @@ export default function App() {
         <Hero />
         <About />
         <Why />
+        <Overview />
         <Yerevan />
         <Program />
         <Screening />

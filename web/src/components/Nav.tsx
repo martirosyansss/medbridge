@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useStickyHeader } from "@/hooks/useStickyHeader"
 import { useActiveSection } from "@/hooks/useActiveSection"
-import logoUrl from "@/assets/logo.png"
+import logoUrl from "@/assets/logo-160.png"
 
 const LINKS = [
   { href: "about", label: "About" },

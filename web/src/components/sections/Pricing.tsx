@@ -1,48 +1,5 @@
-import { Check } from "lucide-react"
-
-const TIERS = [
-  {
-    name: "1 week",
-    duration: "1 week",
-    price: 1500,
-    tagline: "Foundational rotation with full clinical exposure",
-    perks: [
-      "Up to 40 hours of clinical shadowing per week",
-      "24 medical specialties",
-      "Up to 5 surgeries observed per week",
-      "Clinical rounds & hospital experience",
-      "Accommodation near the hospital",
-      "Airport transfers",
-      "Medical screening on arrival",
-      "Cultural excursions around Armenia",
-      "Armenian cuisine & authentic culinary experiences",
-      "Certificate of Completion",
-      "Recommendation letter from supervising doctors",
-      "Visa assistance",
-    ],
-  },
-  {
-    name: "2 weeks",
-    duration: "2 weeks",
-    price: 3800,
-    featured: true,
-    tagline: "Extended rotation with deeper case-mix exposure",
-    perks: [
-      "Everything in the 1-week programme",
-      "Full-day excursions on Saturday and Sunday",
-      "Armenian cuisine dinners on Saturday and Sunday",
-    ],
-  },
-  {
-    name: "3 weeks",
-    duration: "3 weeks",
-    price: 4500,
-    tagline: "Full rotation for advanced students and residents",
-    perks: [
-      "Everything in the 2-week programme",
-    ],
-  },
-]
+import { Check, Minus } from "lucide-react"
+import { NOT_INCLUDED, PROGRAM, REFUND, TIERS } from "@/data/site"
 
 export function Pricing() {
   return (
@@ -55,10 +12,10 @@ export function Pricing() {
           </p>
           <div className="lg:col-span-9">
             <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
-              Programme pricing.
+              Program pricing.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75">
-              Choose a length. Your personalised quote — locked in for 14 days — arrives within 48 hours of application.
+              Choose a length. Your itemised quote, locked in for {PROGRAM.quoteValidityDays} days, arrives within {PROGRAM.responseTime} of application.
               No card required to apply.
             </p>
           </div>
@@ -77,14 +34,16 @@ export function Pricing() {
                   Most popular
                 </span>
               )}
-              <p className="text-xs uppercase tracking-[0.22em] text-ink/65">{t.duration}</p>
+              <p className="text-xs uppercase tracking-[0.22em] text-ink/65">{t.weeks === 1 ? "1 week" : `${t.weeks} weeks`}</p>
               <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">{t.name}</h3>
               <p className="mt-4 flex items-baseline gap-1.5">
                 <span className="text-xs uppercase tracking-[0.18em] text-ink/65">from</span>
-                <span className="text-4xl font-semibold tracking-tight text-ink">${t.price.toLocaleString()}</span>
+                <span className="text-4xl font-semibold tracking-tight text-ink">${t.price.toLocaleString("en-US")}</span>
                 <span className="text-xs text-ink/65">USD</span>
               </p>
-              <p className="mt-1 text-xs text-ink/65">per participant</p>
+              <p className="mt-1 text-xs text-ink/65">
+                per participant · about ${Math.round(t.price / t.weeks).toLocaleString("en-US")} per week
+              </p>
               <p className="mt-5 text-sm text-ink/70 leading-relaxed">{t.tagline}</p>
               <ul className="mt-6 space-y-2.5 text-sm text-ink/75">
                 {t.perks.map((p) => (
@@ -108,7 +67,18 @@ export function Pricing() {
           ))}
         </div>
 
-        <div className="reveal mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="reveal mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="card p-6">
+            <p className="text-base font-semibold text-claret">Not included</p>
+            <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-ink/75">
+              {NOT_INCLUDED.map((n) => (
+                <li key={n} className="flex items-start gap-2">
+                  <Minus className="mt-1 h-3.5 w-3.5 shrink-0 text-ink/40" strokeWidth={2} />
+                  <span>{n}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className="card p-6">
             <p className="text-base font-semibold text-claret">Visa required?</p>
             <p className="mt-2 text-sm leading-relaxed text-ink/75">
@@ -118,13 +88,13 @@ export function Pricing() {
           <div className="card p-6">
             <p className="text-base font-semibold text-claret">Is it refundable?</p>
             <p className="mt-2 text-sm leading-relaxed text-ink/75">
-              Full refund 30+ days out; 50% between 14–30 days; non-refundable within 14 days. Visa denial: full refund. <a className="link underline" href="#guarantees">See guarantees</a>.
+              Full refund {REFUND.fullRefundDays}+ days out; 50% between {REFUND.halfRefundFrom}–{REFUND.halfRefundTo} days; non-refundable within {REFUND.halfRefundFrom} days. Visa denial: full refund. <a className="link underline" href="#guarantees">See guarantees</a>.
             </p>
           </div>
           <div className="card p-6">
             <p className="text-base font-semibold text-claret">Group discount?</p>
             <p className="mt-2 text-sm leading-relaxed text-ink/75">
-              Yes — 10% off for 3+ applicants applying together. Mention it in the application message.
+              Yes: {PROGRAM.groupDiscount.percent}% off for {PROGRAM.groupDiscount.minApplicants}+ applicants applying together. Mention it in the application message.
             </p>
           </div>
         </div>
@@ -133,8 +103,8 @@ export function Pricing() {
         </a>
 
         <p className="reveal mt-8 text-xs text-ink/65">
-          Prices in USD, per participant. Your personalised quote is confirmed after application.
-          Group discounts available for 3+ applicants. Additional services are available for an additional fee.
+          Prices in USD, per participant, payable by bank transfer. Your itemised quote is confirmed after application.
+          Group discounts available for {PROGRAM.groupDiscount.minApplicants}+ applicants. Additional services are available for an additional fee.
         </p>
       </div>
     </section>

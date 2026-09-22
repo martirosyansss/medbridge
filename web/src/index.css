@@ -1,6 +1,18 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Metric-compatible fallback for Inter (values from next/font's Inter → Arial
+   adjustment). Text rendered before the web font arrives occupies the same
+   box, so the swap does not shift layout on the prerendered page. */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  size-adjust: 107.4%;
+  ascent-override: 90.2%;
+  descent-override: 22.48%;
+  line-gap-override: 0%;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {
@@ -19,13 +31,13 @@
      with `gold` (= bright teal) this keeps the palette to two hues:
      navy for trust, teal for freshness. Names kept so call-sites don't
      have to change. */
-  --color-sage: #0A7773; /* ≥4.5:1 on white and on its own 9% tint */
+  --color-sage: #076763; /* ≥4.5:1 on white, on bone and on its own 9–12% tints (Lighthouse-verified) */
   --color-sage-soft: #7FD3CF;
   --color-gold: #1FA8A4;
   --color-gold-soft: #5DD0CC;
 
   --font-display: "Fraunces Variable", "Fraunces", ui-serif, Georgia, serif;
-  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Variable", "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
 
   --tracking-tightest: -0.04em;
 
@@ -409,6 +421,16 @@ section.bg-paper .day-card {
 .hero-content {
   align-self: center;
   max-width: 62rem;
+}
+
+/* Above-the-fold hero blocks animate with pure CSS so the LCP text never
+   waits for the JS bundle (unlike .reveal, which is IntersectionObserver-gated). */
+.hero-enter { animation: heroEnter 0.7s ease both; }
+.hero-enter--late { animation-delay: 0.15s; }
+/* Transform only: an opacity ramp from 0 would postpone the LCP paint. */
+@keyframes heroEnter {
+  from { transform: translateY(14px); }
+  to { transform: none; }
 }
 
 .hero-eyebrow {
@@ -829,7 +851,7 @@ section.bg-paper .day-card {
   border-radius: 999px;
   background-color: rgba(14,23,38,0.05);
   font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
-  color: rgba(14,23,38,0.55);
+  color: rgba(14,23,38,0.74); /* 4.5:1+ on paper */
 }
 .dur-row { display: flex; align-items: baseline; gap: 0.8rem; }
 
@@ -909,7 +931,7 @@ section.bg-paper .day-card {
 }
 .spec-num {
   font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
-  color: rgba(14,23,38,0.4);
+  color: rgba(14,23,38,0.66); /* 4.5:1+ on paper */
 }
 .spec-title {
   font-weight: 600;
@@ -1073,18 +1095,38 @@ section.bg-paper .day-card {
 .footer-link { color: rgba(245,241,234,0.78); transition: color 0.18s; }
 .footer-link:hover { color: var(--color-bone); }
 
-/* ---------------- reveal ---------------- */
-.reveal {
+/* ---------------- reveal ----------------
+   Only hide-before-reveal when JavaScript is running (html.js is set by an
+   inline script in index.html). Prerendered HTML stays fully visible for
+   crawlers and no-JS visitors. */
+html.js .reveal {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.7s ease, transform 0.7s ease;
   will-change: opacity, transform;
 }
-.reveal.is-visible { opacity: 1; transform: none; }
+html.js .reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------------- accordion (forceMount) ----------------
+   Answers stay in the DOM; closed panels are hidden, open ones animate. */
+html.js .accordion-content[data-state="closed"] { display: none; } /* no-JS visitors see every answer */
+.accordion-content[data-state="open"] { animation: accordion-down 0.2s ease-out; }
+@keyframes accordion-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+
+/* ---------------- cookie bar ---------------- */
+.cookie-bar { box-shadow: 0 -8px 24px -16px rgba(14, 23, 38, 0.25); }
+/* Height budget the WhatsApp button uses to sit above the bar (2 text lines + buttons on phones). */
+:root { --cookie-bar-h: 5.25rem; }
+@media (min-width: 640px) { :root { --cookie-bar-h: 3.5rem; } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  html.js .reveal { opacity: 1; transform: none; transition: none; }
+  .accordion-content[data-state="open"] { animation: none; }
+  .hero-enter { animation: none; }
   .yerevan-card:hover,
   .program-card:hover,
   .spec-card:hover,

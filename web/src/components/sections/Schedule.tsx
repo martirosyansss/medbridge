@@ -1,28 +1,32 @@
+import { STATS } from "@/data/site"
+
+const OR_BLOCK = `OR block: up to ${STATS.surgeriesPerDayMax} surgical observations`
+
 const DAYS = [
   {
     label: "Mon",
     title: "Induction & first ORs",
-    items: ["Hospital orientation", "OR protocols & sterile field", "1 surgical observation", "Post-op debrief"],
+    items: ["Hospital orientation", "OR protocols & sterile field", OR_BLOCK, "Post-op debrief"],
   },
   {
     label: "Tue",
     title: "Operating theatre",
-    items: ["1 surgical observation", "Detailed surgeon commentary", "Anaesthesiology overview", "Patient case-file review"],
+    items: [OR_BLOCK, "Detailed surgeon commentary", "Anaesthesiology overview", "Patient case-file review"],
   },
   {
     label: "Wed",
     title: "Ward rounds & clinic",
-    items: ["Morning attending rounds", "Post-operative patient care", "Outpatient clinic shadowing", "Imaging & diagnostics", "1 surgical observation"],
+    items: ["Morning attending rounds", "Post-operative patient care", "Outpatient clinic shadowing", "Imaging & diagnostics", OR_BLOCK],
   },
   {
     label: "Thu",
     title: "Specialty focus",
-    items: ["Deep-dive in chosen specialty", "1 surgical observation", "One-on-one with surgeon", "Procedural workshop"],
+    items: ["Deep-dive in chosen specialty", OR_BLOCK, "One-on-one with surgeon", "Procedural workshop"],
   },
   {
     label: "Fri",
     title: "Multidisciplinary day",
-    items: ["Cross-specialty observations", "Tumour board / case conference", "Programme reflection", "Certificate of completion"],
+    items: [OR_BLOCK, "Cross-specialty observations", "Tumour board / case conference", "Program reflection", "Certificate of completion"],
   },
 ]
 
@@ -33,14 +37,14 @@ export function Schedule() {
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-claret lg:col-span-3">
             <span className="kicker-mark" />
-            06 — Sample Week
+            Sample Week
           </p>
           <div className="lg:col-span-9">
             <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
-              A week at Astghik, hour by hour.
+              A week at Astghik, day by day.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75">
-              A representative Monday-to-Friday rotation. Actual case mix varies with department and weekly surgical schedule.
+              A representative Monday-to-Friday rotation, up to {STATS.hoursPerWeekMax} hours a week. The actual case mix varies with the department and the weekly surgical schedule.
             </p>
           </div>
         </header>
@@ -66,7 +70,7 @@ export function Schedule() {
           </p>
           <h3 className="mt-3 text-2xl lg:text-3xl font-semibold tracking-tight">Selected surgical hands-on exposure</h3>
           <p className="mt-4 max-w-3xl text-ink/80 leading-relaxed">
-            Advanced medical students may be eligible for supervised hands-on clinical exposure in selected surgeries and clinical activities — including assisting during selected procedures where permitted and direct interaction with surgeons and medical teams. Eligibility depends on academic level, specialty, hospital approval and local regulations.
+            Advanced medical students may be eligible for supervised hands-on clinical exposure in selected surgeries and clinical activities, including assisting during selected procedures where permitted and direct interaction with surgeons and medical teams. Eligibility depends on academic level, specialty, hospital approval and local regulations, and is confirmed in writing in your acceptance letter, never assumed.
           </p>
         </div>
       </div>

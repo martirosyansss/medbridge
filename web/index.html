@@ -3,9 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-    <title>MedBridge — International Medical Shadowing at Astghik Medical Center, Yerevan</title>
-    <meta name="description" content="MedBridge is an international medical shadowing program at Astghik Medical Center in Yerevan, Armenia — a JCI-accredited and ISO 9001:2015 certified hospital. 24 specialties, 15 operating rooms and real clinical practice in English for pre-med students, medical students, residents and young physicians." />
+    <title>Medical Shadowing & Observership in Armenia | MedBridge, Yerevan</title>
+    <meta name="description" content="1–3 week clinical observership at Astghik Medical Center, Yerevan, a JCI-accredited hospital. 24 specialties, in English, from $1,500. Apply free." />
     <meta name="theme-color" content="#0E1726" />
+    <!--
+      html.js enables the scroll-reveal fade and hides closed FAQ panels.
+      Failsafe: if the bundle has not hydrated within 3 s (slow network, JS
+      error, 404), drop the class so the prerendered content is never left
+      invisible. main.tsx clears the timer as soon as it runs.
+    -->
+    <script>
+      document.documentElement.classList.add("js");
+      window.__mbRevealFailsafe = setTimeout(function () {
+        document.documentElement.classList.remove("js");
+      }, 3000);
+    </script>
 
     <link rel="canonical" href="https://medbridge.am/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -14,8 +26,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="MedBridge — International Medical Shadowing in Armenia" />
-    <meta property="og:description" content="Observe surgery at Astghik Medical Center, Yerevan. Twenty-four specialties, fifteen operating rooms, JCI-accredited, in English." />
+    <meta property="og:title" content="Medical Shadowing & Observership in Armenia | MedBridge" />
+    <meta property="og:description" content="1–3 week clinical observership at Astghik Medical Center, Yerevan, a JCI-accredited hospital. 24 specialties, in English, from $1,500." />
     <meta property="og:url" content="https://medbridge.am/" />
     <meta property="og:site_name" content="MedBridge" />
     <meta property="og:locale" content="en_US" />
@@ -24,88 +36,130 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Astghik Medical Center, Yerevan — MedBridge international shadowing program" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="MedBridge — International Medical Shadowing in Armenia" />
-    <meta name="twitter:description" content="Observe surgery at Astghik Medical Center, Yerevan. 24 specialties, 15 operating rooms, JCI-accredited, in English." />
+    <meta name="twitter:title" content="Medical Shadowing & Observership in Armenia | MedBridge" />
+    <meta name="twitter:description" content="1–3 week clinical observership at Astghik Medical Center, Yerevan, a JCI-accredited hospital. 24 specialties, in English, from $1,500." />
     <meta name="twitter:image" content="https://medbridge.am/og.jpg" />
 
     <!-- Fonts are self-hosted via @fontsource-variable in src/main.tsx — no third-party font CDN. -->
 
+    <!--
+      Structured data. One @graph so Organization, the partner hospital and the
+      Course reference each other by @id. The hospital is the program's
+      location, not the same entity as medbridge.am. FAQPage JSON-LD is injected
+      at build time by scripts/prerender.mjs from src/data/faq.ts.
+    -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "MedBridge",
-      "url": "https://medbridge.am/",
-      "logo": "https://medbridge.am/logo.png",
-      "description": "International medical shadowing & clinical experience program at Astghik Medical Center, Yerevan, Armenia.",
-      "email": "info@medbridge.am",
-      "telephone": "+374-77-33-83-33",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "13 Khanjyan str.",
-        "addressLocality": "Yerevan",
-        "addressCountry": "AM"
-      },
-      "sameAs": []
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Hospital",
-      "name": "Astghik Medical Center",
-      "url": "https://medbridge.am/",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "13 Khanjyan str.",
-        "addressLocality": "Yerevan",
-        "addressCountry": "AM"
-      },
-      "medicalSpecialty": [
-        "Surgery", "CardiacSurgery", "Cardiology", "Neurosurgery", "Obstetrics",
-        "Gynecology", "Ophthalmology", "Otolaryngology", "Orthopedics", "Urology",
-        "Oncology", "PlasticSurgery", "Pulmonary", "DiagnosticRadiology"
-      ],
-      "hasCredential": [
-        { "@type": "EducationalOccupationalCredential", "name": "Joint Commission International (JCI) accreditation" },
-        { "@type": "EducationalOccupationalCredential", "name": "ISO 9001:2015 (TÜV Rheinland)" }
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "MedBridge International Medical Shadowing Program",
-      "description": "Clinical observership at Astghik Medical Center, Yerevan — 24 specialties, 15 operating rooms, English-language program for medical students, residents and young physicians.",
-      "provider": {
-        "@type": "Organization",
-        "name": "MedBridge",
-        "url": "https://medbridge.am/"
-      },
-      "inLanguage": "en",
-      "educationalLevel": "Medical student, Resident, Young physician",
-      "hasCourseInstance": [
+      "@graph": [
         {
-          "@type": "CourseInstance",
-          "name": "1-week rotation",
-          "courseMode": "onsite",
-          "location": { "@type": "Place", "name": "Astghik Medical Center, Yerevan, Armenia" },
-          "offers": { "@type": "Offer", "price": "1500", "priceCurrency": "USD" }
+          "@type": ["Organization", "EducationalOrganization"],
+          "@id": "https://medbridge.am/#organization",
+          "name": "MedBridge",
+          "url": "https://medbridge.am/",
+          "logo": "https://medbridge.am/logo.png",
+          "description": "International medical shadowing and clinical observership program at Astghik Medical Center, Yerevan, Armenia.",
+          "email": "info@medbridge.am",
+          "telephone": "+374-77-33-83-33",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "13 Khanjyan str.",
+            "addressLocality": "Yerevan",
+            "addressCountry": "AM"
+          },
+          "location": { "@id": "https://medbridge.am/#astghik-medical-center" }
         },
         {
-          "@type": "CourseInstance",
-          "name": "2-week rotation",
-          "courseMode": "onsite",
-          "location": { "@type": "Place", "name": "Astghik Medical Center, Yerevan, Armenia" },
-          "offers": { "@type": "Offer", "price": "3800", "priceCurrency": "USD" }
+          "@type": "Hospital",
+          "@id": "https://medbridge.am/#astghik-medical-center",
+          "name": "Astghik Medical Center",
+          "url": "https://mcastghik.com/",
+          "sameAs": ["https://www.facebook.com/astghikmedicalcenter"],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Yerevan",
+            "addressCountry": "AM"
+          },
+          "medicalSpecialty": [
+            "Surgical", "Cardiovascular", "Neurologic", "Obstetric", "Gynecologic",
+            "Ophthalmology", "Otolaryngologic", "Musculoskeletal", "Urologic",
+            "Oncologic", "PlasticSurgery", "Pulmonary", "Radiography"
+          ],
+          "hasCertification": [
+            {
+              "@type": "Certification",
+              "name": "Joint Commission International (JCI) accreditation",
+              "certificationStatus": "https://schema.org/CertificationActive",
+              "issuedBy": { "@type": "Organization", "name": "Joint Commission International", "url": "https://www.jointcommissioninternational.org/" },
+              "validFrom": "2025-05-31",
+              "expires": "2028-05-30"
+            },
+            {
+              "@type": "Certification",
+              "name": "ISO 9001:2015 quality management certification",
+              "certificationStatus": "https://schema.org/CertificationActive",
+              "issuedBy": { "@type": "Organization", "name": "TÜV Rheinland", "url": "https://www.tuv.com/" },
+              "validFrom": "2024-08-26",
+              "expires": "2027-08-26"
+            }
+          ]
         },
         {
-          "@type": "CourseInstance",
-          "name": "3-week rotation",
-          "courseMode": "onsite",
-          "location": { "@type": "Place", "name": "Astghik Medical Center, Yerevan, Armenia" },
-          "offers": { "@type": "Offer", "price": "4500", "priceCurrency": "USD" }
+          "@type": "Course",
+          "@id": "https://medbridge.am/#course",
+          "name": "MedBridge International Medical Shadowing & Observership Program",
+          "description": "Clinical observership at Astghik Medical Center, Yerevan: 24 specialties, 15 operating rooms, up to 5 surgeries observed daily, English-language program for pre-med students, medical students, residents and young physicians.",
+          "url": "https://medbridge.am/",
+          "provider": { "@id": "https://medbridge.am/#organization" },
+          "inLanguage": "en",
+          "educationalLevel": ["Pre-med student", "Medical student", "Resident", "Young physician"],
+          "educationalCredentialAwarded": "Certificate of Completion",
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "1500",
+            "highPrice": "4500",
+            "priceCurrency": "USD",
+            "offerCount": 3,
+            "category": "Paid",
+            "url": "https://medbridge.am/#pricing"
+          },
+          "hasCourseInstance": [
+            {
+              "@type": "CourseInstance",
+              "name": "1-week clinical shadowing rotation",
+              "courseMode": "Onsite",
+              "courseWorkload": "PT40H",
+              "duration": "P1W",
+              "location": { "@id": "https://medbridge.am/#astghik-medical-center" },
+              "offers": { "@type": "Offer", "price": "1500", "priceCurrency": "USD", "category": "Paid", "availability": "https://schema.org/InStock", "url": "https://medbridge.am/#pricing" }
+            },
+            {
+              "@type": "CourseInstance",
+              "name": "2-week clinical shadowing rotation",
+              "courseMode": "Onsite",
+              "courseWorkload": "PT80H",
+              "duration": "P2W",
+              "location": { "@id": "https://medbridge.am/#astghik-medical-center" },
+              "offers": { "@type": "Offer", "price": "3800", "priceCurrency": "USD", "category": "Paid", "availability": "https://schema.org/InStock", "url": "https://medbridge.am/#pricing" }
+            },
+            {
+              "@type": "CourseInstance",
+              "name": "3-week clinical shadowing rotation",
+              "courseMode": "Onsite",
+              "courseWorkload": "PT120H",
+              "duration": "P3W",
+              "location": { "@id": "https://medbridge.am/#astghik-medical-center" },
+              "offers": { "@type": "Offer", "price": "4500", "priceCurrency": "USD", "category": "Paid", "availability": "https://schema.org/InStock", "url": "https://medbridge.am/#pricing" }
+            }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://medbridge.am/#website",
+          "url": "https://medbridge.am/",
+          "name": "MedBridge",
+          "inLanguage": "en",
+          "publisher": { "@id": "https://medbridge.am/#organization" }
         }
       ]
     }

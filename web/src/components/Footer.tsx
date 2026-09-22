@@ -1,4 +1,5 @@
-import logoUrl from "@/assets/logo.png"
+import logoUrl from "@/assets/logo-160.png"
+import { HOSPITAL } from "@/data/site"
 import {
   CONTACT_ADDRESS_LINE,
   CONTACT_CITY_COUNTRY,
@@ -24,15 +25,18 @@ export function Footer() {
               />
             </a>
             <p className="mt-5 max-w-md text-bone/65 leading-relaxed">
-              The international observership programme at Astghik Medical Center — bridging international medical education and clinical excellence in Armenia.
+              The international medical shadowing and observership program at{" "}
+              <a className="footer-link underline" href={HOSPITAL.url} target="_blank" rel="noopener noreferrer">{HOSPITAL.name}</a>,
+              bridging international medical education and clinical excellence in Armenia.
             </p>
           </div>
 
           <div className="lg:col-span-3">
-            <p className="text-xs uppercase tracking-[0.22em] text-bone/65">Programme</p>
+            <p className="text-xs uppercase tracking-[0.22em] text-bone/65">Program</p>
             <ul className="mt-4 space-y-2 text-sm">
               <li><a className="footer-link" href="#about">About Astghik</a></li>
-              <li><a className="footer-link" href="#program">Programme</a></li>
+              <li><a className="footer-link" href="#overview">Overview</a></li>
+              <li><a className="footer-link" href="#program">Program</a></li>
               <li><a className="footer-link" href="#specialties">Specialties</a></li>
               <li><a className="footer-link" href="#schedule">Sample Week</a></li>
               <li><a className="footer-link" href="#pricing">Pricing</a></li>
@@ -41,12 +45,15 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-4">
-            <p className="text-xs uppercase tracking-[0.22em] text-bone/65">Location</p>
+            <p className="text-xs uppercase tracking-[0.22em] text-bone/65">MedBridge office</p>
             <address className="mt-4 not-italic text-sm leading-relaxed text-bone/85">
-              Astghik Medical Center<br />
               {CONTACT_ADDRESS_LINE}<br />
               {CONTACT_CITY_COUNTRY}
             </address>
+            <p className="mt-2 text-sm text-bone/70">
+              Program venue:{" "}
+              <a className="footer-link underline" href={HOSPITAL.url} target="_blank" rel="noopener noreferrer">{HOSPITAL.name}</a>, Yerevan
+            </p>
             <p className="mt-5 text-xs uppercase tracking-[0.22em] text-bone/65">Contact</p>
             <ul className="mt-3 space-y-1.5 text-sm">
               <li>
@@ -75,8 +82,12 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-bone/15 pt-8 text-xs text-bone/65 sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} MedBridge. All rights reserved.</p>
-          <p>Astghik Medical Center is JCI-accredited and ISO 9001:2015 certified by TÜV Rheinland.</p>
+          <p suppressHydrationWarning>© {new Date().getFullYear()} MedBridge. All rights reserved.</p>
+          <p>
+            {HOSPITAL.name} is{" "}
+            <a className="footer-link underline" href={HOSPITAL.jciDirectoryUrl} target="_blank" rel="noopener noreferrer">JCI-accredited</a>{" "}
+            and ISO 9001:2015 certified by TÜV Rheinland.
+          </p>
         </div>
       </div>
     </footer>

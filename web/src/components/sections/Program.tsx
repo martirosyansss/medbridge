@@ -1,3 +1,5 @@
+import { PROGRAM } from "@/data/site"
+
 export function Program() {
   return (
     <section id="program" className="bg-bone py-section">
@@ -5,14 +7,14 @@ export function Program() {
         <header className="reveal grid gap-6 lg:grid-cols-12">
           <p className="kicker text-claret lg:col-span-3">
             <span className="kicker-mark" />
-            04 — Programme
+            Program
           </p>
           <div className="lg:col-span-9">
             <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-tightest">
               One, two, or three weeks at the bedside.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75">
-              Programmes begin every Saturday. Choose your length, choose your focus specialty and arrive ready. Longer durations available on request.
+              Programs begin every {PROGRAM.arrivalDay}, year-round. Choose your length, choose your focus specialty and arrive ready. Longer durations available on request.
             </p>
           </div>
         </header>
@@ -22,7 +24,7 @@ export function Program() {
             <span className="program-num">01</span>
             <h3 className="text-2xl font-semibold tracking-tight">Duration</h3>
             <ul className="mt-5 space-y-2.5 text-ink/85">
-              {[1, 2, 3].map((n) => (
+              {PROGRAM.durationsWeeks.map((n) => (
                 <li key={n} className="dur-row">
                   <span className="text-3xl font-semibold tracking-tight text-claret leading-none">{n}</span>
                   <span>{n === 1 ? "week" : "weeks"}</span>
@@ -36,12 +38,12 @@ export function Program() {
             <span className="program-num">02</span>
             <h3 className="text-2xl font-semibold tracking-tight">Arrival</h3>
             <p className="mt-5 text-ink/80 text-[0.97rem]">
-              All participants arrive on <strong className="font-medium text-ink">Saturday</strong>, with the programme beginning the following Monday.
+              All participants arrive on <strong className="font-medium text-ink">{PROGRAM.arrivalDay}</strong>, with the program beginning the following {PROGRAM.startDay}.
             </p>
             <ul className="mt-5 space-y-2 text-sm text-ink/70">
               <li className="check-row">Airport transfer included</li>
               <li className="check-row">Sunday orientation walk</li>
-              <li className="check-row">Hospital induction Monday AM</li>
+              <li className="check-row">Hospital induction {PROGRAM.startDay} morning</li>
             </ul>
           </article>
 
@@ -50,11 +52,12 @@ export function Program() {
             <h3 className="text-2xl font-semibold tracking-tight">Eligibility</h3>
             <ul className="mt-5 space-y-2 text-sm text-ink/70">
               <li className="check-row">Medical students, years 1–6</li>
+              <li className="check-row">Pre-med students (observational programs)</li>
               <li className="check-row">International healthcare trainees</li>
               <li className="check-row">Young physicians and residents</li>
             </ul>
             <p className="mt-5 text-xs text-ink/65">
-              Pre-med students can participate in some observational programmes. Advanced students may be eligible for supervised hands-on exposure depending on specialty, experience and hospital approval.
+              Advanced students may be eligible for supervised hands-on exposure depending on specialty, experience and hospital approval.
             </p>
           </article>
         </div>
